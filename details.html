@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachricht Details</title>
+    <link rel="stylesheet" href="">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+}
+
+header .logo h1 {
+    display: inline-block;
+}
+
+nav ul {
+    list-style: none;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    margin: 20px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.featured {
+    width: 60%;
+}
+
+.news {
+    width: 30%;
+}
+
+footer {
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+}
+
+.news-detail {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.news-detail h2 {
+    margin-bottom: 10px;
+}
+
+.news-detail p {
+    line-height: 1.8;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BBC Somali - Nachricht Details</h1>
+        </div>
+    </header>
+
+    <section class="news-detail">
+        <div id="news-content">
+            <!-- Die Details werden hier dynamisch eingefügt -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BBC Somali Beispiel. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script src="details.js"></script>
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Den URL-Parameter holen
+    const urlParams = new URLSearchParams(window.location.search);
+    const newsId = urlParams.get('news');
+
+    // Das Div für den Nachrichteninhalt
+    const contentDiv = document.getElementById('news-content');
+
+    // Abhängig vom Wert des news-Parameters die Details anzeigen
+    let title, content;
+
+    switch (newsId) {
+        case 'featured':
+            title = 'Ku Soo dhawooow bogeena';
+            content = 'Maalin wanaagsan.';
+            break;
+        case '1':
+            title = 'tafatirka 1';
+            content = 'kani waa cinwaanka 1 deteilskiisa.';
+            break;
+        case '2':
+            title = 'tafatirka 2';
+            content = 'waa tafatirka labaad.';
+            break;
+        case '3':
+            title = 'waa tafarirka 3aad';
+            content = 'waa tafatirka 3aad iyo faaf faahintiisa.';
+            break;
+            case '4':
+            title = 'waa tafarirka 4aad';
+            content = 'waa tafatirka 4aad iyo faaf faahintiisa.';
+            break;
+        default:
+            title = 'Nachricht nicht gefunden';
+            content = 'Die angeforderte Nachricht konnte nicht gefunden werden.';
+
+    }
+
+    // Den Titel und Inhalt in das Div einfügen
+    contentDiv.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
+});
+
+</script>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBC Somali - Beispiel</title>
+    <style>
+/* General Body and Layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-menu .menutext {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .menutext:hover {
+    background-color: #ddd;
+}
+
+.logo h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.featured, .news {
+    margin-bottom: 20px;
+}
+
+.featured h2 {
+    background-color: #0099cc;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.guud{
+text-align: center;
+}
+.dheraad{
+    background-color: blue;
+    color: white;
+
+}
+
+.news .title-div h2.dheraad {
+    font-size: 50px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.news .title{
+    text-align: center;
+}
+
+.title-div .title {
+    display: block;
+    color: black;
+    font-size: 23px;
+    text-decoration: none;
+    padding: 15px 20px;
+    contain: paint;
+}
+.title-div .title:hover{
+    background-color: blue;
+    color: white;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        text-align: left;
+    }
+
+    .menu-container {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .menu-icon {
+        font-size: 28px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-container">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <div class="dropdown-menu" id="menu">
+                <a class="menutext" href="#">Einstellungen</a>
+                <a class="menutext" href="#">Hilfe</a>
+                <a class="menutext" href="#">Home</a>
+                <a class="menutext" href="#">Nachrichten</a>
+                <a class="menutext" href="#">Kultur</a>
+                <a class="menutext" href="#">Sport</a>
+                <a class="menutext" href="#">Welt</a>
+            </div>
+        </div>
+        <div class="logo">
+            <h3>Maxaa cusub</h3>
+        </div>
+    </header>
+
+    <section class="main-content">
+        <article class="featured">
+            <h2 class="guud"><a class="guuda" href="details.html?news=featured">wararka guud</a></h2>
+        </article>
+        <article class="news">
+            <div class="title-div">
+                <h2 class="dheraad">wararka hada</h2>
+                <a class="title" href="details.html?news=1">cinwaanka 1 </a>
+                <a class="title" href="details.html?news=2">wararkii shalay 2</a>
+                <a class="title" href="details.html?news=3">Nachricht 3</a>
+                <a class="title" href="details.html?news=4">dhalinta maanta</a>
+                <a class="title" href="details.html?news=5">wayaha cusub</a>
+            </div>
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; Bogan waxaa loogu tala galay wararka waxaa la aasaasay 22,1,2025.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
