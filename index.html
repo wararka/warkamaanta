@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBC Somali - Beispiel</title>
+    <title>boga kowaad cinwaanada</title>
     <style>
 /* General Body and Layout */
 body {
@@ -134,18 +134,22 @@ footer {
         <div class="menu-container">
             <div class="menu-icon" onclick="toggleMenu()">☰</div>
             <div class="dropdown-menu" id="menu">
-                <a class="menutext" href="#">Einstellungen</a>
-                <a class="menutext" href="#">Hilfe</a>
+                <a class="menutext" href="#">dajinta</a>
+                <a onclick="colorpicker()" class="menutext" href="#">Midabka</a>
                 <a class="menutext" href="#">Home</a>
-                <a class="menutext" href="#">Nachrichten</a>
-                <a class="menutext" href="#">Kultur</a>
-                <a class="menutext" href="#">Sport</a>
-                <a class="menutext" href="#">Welt</a>
+                <a class="menutext" href="#">Caawi</a>
+                <a class="menutext" href="#">Ganacsiga</a>
+                <a class="menutext" href="#">qiimaha</a>
+                <a class="menutext" href="#">xayaysiis</a>
             </div>
         </div>
         <div class="logo">
             <h3>Maxaa cusub</h3>
         </div>
+        <div style="position: fixed;" id="color-picker-container" class="color-picker-container">
+            <label for="bgColorPicker">Dooro Midabka:</label>
+            <input type="color" id="bgColorPicker" name="bgColorPicker" value="#ffffff">
+          </div>
     </header>
 
     <section class="main-content">
@@ -188,3 +192,21 @@ footer {
     </script>
 </body>
 </html>
+<script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
