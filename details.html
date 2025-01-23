@@ -125,6 +125,10 @@ footer {
 }
 #news-content{
 }
+.color-picker-container{
+    display: non;
+color: black;
+}
 
     </style>
 </head>
@@ -134,8 +138,8 @@ footer {
             <div class="menu-icon" onclick="toggleMenu()">☰</div>
             <div class="dropdown-menu" id="menu">
                 <a class="menutext" href="#">dajinta</a>
-                <a class="menutext" href="#">Midabka</a>
-                <a class="menutext" href="#">Home</a>
+                <a onclick="colorpicker()" class="menutext" href="#">Midabka</a>
+                <a class="menutext" href="#">Guriga</a>
                 <a class="menutext" href="#">Caawi</a>
                 <a class="menutext" href="#">Ganacsiga</a>
                 <a class="menutext" href="#">qiimaha</a>
@@ -145,7 +149,10 @@ footer {
         <div class="logo">
             <h3>Maxaa cusub</h3>
         </div>
-        <div></div>
+            <div id="color-picker-container" class="color-picker-container">
+            <label for="bgColorPicker">Dooro Midabka:</label>
+            <input type="color" id="bgColorPicker" name="bgColorPicker" value="#ffffff">
+          </div>
     </header>
 
     <section class="news-detail">
@@ -221,6 +228,29 @@ footer {
 
     // Den Titel und Inhalt in das Div einfügen
     contentDiv.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
+});
+
+</script>
+<script>
+    // script.js color picker
+
+// Function to toggle the display of the menu
+function colorpicker() {
+  var menu = document.getElementById('color-picker-container');
+
+  // Check if the menu is already visible
+  if (menu.style.display === "block") {
+    // If it is visible, hide it
+    menu.style.display = "none";
+  } else {
+    // Otherwise, show it
+    menu.style.display = "block";
+  }
+}
+
+// Change the background color based on the color picker
+document.getElementById('bgColorPicker').addEventListener('input', function(event) {
+  document.body.style.backgroundColor = event.target.value;
 });
 
 </script>
