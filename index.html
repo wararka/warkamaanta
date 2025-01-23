@@ -212,7 +212,34 @@ footer {
             }
         }
     // Change the background color based on the color picker
+
+    
+// Function to change background color and text color based on selected color
 document.getElementById('bgColorPicker').addEventListener('input', function(event) {
-  document.body.style.backgroundColor = event.target.value;
+  var color = event.target.value; // Get the selected color
+  document.body.style.backgroundColor = color;
+
+  // Check if the background color is dark (near black)
+  if (isDarkBackground(color)) {
+    // Change text color to white if background is dark
+    document.body.style.color = "#ffffff";
+  } else {
+    // Change text color to black if background is light
+    document.body.style.color = "#000000";
+  }
 });
+
+// Function to check if a color is dark based on its luminance
+function isDarkBackground(color) {
+  // Convert hex color to RGB
+  var r = parseInt(color.substr(1, 2), 16); // Red
+  var g = parseInt(color.substr(3, 2), 16); // Green
+  var b = parseInt(color.substr(5, 2), 16); // Blue
+
+  // Calculate luminance using the formula
+  var luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  // If luminance is less than 128, it's considered dark
+  return luminance < 128;
+}
     </script>
