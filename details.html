@@ -53,10 +53,12 @@ header .logo h1 {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: center;
 }
 
 .dropdown-menu .menutext:hover {
-    background-color: #ddd;
+    background-color: blue;
+    color: white;
 }
 
 
@@ -76,7 +78,7 @@ nav ul li a {
 }
 
 main {
-    margin: 20px;
+    margin: 30px;
 }
 
 .main-content {
@@ -90,6 +92,7 @@ main {
 
 .news {
     width: 30%;
+
 }
 
 footer {
@@ -102,16 +105,24 @@ footer {
 .news-detail {
     margin: 20px;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: black;
+    color: white;
     border-radius: 5px;
+    text-align: center;
 }
 
 .news-detail h2 {
     margin-bottom: 10px;
+    font-size: 24px;
+    background-color: white;
+    color: black;
 }
 
 .news-detail p {
     line-height: 1.8;
+    font-size: 19px;
+}
+#news-content{
 }
 
     </style>
@@ -121,13 +132,13 @@ footer {
         <div class="menu-container">
             <div class="menu-icon" onclick="toggleMenu()">☰</div>
             <div class="dropdown-menu" id="menu">
-                <a class="menutext" href="#">Einstellungen</a>
-                <a class="menutext" href="#">Hilfe</a>
+                <a class="menutext" href="#">dajinta</a>
+                <a class="menutext" href="#">Midabka</a>
                 <a class="menutext" href="#">Home</a>
-                <a class="menutext" href="#">Nachrichten</a>
-                <a class="menutext" href="#">Kultur</a>
-                <a class="menutext" href="#">Sport</a>
-                <a class="menutext" href="#">Welt</a>
+                <a class="menutext" href="#">Caawi</a>
+                <a class="menutext" href="#">Ganacsiga</a>
+                <a class="menutext" href="#">qiimaha</a>
+                <a class="menutext" href="#">xayaysiis</a>
             </div>
         </div>
         <div class="logo">
@@ -183,27 +194,27 @@ footer {
     switch (newsId) {
         case 'featured':
             title = 'Ku Soo dhawooow bogeena';
-            content = 'Maalin wanaagsan.';
+            content = 'Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
             break;
         case '1':
             title = 'tafatirka 1';
-            content = 'kani waa cinwaanka 1 deteilskiisa.';
+            content = 'kani waa cinwaanka 1 deteilskiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
             break;
         case '2':
             title = 'tafatirka 2';
-            content = 'waa tafatirka labaad.';
+            content = 'waa tafatirka labaad Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
             break;
         case '3':
             title = 'waa tafarirka 3aad';
-            content = 'waa tafatirka 3aad iyo faaf faahintiisa.';
+            content = 'waa tafatirka 3aad iyo faaf faahintiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
             break;
             case '4':
             title = 'waa tafarirka 4aad';
-            content = 'waa tafatirka 4aad iyo faaf faahintiisa.';
+            content = 'waa tafatirka 4aad iyo faaf faahintiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
             break;
         default:
-            title = 'Nachricht nicht gefunden';
-            content = 'Die angeforderte Nachricht konnte nicht gefunden werden.';
+            title = 'Lama helin';
+            content = 'Iga raali noqo Wuu madhanyahay😐.';
 
     }
 
