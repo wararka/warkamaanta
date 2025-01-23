@@ -21,11 +21,44 @@ header {
     background-color: #003366;
     color: white;
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 header .logo h1 {
     display: inline-block;
 }
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-menu .menutext {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .menutext:hover {
+    background-color: #ddd;
+}
+
 
 nav ul {
     list-style: none;
@@ -85,9 +118,22 @@ footer {
 </head>
 <body>
     <header>
-        <div class="logo">
-            <h1>BBC Somali - Nachricht Details</h1>
+        <div class="menu-container">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <div class="dropdown-menu" id="menu">
+                <a class="menutext" href="#">Einstellungen</a>
+                <a class="menutext" href="#">Hilfe</a>
+                <a class="menutext" href="#">Home</a>
+                <a class="menutext" href="#">Nachrichten</a>
+                <a class="menutext" href="#">Kultur</a>
+                <a class="menutext" href="#">Sport</a>
+                <a class="menutext" href="#">Welt</a>
+            </div>
         </div>
+        <div class="logo">
+            <h3>Maxaa cusub</h3>
+        </div>
+        <div></div>
     </header>
 
     <section class="news-detail">
@@ -97,12 +143,30 @@ footer {
     </section>
 
     <footer>
-        <p>&copy; 2025 BBC Somali Beispiel. Alle Rechte vorbehalten.</p>
+        <p>&copy;  Bogan waxaa loogu tala galay wararka waxaa la aasaasay 22,1,2025.</p>
     </footer>
 
     <script src="details.js"></script>
 </body>
 </html>
+<script>
+           function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
