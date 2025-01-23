@@ -10,7 +10,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #CCCCFF;
+    background-color: #f4f4f4;
+    color: white;
 }
 
 header {
@@ -76,9 +77,8 @@ header {
 text-align: center;
 }
 .dheraad{
-    background-color: blue;
-    color: white;
-
+color: black;
+background-color: black;
 }
 
 .news .title-div h2.dheraad {
@@ -91,9 +91,8 @@ text-align: center;
 }
 
 .title-div .title {
-    display: flex;
-    color: white;
-    background-color: black;
+    display: block;
+    color: black;
     font-size: 23px;
     text-decoration: none;
     padding: 15px 20px;
@@ -127,9 +126,40 @@ footer {
         font-size: 28px;
     }
 }
-.color-picker-container{
-    display: none;
+
+.news .title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.news .title img {
+    width: 100px;  /* Waad sameyn kartaa cabbirka sawirka */
+    margin-top: 10px;
+}
+
+.title-div .title {
+    display: flex;
+    color: white;
+    background-color: black;
+    font-size: 23px;
+    text-decoration: none;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title-div .title:hover {
+    background-color: blue;
+    color: white;
+}
+.color-picker-container{
+    display: non;
+color: black;
+}
+
     </style>
 </head>
 <body>
