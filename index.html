@@ -211,4 +211,8 @@ footer {
                 }
             }
         }
+    // Change the background color based on the color picker
+document.getElementById('bgColorPicker').addEventListener('input', function(event) {
+  document.body.style.backgroundColor = event.target.value;
+});
     </script>
