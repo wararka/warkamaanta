@@ -3,255 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faahfaahinta</title>
-    <link rel="stylesheet" href="">
+    <title>Details</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* Allgemeines Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: black;
-}
+        h1, h2 {
+            color: white;
+        }
 
-header {
-    background-color: #003366;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-}
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
 
-header .logo h1 {
-    display: inline-block;
-}
-.menu-container {
-    position: relative;
-    display: inline-block;
-}
+        a:hover {
+            text-decoration: underline;
+        }
 
-.menu-icon {
-    font-size: 30px;
-    cursor: pointer;
-    margin-left: 15px;
-}
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px;
-}
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.dropdown-menu .menutext {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-}
+        li {
+            margin: 10px 0;
+        }
 
-.dropdown-menu .menutext:hover {
-    background-color: blue;
-    color: white;
-}
+        .box {
+            margin: 20px;
+            padding: 20px;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #details_erste, #details_zweite, #details_dritte, #details-afar {
+            display: none;
+        }
+
+        /* Styling für den Header */
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ali {
+            display: block;
+            color: black;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        video {
+            display: block;
+            margin: 20px auto;
+            width: 50%;
+            height: 150px;
+        }
+        img{
+            width: 90%;
+        }
+        p{
+            margin: 9px;
+        }
+
+        /* Styling für Header und Menü */
+        .header {
+            display: flex;
+            background-color: blue;
+            justify-content: space-between;
+            padding: 10px;
+            position: fixe;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .menudiv {
+            cursor: pointer;
+        }
+
+        .menu1, .menu2, .menu3 {
+            width: 35px;
+            height: 5px;
+            background-color: white;
+            margin: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        #menu {
+            background-color: white;
+            position: fixed;
+            top: 40px;
+            left: -100%;
+            width: 100px;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+        }
+
+        #menu.open {
+            left: 0;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .searchdiv {
+            display: flex;
+            align-items: center;
+        }
+
+        #searchInput {
+            margin: 10px;
+            padding: 8px;
+            width: 150px;
+            border-radius: 5px;
+            border: none;
+            background-color: transparent;
+            color: white;
+            border: 1px solid #fff;
+        }
+
+        .highlight {
+            background-color: yellow;
+            color: white;
+        }
+
+                /*animationka ku soo dhwoow bogeena */
 
 
-nav ul {
-    list-style: none;
-    text-align: right;
-}
+         .container {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 9px;
+            width: 90%;
+            font-weight: bold;
+            animation: mida 2s infinite;
+        }
+        @keyframes midab{
+            10%{
+                background-color: yellowgreen;
+            }
+            20%
+        {
+            background-color: red;
+        }
+        30%{
+            background-color: blue;
+        }
+        40%{
+            background-color: white;
+        }
+        50%{
+            background-color: green;
+        }
+        }
 
-nav ul li {
-    display: inline-block;
-    margin-left: 20px;
-}
+        .word {
+            margin: 0 5px;
+            color: #4caf50;
+            animation: rotate 3s linear infinite;
+        }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
+        .word:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .word:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .word:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        .word:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+        .word:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+        .word:nth-child(6) {
+            animation-delay: 1.5s;
+        }
+        .word:nth-child(7) {
+            animation-delay: 1.8s;
+        }
+        .word:nth-child(8) {
+            animation-delay: 2.1s;
+        }
+        .word:nth-child(9) {
+            animation-delay: 2.4s;
+        }
+        .word:nth-child(10) {
+            animation-delay: 2.7s;
+        }
+        .word:nth-child(11) {
+            animation-delay: 3s;
+        }
+        .word:nth-child(12) {
+            animation-delay: 3.3s;
+        }
+        .word:nth-child(13) {
+            animation-delay: 3.6s;
+        }
+        .word:nth-child(14) {
+            animation-delay: 3.9s;
+        }
+        .word:nth-child(15) {
+            animation-delay: 4.2s;
+        }
+        .word:nth-child(16) {
+            animation-delay: 4.5s;
+        }
+        .word:nth-child(17) {
+            animation-delay: 4.8s;
+        }
+        .word:nth-child(18) {
+            animation-delay: 5.1s;
+        }
 
-main {
-    margin: 30px;
-}
+        /* Rotate animation */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+                color: #4caf50;
+            }
+            25% {
+                transform: rotate(90deg);
+                color: #2196f3;
+            }
+            50% {
+                transform: rotate(180deg);
+                color: #ff5722;
+            }
+            75% {
+                transform: rotate(270deg);
+                color: #9c27b0;
+            }
+            100% {
+                transform: rotate(360deg);
+                color: #4caf50;
+            }
+        }
 
-.main-content {
-    display: flex;
-    justify-content: space-between;
-}
+        /* halkaas ayuu ku dhamaaday css animationka ku soo dhowaaw bogeena*/
 
-.featured {
-    width: 60%;
-}
-
-.news {
-    width: 30%;
-
-}
-
-footer {
-    text-align: center;
-    background-color: #003366;
-    color: white;
-    padding: 10px;
-}
-
-.news-detail {
-    margin: 20px;
-    padding: 20px;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.news-detail h2 {
-    margin-bottom: 10px;
-    font-size: 24px;
-    background-color: white;
-    color: black;
-}
-
-.news-detail p {
-    line-height: 1.8;
-    font-size: 19px;
-}
-#news-content{
-}
-.color-picker-container{
-    display: none;
-color: black;
-}
 
     </style>
 </head>
 <body>
-    <header>
-        <div class="menu-container">
-            <div class="menu-icon" onclick="toggleMenu()">☰</div>
-            <div class="dropdown-menu" id="menu">
-                <a class="menutext" href="http://maanta.infinityfreeapp.com/?i=1">dajinta</a>
-                <a onclick="colorpicker()" class="menutext" href="#">Midabka</a>
-                <a class="menutext" href="login.html">Nagu Sahabsan</a>
-                <a class="menutext" href="xirrir-email.html">Caawi</a>
-                <a class="menutext" href="#">Ganacsiga</a>
-                <a class="menutext" href="#">qiimaha</a>
-                <a class="menutext" href="#">xayaysiis</a>
-                <a class="menutext" href="xirrir-email.html">CNala soo xirri</a>
-            </div>
-        </div>
-        <div class="logo">
-            <h3>Maxaa cusub</h3>
-        </div>
-            <div id="color-picker-container" class="color-picker-container">
-            <label for="bgColorPicker">Dooro Midabka:</label>
-            <input type="color" id="bgColorPicker" name="bgColorPicker" value="#ffffff">
-          </div>
-    </header>
 
-    <section class="news-detail">
-        <div id="news-content">
-            <!-- Die Details werden hier dynamisch eingefügt -->
+    <!-- Header mit Menü und Suche -->
+    <div class="header">
+        <div class="menudiv" id="menudiv">
+            <div class="menu1"></div>
+            <div class="menu2"></div>
+            <div class="menu3"></div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy;  Bogan waxaa loogu tala galay wararka waxaa la aasaasay 22,1,2025.</p>
-    </footer>
+        <menu id="menu">
+            <a class="ali" href="index.html">Home</a>
+            <a class="ali" href="#">Content</a>
+            <a class="ali" href="#">Search</a>
+        </menu>
 
-    <script src="details.js"></script>
+        <div class="searchdiv">
+            <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchFunction()">
+        </div>
+    </div>
+    <br>
+
+
+    <!-- Inhalt der Seite -->
+    <div class="box">
+
+        <!--ku soo dhawoow bodgeena html-->
+<div class="container">
+    <div class="word">K</div>
+    <div class="word">U</div>
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">S</div>
+    <div class="word">O</div>
+    <div class="word">O</div>
+
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">D</div>
+    <div class="word">H</div>
+    <div class="word">A</div>
+    <div class="word">W</div>
+    <div class="word">O</div>
+    <div class="word">W</div>
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">B</div>
+    <div class="word">O</div>
+    <div class="word">G</div>
+    <div class="word">E</div>
+    <div class="word">E</div>
+    <div class="word">N</div>
+    <div class="word">A</div>
+
+</div>
+<!--halkaas ayuu ku istaagay ku soo dhawoow bogeena-->
+
+
+
+        <div id="details_erste" style="display: none;">
+            <h2>Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
+                <img src="img1.webp" alt="">
+            </h2>
+            <p>16 Daqiiqadood ka hor
+                Ciyaartoyda Afrikaanka ah ayaa door muhiim ah ka ciyaari doona xilli uu xilli ciyaareedka horyaalka Pro League ee Saudi Arabia uu u sii gudbayo heerkiisa ugu sarreeya bisha May, iyadoo in ka badan 50 ciyaartooy oo ka kala yimid qaarada Afrika ay ku baahsan yihiin 18 ka kooxood ee heerkan.
+            </p>
+        </div>
+
+        <div id="details_zweite" style="display: none;">
+            <h2>Cinwaanka Labaad</h2>
+            <p>Dies sind die Details für den zweiten Titel.</p>
+        </div>
+
+        <div id="details_dritte" style="display: none;">
+            <h2>Dritter Titel</h2>
+            <p>Dies sind die Details für den dritten Titel.</p>
+        </div>
+
+        <div id="details-afar" style="display: none;">
+            <h2>Cinwaanka Afaraad</h2>
+            <p>Willkommen zum vierten Titel 
+                <video controls src="ISMAACIIL AARKA __ XILO JANNO __ OFFICIAL VIDEO 2023.mp4"></video>
+            </p>
+        </div>
+    </div>
+
+    <a class="backforword" href="index.html">dib u laabo </a>
+
+
 </body>
 </html>
-<script>
-           function toggleMenu() {
-            var menu = document.getElementById("menu");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
 
-        window.onclick = function(event) {
-            if (!event.target.matches('.menu-icon')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
+<script>
+    // Menü-Animation
+    let menudiv = document.getElementById("menudiv");
+    let menu = document.getElementById("menu");
+
+    menudiv.addEventListener("click", function() {
+        menu.classList.toggle("open");
+    });
+
+    // Suchfunktion
+    function searchFunction() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const items = document.querySelectorAll('.box p, .box h2'); // Suchen in p und h2
+
+        // Entfernen der alten Highlights
+        document.querySelectorAll('.highlight').forEach(function(element) {
+            element.classList.remove('highlight');
+        });
+
+        items.forEach(item => {
+            const text = item.textContent || item.innerText;
+            if (text.toLowerCase().includes(filter) && filter !== "") {
+                // Markiere das gefundene Wort
+                const regex = new RegExp(`(${filter})`, 'gi');
+                item.innerHTML = item.textContent.replace(regex, '<span class="highlight">$1</span>');
             }
-        }
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Den URL-Parameter holen
-    const urlParams = new URLSearchParams(window.location.search);
-    const newsId = urlParams.get('news');
-
-    // Das Div für den Nachrichteninhalt
-    const contentDiv = document.getElementById('news-content');
-
-    // Abhängig vom Wert des news-Parameters die Details anzeigen
-    let title, content;
-
-    switch (newsId) {
-        case 'featured':
-            title = 'Ku Soo dhawooow bogeena';
-            content = 'Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
-            break;
-        case '1':
-            title = 'tafatirka 1';
-            content = 'kani waa cinwaanka 1 deteilskiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
-            break;
-        case '2':
-            title = 'tafatirka 2';
-            content = 'waa tafatirka labaad Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
-            break;
-        case '3':
-            title = 'waa tafarirka 3aad';
-            content = 'waa tafatirka 3aad iyo faaf faahintiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
-            break;
-            case '4':
-            title = 'waa tafarirka 4aad';
-            content = 'waa tafatirka 4aad iyo faaf faahintiisa Maalin wanaagsan halkan wax kuma jirto fahfaahin ama warbixin.';
-            break;
-        default:
-            title = 'Lama helin';
-            content = 'Iga raali noqo Wuu madhanyahay😐.';
-
+        });
     }
 
-    // Den Titel und Inhalt in das Div einfügen
-    contentDiv.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
-});
+    // Hier wird der URL-Parameter 'title' ausgelesen und der entsprechende Inhalt angezeigt
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
 
+    if (title === "erste") {
+        document.getElementById("details_erste").style.display = "block";
+    } else if (title === "zweite") {
+        document.getElementById("details_zweite").style.display = "block";
+    } else if (title === "dritte") {
+        document.getElementById("details_dritte").style.display = "block";
+    } else if (title === "afar") {
+        document.getElementById("details-afar").style.display = "block";
+    } else {
+        document.body.innerHTML = "<h1>404 - Titel nicht gefunden</h1><p>Es tut uns leid, der angeforderte Titel existiert nicht.</p>";
+    }
 </script>
-<script>
-    // script.js color picker
 
-// Function to toggle the display of the menu
-function colorpicker() {
-  var menu = document.getElementById('color-picker-container');
-
-  // Check if the menu is already visible
-  if (menu.style.display === "block") {
-    // If it is visible, hide it
-    menu.style.display = "none";
-  } else {
-    // Otherwise, show it
-    menu.style.display = "block";
-  }
-}
-
-// Change the background color based on the color picker
-document.getElementById('bgColorPicker').addEventListener('input', function(event) {
-  document.body.style.backgroundColor = event.target.value;
-});
-
-</script>
