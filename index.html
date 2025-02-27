@@ -1,277 +1,386 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boga kowaad cinwaanada</title>
+    <title>fiiri</title>
     <style>
-/* General Body and Layout */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: white;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: black;
+            color: white;
 
-header {
-    background-color: #0073e6;
-    color: white;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-}
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .menu1, .menu2, .menu3 {
+            width: 35px;
+            height: 5px;
+            color: white;
+            background-color: white;
+            margin: 5px;
+            transition: transform 0.3s ease;
+        }
+        #menu {
+            background-color: blue;
+            position: fixed;
+            top: 40px;
+            left: -100%; /* Initially off-screen */
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 10px;
+            opacity: 0; /* Initially hidden */
+            transform: translateX(-100%);
+            transition: all 0.5s ease-in-out;
+        }
+        #menu.open {
+            left: 0; /* Menu slides in */
+            opacity: 1; /* Make it visible */
+            transform: translateX(0); /* Reset position */
+        }
+        #menu .ali {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 20px 0;
+            font-size: 20px;
+            text-align: left;
+            transition: color 0.3s;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 0.5s forwards;
+        }
+        #menu .ali:nth-child(1) {
+            animation-delay: 0.9s;
+        }
+        #menu .ali:nth-child(2) {
+            animation-delay: 1.3s;
+        }
+        #menu .ali:nth-child(3) {
+            animation-delay: 1.9s;
+        }
+        #menu .ali:hover {
+            color: blue;
+        }
+        @keyframes fadeIn {
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /* Search input style */
+        #searchInput {
+            margin: 20px;
+            padding: 5px;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            background-color: transparent;
+            color: white;
+        }
+        /*animationka ku soo dhwoow bogeena */
 
-.menu-container {
-    position: relative;
-    display: inline-block;
-}
+        .container {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 9px;
+            width: 90%;
+            font-weight: bold;
+            animation: mida 2s infinite;
+        }
 
-.menu-icon {
-    font-size: 30px;
-    cursor: pointer;
-    margin-left: 15px;
-}
+        @keyframes midab{
+            10%{
+                background-color: yellowgreen;
+            }
+            20%
+        {
+            background-color: red;
+        }
+        30%{
+            background-color: blue;
+        }
+        40%{
+            background-color: white;
+        }
+        50%{
+            background-color: green;
+        }
+        }
+        .word {
+            margin: 0 5px;
+            color: #4caf50;
+            animation: rotate 3s linear infinite;
+        }
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px;
-}
+        .word:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .word:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .word:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        .word:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+        .word:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+        .word:nth-child(6) {
+            animation-delay: 1.5s;
+        }
+        .word:nth-child(7) {
+            animation-delay: 1.8s;
+        }
+        .word:nth-child(8) {
+            animation-delay: 2.1s;
+        }
+        .word:nth-child(9) {
+            animation-delay: 2.4s;
+        }
+        .word:nth-child(10) {
+            animation-delay: 2.7s;
+        }
+        .word:nth-child(11) {
+            animation-delay: 3s;
+        }
+        .word:nth-child(12) {
+            animation-delay: 3.3s;
+        }
+        .word:nth-child(13) {
+            animation-delay: 3.6s;
+        }
+        .word:nth-child(14) {
+            animation-delay: 3.9s;
+        }
+        .word:nth-child(15) {
+            animation-delay: 4.2s;
+        }
+        .word:nth-child(16) {
+            animation-delay: 4.5s;
+        }
+        .word:nth-child(17) {
+            animation-delay: 4.8s;
+        }
+        .word:nth-child(18) {
+            animation-delay: 5.1s;
+        }
 
-.dropdown-menu .menutext {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+        /* Rotate animation */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+                color: #4caf50;
+            }
+            25% {
+                transform: rotate(90deg);
+                color: #2196f3;
+            }
+            50% {
+                transform: rotate(180deg);
+                color: #ff5722;
+            }
+            75% {
+                transform: rotate(270deg);
+                color: #9c27b0;
+            }
+            100% {
+                transform: rotate(360deg);
+                color: #4caf50;
+            }
+        }
 
-.dropdown-menu .menutext:hover {
-    background-color: #ddd;
-}
+        /* halkaas ayuu ku dhamaaday css animationka ku soo dhowaaw bogeena*/
 
-.logo h3 {
-    margin: 0;
-    font-size: 24px;
-}
+        h1, h2 {
+            color: white;
+            text-align: center;
+        }
 
-.main-content {
-    padding: 20px;
-}
+        .title {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centering the title, image/video, and text */
+            padding: 15px;
+            margin: 10px 20px;
+            border-radius: 8px;
+            background-color: ;
+            transition: background-color 0.3s ease;
+            width: 90%;
+            max-width: 450px; /* Maximalbreite für alle Elemente */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
 
-.featured, .news {
-    margin-bottom: 20px;
-}
+        .title:hover {
+            background-color: #007bf;
+            color: white;
+        }
 
-.featured h2 {
-    background-color: #0099cc;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-}
-.guud{
-text-align: center;
-}
-.dheraad{
-color: white;
-background-color: black;
-}
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.news .title-div h2.dheraad {
-    font-size: 50px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-.news .title{
-    text-align: center;
-}
+        li {
+            margin: 10px 0;
+        }
 
-.title-div .title {
-    display: block;
-    color: black;
-    font-size: 23px;
-    text-decoration: none;
-    padding: 15px 20px;
-    contain: paint;
-}
-.title-div .title:hover{
-    background-color: blue;
-    color: white;
-}
+        /* Stil für Bilder und Videos */
+        .title img, .title video {
+            max-width: 100%; /* Bilder und Videos in voller Breite des Containers */
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 30px;
-}
+        /* Video Styling */
+        video {
+            height: 100px; /* Reduziere die Höhe des Videos */
+            margin-top: 15px;
+        }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    header {
-        text-align: left;
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
 
-    .menu-container {
-        display: inline-block;
-        margin-left: 15px;
-    }
+            h1 {
+                font-size: 1.5rem;
+            }
 
-    .menu-icon {
-        font-size: 28px;
-    }
-}
-
-.news .title {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.news .title img {
-    width: 100px;  /* Waad sameyn kartaa cabbirka sawirka */
-    margin-top: 10px;
-}
-
-.title-div .title {
-    display: flex;
-    color: white;
-    background-color: black;
-    font-size: 23px;
-    text-decoration: none;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.title-div .title:hover {
-    background-color: blue;
-    color: white;
-}
-.color-picker-container{
-    display: none;
-color: black;
-}
-
+            .title {
+                padding: 5px;
+                margin: 5px 0;
+                width: 80%; /* Verkleinere die Breite auf mobilen Geräten */
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="menu-container">
-            <div class="menu-icon" onclick="toggleMenu()">☰</div>
-            <div class="dropdown-menu" id="menu">
-                <a class="menutext" href="#">dajinta</a>
-                <a onclick="colorpicker()" class="menutext" href="#">Midabka</a>
-                <a class="menutext" href="login.html">Nagu sahabsan</a>
-                <a class="menutext" href="http://maanta.infinityfreeapp.com/Sheeko.php>Caawi</a>
-                <a class="menutext" href="#">Ganacsiga</a>
-                <a class="menutext" href="#">qiimaha</a>
-                <a class="menutext" href="#">xayaysiis</a>
-                <a class="menutext" href="xirrir-email.html">Nala soo xirri</a>
-            </div>
+    <div class="header">
+        <div class="menudiv" id="menudiv">
+            <div class="menu1"></div>
+            <div class="menu2"></div>
+            <div class="menu3"></div>
         </div>
-        <div class="logo">
-            <h3>Maxaa cusub</h3>
+        <menu id="menu">
+            <a class="ali" href="#">Home</a>
+            <a class="ali" href="#">Content</a>
+            <a class="ali" href="#">Search</a>
+        </menu>
+        <div class="searchdiv">
+            <input type="text" id="searchInput" placeholder="Raadi magac ama title..." onkeyup="searchFunction()">
         </div>
-        <div id="color-picker-container" class="color-picker-container">
-            <label for="bgColorPicker">Dooro Midabka:</label>
-            <input type="color" id="bgColorPicker" name="bgColorPicker" value="#ffffff">
-          </div>
-    </header>
+    </div>
 
-    <section class="main-content">
-        <article class="featured">
-            <h2 class="guud"><a class="guuda" href="details.html?news=featured">wararka guud</a></h2>
-        </article>
-        <article class="news">
-            <div class="title-div">
-                <h2 class="dheraad">Waa tijaabo</h2>
-                <a class="title" href="details.html?news=1">cinwaanka 1 </a>
-                <a class="title" href="details.html?news=2">wararkii shalay 2</a>
-                <a class="title" href="details.html?news=3">Nachricht 3</a>
-                <a class="title" href="details.html?news=4">dhalinta maanta</a>
-                <a class="title" href="details.html?news=5">wayaha cusub</a>
-            </div>
-        </article>
-    </section>
 
-    <footer>
-        <p>&copy; Bogan waxaa loogu tala galay wararka waxaa la aasaasay 22,1,2025.</p>
-    </footer>
+    <div id="titleList" class="box">
+<!--ku soo dhawoow bodgeena html-->
+<div class="container">
+    <div class="word">K</div>
+    <div class="word">U</div>
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">S</div>
+    <div class="word">O</div>
+    <div class="word">O</div>
+
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">D</div>
+    <div class="word">H</div>
+    <div class="word">A</div>
+    <div class="word">W</div>
+    <div class="word">O</div>
+    <div class="word">W</div>
+    <div class="word"> </div> <!-- Space between words -->
+    <div class="word">B</div>
+    <div class="word">O</div>
+    <div class="word">G</div>
+    <div class="word">E</div>
+    <div class="word">E</div>
+    <div class="word">N</div>
+    <div class="word">A</div>
+
+</div>
+<!--halkaas ayuu ku istaagay ku soo dhawoow bogeena-->
+
+
+
+        <ul>
+            <li>
+                <a class="title" href="details.html?title=erste">
+                    Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
+                    <img src="img1.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="title" href="details.html?title=zweite">
+                    cinwaanka 2aad 
+                    <img src="img2.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="title" href="details.html?title=dritte">
+                    Dritter Titel
+                    <img src="img3.webp" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="title" href="details.html?title=afar">
+                    Heesta Ismail Aarka
+                    <video controls src="ISMAACIIL AARKA __ XILO JANNO __ OFFICIAL VIDEO 2023.mp4"></video>
+                </a>
+            </li>
+        </ul>
+    </div>
 
     <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menu");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
+        let menudiv = document.getElementById("menudiv");
+        let menu = document.getElementById("menu");
 
-        window.onclick = function(event) {
-            if (!event.target.matches('.menu-icon')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
+        menudiv.addEventListener("click", function() {
+            // Toggle the 'open' class to animate the menu
+
+            menu.classList.toggle("open");
+        });
+
+        function searchFunction() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const list = document.getElementById('titleList');
+            const items = list.getElementsByTagName('a');
+
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const text = item.textContent || item.innerText;
+
+                if (text.toLowerCase().includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
                 }
             }
         }
     </script>
 </body>
 </html>
-<script>
-        function colorpicker() {
-            var menu = document.getElementById("color-picker-container");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.menu-icon')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
-            }
-        }
-    // Change the background color based on the color picker
-
-    
-// Function to change background color and text color based on selected color
-document.getElementById('bgColorPicker').addEventListener('input', function(event) {
-  var color = event.target.value; // Get the selected color
-  document.body.style.backgroundColor = color;
-
-  // Check if the background color is dark (near black)
-  if (isDarkBackground(color)) {
-    // Change text color to white if background is dark
-    document.body.style.color = "#ffffff";
-  } else {
-    // Change text color to black if background is light
-    document.body.style.color = "#000000";
-  }
-});
-
-// Function to check if a color is dark based on its luminance
-function isDarkBackground(color) {
-  // Convert hex color to RGB
-  var r = parseInt(color.substr(1, 2), 16); // Red
-  var g = parseInt(color.substr(3, 2), 16); // Green
-  var b = parseInt(color.substr(5, 2), 16); // Blue
-
-  // Calculate luminance using the formula
-  var luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-  // If luminance is less than 128, it's considered dark
-  return luminance < 128;
-}
-    </script>
