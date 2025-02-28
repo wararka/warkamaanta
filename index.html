@@ -10,8 +10,9 @@
             margin: 0;
             background-color: black;
             color: white;
-
         }
+
+        /* Header and menu styles */
         .header {
             display: flex;
             justify-content: space-between;
@@ -29,22 +30,23 @@
             background-color: blue;
             position: fixed;
             top: 40px;
-            left: -100%; /* Initially off-screen */
+            left: -100%;
             width: 100px;
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 10px;
-            opacity: 0; /* Initially hidden */
+            opacity: 0;
             transform: translateX(-100%);
             transition: all 0.5s ease-in-out;
         }
         #menu.open {
-            left: 0; /* Menu slides in */
-            opacity: 1; /* Make it visible */
-            transform: translateX(0); /* Reset position */
+            left: 0;
+            opacity: 1;
+            transform: translateX(0);
         }
+
         #menu .ali {
             color: white;
             text-decoration: none;
@@ -53,42 +55,21 @@
             font-size: 20px;
             text-align: left;
             transition: color 0.3s;
-            opacity: 0; /* Initially hidden */
+            opacity: 0;
             animation: fadeIn 0.5s forwards;
         }
-        #menu .ali:nth-child(1) {
-            animation-delay: 0.9s;
-        }
-        #menu .ali:nth-child(2) {
-            animation-delay: 1.3s;
-        }
-        #menu .ali:nth-child(3) {
-            animation-delay: 1.9s;
-        }
-        #menu .ali:hover {
-            color: blue;
-        }
-        @keyframes fadeIn {
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        /* Search input style */
-        #searchInput {
-            margin: 20px;
+        #searchInput{
             padding: 5px;
-            width: 100px;
-            border-radius: 5px;
-            border: 1px solid #fff;
-            background-color: transparent;
-            color: white;
         }
-        /*animationka ku soo dhwoow bogeena */
 
-        .container {
+        @keyframes fadeIn {
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+                /*animationka ku soo dhwoow bogeena */
+
+                .container {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -204,59 +185,38 @@
 
         /* halkaas ayuu ku dhamaaday css animationka ku soo dhowaaw bogeena*/
 
-        h1, h2 {
-            color: white;
-            text-align: center;
+        /* New grid layout for titles */
+        .cinwaanka {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* 2 columns or more based on available space */
+            gap: 30px; /* Space between items */
+            justify-items: center; /* Centers the items horizontally */
+            padding: 10px;
         }
 
+        /* Title item styling */
         .title {
-            display: flex;
-            flex-direction: column;
             text-align: center;
-            align-items: center;
-            text-decoration: none;
+            padding: 10px;
             color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centering the title, image/video, and text */
-            padding: 15px;
-            margin: 10px 20px;
-            border-radius: 8px;
-            background-color: ;
-            transition: background-color 0.3s ease;
-            width: 90%;
-            max-width: 450px; /* Maximalbreite für alle Elemente */
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
         }
 
         .title:hover {
-            background-color: #007bf;
-            color: white;
+            background-color: #007bf0;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin: 10px 0;
-        }
-
-        /* Stil für Bilder und Videos */
         .title img, .title video {
-            max-width: 100%; /* Bilder und Videos in voller Breite des Containers */
-            height: auto;
+            max-width: 100%;
             border-radius: 5px;
-            margin-top: 15px;
         }
 
-        /* Video Styling */
-        video {
-            height: 100px; /* Reduziere die Höhe des Videos */
-            margin-top: 15px;
+        /* Additional Styling */
+        h1, h2 {
+            color: white;
+            text-align: center;
         }
 
         /* Responsive Design */
@@ -264,15 +224,11 @@
             body {
                 font-size: 14px;
             }
-
             h1 {
                 font-size: 1.5rem;
             }
-
             .title {
-                padding: 5px;
-                margin: 5px 0;
-                width: 80%; /* Verkleinere die Breite auf mobilen Geräten */
+                width: 90%; /* Make title container width smaller */
             }
         }
     </style>
@@ -293,9 +249,7 @@
             <input type="text" id="searchInput" placeholder="Raadi magac ama title..." onkeyup="searchFunction()">
         </div>
     </div>
-
-
-    <div id="titleList" class="box">
+    <br>
 <!--ku soo dhawoow bodgeena html-->
 <div class="container">
     <div class="word">K</div>
@@ -324,34 +278,25 @@
 </div>
 <!--halkaas ayuu ku istaagay ku soo dhawoow bogeena-->
 
-
-
-        <ul>
-            <li>
-                <a class="title" href="details.html?title=erste">
-                    Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
-                    <img src="img1.webp" alt="">
-                </a>
-            </li>
-            <li>
-                <a class="title" href="details.html?title=zweite">
-                    cinwaanka 2aad 
-                    <img src="img2.webp" alt="">
-                </a>
-            </li>
-            <li>
-                <a class="title" href="details.html?title=dritte">
-                    Dritter Titel
-                    <img src="img3.webp" alt="">
-                </a>
-            </li>
-            <li>
-                <a class="title" href="details.html?title=afar">
-                    Heesta Ismail Aarka
-                    <video controls src="ISMAACIIL AARKA __ XILO JANNO __ OFFICIAL VIDEO 2023.mp4"></video>
-                </a>
-            </li>
-        </ul>
+    <div id="titleList" class="box">
+        <div class="cinwaanka">
+            <a class="title" href="details.html?title=erste">
+                Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
+                <img src="img1.webp" alt="">
+            </a>
+            <a class="title" href="details.html?title=zweite">
+                cinwaanka 2aad
+                <img src="img2.webp" alt="">
+            </a>
+            <a class="title" href="details.html?title=dritte">
+                Dritter Titel
+                <img src="img3.webp" alt="">
+            </a>
+            <a class="title" href="details.html?title=afar">
+                Heesta Ismail Aarka
+                <video controls src="ISMAACIIL AARKA __ XILO JANNO __ OFFICIAL VIDEO 2023.mp4"></video>
+            </a>
+        </div>
     </div>
 
     <script>
@@ -359,8 +304,6 @@
         let menu = document.getElementById("menu");
 
         menudiv.addEventListener("click", function() {
-            // Toggle the 'open' class to animate the menu
-
             menu.classList.toggle("open");
         });
 
