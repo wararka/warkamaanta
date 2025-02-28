@@ -51,44 +51,12 @@
         }
 
         /* Styling für den Header */
-        h2 {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .ali {
-            display: block;
-            color: black;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 1.2rem;
-            text-decoration: none;
-        }
-
-        video {
-            display: block;
-            margin: 20px auto;
-            width: 50%;
-            height: 150px;
-        }
-        img{
-            width: 90%;
-        }
-        p{
-            margin: 9px;
-        }
-
-        /* Styling für Header und Menü */
         .header {
             display: flex;
             background-color: blue;
             justify-content: space-between;
             padding: 10px;
-            position: fixe;
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -148,10 +116,8 @@
             color: white;
         }
 
-                /*animationka ku soo dhwoow bogeena */
-
-
-         .container {
+        /* Animation */
+        .container {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -159,86 +125,31 @@
             font-size: 9px;
             width: 90%;
             font-weight: bold;
-            animation: mida 2s infinite;
+            animation: midab 2s infinite;
         }
-        @keyframes midab{
-            10%{
+
+        @keyframes midab {
+            10% {
                 background-color: yellowgreen;
             }
-            20%
-        {
-            background-color: red;
-        }
-        30%{
-            background-color: blue;
-        }
-        40%{
-            background-color: white;
-        }
-        50%{
-            background-color: green;
-        }
+            20% {
+                background-color: red;
+            }
+            30% {
+                background-color: blue;
+            }
+            40% {
+                background-color: white;
+            }
+            50% {
+                background-color: green;
+            }
         }
 
         .word {
             margin: 0 5px;
             color: #4caf50;
             animation: rotate 3s linear infinite;
-        }
-
-        .word:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .word:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-        .word:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-        .word:nth-child(4) {
-            animation-delay: 0.9s;
-        }
-        .word:nth-child(5) {
-            animation-delay: 1.2s;
-        }
-        .word:nth-child(6) {
-            animation-delay: 1.5s;
-        }
-        .word:nth-child(7) {
-            animation-delay: 1.8s;
-        }
-        .word:nth-child(8) {
-            animation-delay: 2.1s;
-        }
-        .word:nth-child(9) {
-            animation-delay: 2.4s;
-        }
-        .word:nth-child(10) {
-            animation-delay: 2.7s;
-        }
-        .word:nth-child(11) {
-            animation-delay: 3s;
-        }
-        .word:nth-child(12) {
-            animation-delay: 3.3s;
-        }
-        .word:nth-child(13) {
-            animation-delay: 3.6s;
-        }
-        .word:nth-child(14) {
-            animation-delay: 3.9s;
-        }
-        .word:nth-child(15) {
-            animation-delay: 4.2s;
-        }
-        .word:nth-child(16) {
-            animation-delay: 4.5s;
-        }
-        .word:nth-child(17) {
-            animation-delay: 4.8s;
-        }
-        .word:nth-child(18) {
-            animation-delay: 5.1s;
         }
 
         /* Rotate animation */
@@ -265,9 +176,17 @@
             }
         }
 
-        /* halkaas ayuu ku dhamaaday css animationka ku soo dhowaaw bogeena*/
+        /* Ensuring reasonable size for images and videos */
+        img, video {
+            max-width: 100%; /* Ensures they don't overflow */
+            height: auto;
+        }
 
-
+        .box {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
@@ -292,43 +211,11 @@
     </div>
     <br>
 
-
     <!-- Inhalt der Seite -->
     <div class="box">
-
-        <!--ku soo dhawoow bodgeena html-->
-<div class="container">
-    <div class="word">K</div>
-    <div class="word">U</div>
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">S</div>
-    <div class="word">O</div>
-    <div class="word">O</div>
-
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">D</div>
-    <div class="word">H</div>
-    <div class="word">A</div>
-    <div class="word">W</div>
-    <div class="word">O</div>
-    <div class="word">W</div>
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">B</div>
-    <div class="word">O</div>
-    <div class="word">G</div>
-    <div class="word">E</div>
-    <div class="word">E</div>
-    <div class="word">N</div>
-    <div class="word">A</div>
-
-</div>
-<!--halkaas ayuu ku istaagay ku soo dhawoow bogeena-->
-
-
-
         <div id="details_erste" style="display: none;">
             <h2>Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
-                <img src="img1.webp" alt="">
+                <img src="img1.webp" alt="Afrika Football Player">
             </h2>
             <p>16 Daqiiqadood ka hor
                 Ciyaartoyda Afrikaanka ah ayaa door muhiim ah ka ciyaari doona xilli uu xilli ciyaareedka horyaalka Pro League ee Saudi Arabia uu u sii gudbayo heerkiisa ugu sarreeya bisha May, iyadoo in ka badan 50 ciyaartooy oo ka kala yimid qaarada Afrika ay ku baahsan yihiin 18 ka kooxood ee heerkan.
@@ -354,7 +241,6 @@
     </div>
 
     <a class="backforword" href="index.html">dib u laabo </a>
-
 
 </body>
 </html>
@@ -389,7 +275,7 @@
         });
     }
 
-    // Hier wird der URL-Parameter 'title' ausgelesen und der entsprechende Inhalt angezeigt
+    // URL parameter for displaying specific title details
     const urlParams = new URLSearchParams(window.location.search);
     const title = urlParams.get('title');
 
@@ -405,4 +291,3 @@
         document.body.innerHTML = "<h1>404 - Titel nicht gefunden</h1><p>Es tut uns leid, der angeforderte Titel existiert nicht.</p>";
     }
 </script>
-
