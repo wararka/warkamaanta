@@ -1,329 +1,1707 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="so">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fiiri</title>
+    <title>Falalka Jarmalka - Präfixverben</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            background-color: black;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Header and menu styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Mode (default) */
+        body.dark {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+        }
+
+        /* Light Mode */
+        body.light {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header with Theme Toggle */
         .header {
             display: flex;
             justify-content: space-between;
-            padding: 10px;
-        }
-        .menu1, .menu2, .menu3 {
-            width: 35px;
-            height: 5px;
-            color: white;
-            background-color: white;
-            margin: 5px;
-            transition: transform 0.3s ease;
-        }
-        #menu {
-            background-color: blue;
-            position: fixed;
-            top: 40px;
-            left: -100%;
-            width: 100px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            padding-top: 10px;
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: all 0.5s ease-in-out;
-        }
-        #menu.open {
-            left: 0;
-            opacity: 1;
-            transform: translateX(0);
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        #menu .ali {
-            color: white;
-            text-decoration: none;
-            display: block;
-            margin: 20px 0;
-            font-size: 20px;
-            text-align: left;
-            transition: color 0.3s;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
+        .title-section h1 {
+            font-size: 2rem;
+            color: #ffcc00;
         }
-        #searchInput{
-            padding: 5px;
+
+        body.light .title-section h1 {
+            color: #d4a000;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: #1a1a1a;
+            border: 2px solid #444;
+            color: #ffcc00;
+            padding: 12px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.light .theme-toggle {
+            background: #e0e0e0;
+            border-color: #ccc;
+            color: #d4a000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.02);
+            background: #2a2a2a;
+        }
+
+        body.light .theme-toggle:hover {
+            background: #d0d0d0;
+        }
+
+        /* Search Section */
+        .search-section {
+            margin: 30px 0 20px 0;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #searchInput {
+            flex: 1;
+            min-width: 250px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border: 2px solid #333;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        body.dark #searchInput {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: #444;
+        }
+
+        body.light #searchInput {
+            background-color: white;
+            color: #1a1a1a;
+            border-color: #ddd;
+        }
+
+        #searchInput:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+        }
+
+        .search-btn {
+            padding: 14px 28px;
+            font-size: 1rem;
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #ffdd33;
+            transform: scale(1.02);
+        }
+
+        /* Hint badges */
+        .hint-section {
+            margin: 15px 0 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .hint-badge {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #ccc;
+        }
+
+        body.light .hint-badge {
+            background: #e8e8e8;
+            border-color: #ccc;
+            color: #333;
+        }
+
+        .hint-badge:hover {
+            background: #ffcc00;
+            color: #1a1a1a;
+            border-color: #ffcc00;
+            transform: translateY(-1px);
+        }
+
+        /* Result Card */
+        .result-card {
+            background-color: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            animation: fadeIn 0.4s ease;
+            transition: all 0.3s;
+        }
+
+        body.light .result-card {
+            background-color: white;
+            border-color: #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         @keyframes fadeIn {
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-                /*animationka ku soo dhwoow bogeena */
-
-                .container {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 9px;
-            width: 90%;
+        .verb-title {
+            font-size: 2rem;
             font-weight: bold;
-            animation: mida 2s infinite;
+            color: #ffcc00;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
         }
 
-        @keyframes midab{
-            10%{
-                background-color: yellowgreen;
-            }
-            20%
-        {
-            background-color: red;
-        }
-        30%{
-            background-color: blue;
-        }
-        40%{
-            background-color: white;
-        }
-        50%{
-            background-color: green;
-        }
-        }
-        .word {
-            margin: 0 5px;
-            color: #4caf50;
-            animation: rotate 3s linear infinite;
+        body.light .verb-title {
+            border-bottom-color: #e0e0e0;
         }
 
-        .word:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .word:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-        .word:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-        .word:nth-child(4) {
-            animation-delay: 0.9s;
-        }
-        .word:nth-child(5) {
-            animation-delay: 1.2s;
-        }
-        .word:nth-child(6) {
-            animation-delay: 1.5s;
-        }
-        .word:nth-child(7) {
-            animation-delay: 1.8s;
-        }
-        .word:nth-child(8) {
-            animation-delay: 2.1s;
-        }
-        .word:nth-child(9) {
-            animation-delay: 2.4s;
-        }
-        .word:nth-child(10) {
-            animation-delay: 2.7s;
-        }
-        .word:nth-child(11) {
-            animation-delay: 3s;
-        }
-        .word:nth-child(12) {
-            animation-delay: 3.3s;
-        }
-        .word:nth-child(13) {
-            animation-delay: 3.6s;
-        }
-        .word:nth-child(14) {
-            animation-delay: 3.9s;
-        }
-        .word:nth-child(15) {
-            animation-delay: 4.2s;
-        }
-        .word:nth-child(16) {
-            animation-delay: 4.5s;
-        }
-        .word:nth-child(17) {
-            animation-delay: 4.8s;
-        }
-        .word:nth-child(18) {
-            animation-delay: 5.1s;
+        .meaning {
+            font-size: 1.15rem;
+            margin: 15px 0;
+            color: #ddd;
         }
 
-        /* Rotate animation */
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-                color: #4caf50;
-            }
-            25% {
-                transform: rotate(90deg);
-                color: #2196f3;
-            }
-            50% {
-                transform: rotate(180deg);
-                color: #ff5722;
-            }
-            75% {
-                transform: rotate(270deg);
-                color: #9c27b0;
-            }
-            100% {
-                transform: rotate(360deg);
-                color: #4caf50;
-            }
+        body.light .meaning {
+            color: #444;
         }
 
-        /* halkaas ayuu ku dhamaaday css animationka ku soo dhowaaw bogeena*/
-
-        /* New grid layout for titles */
-        .cinwaanka {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* 2 columns or more based on available space */
-            gap: 30px; /* Space between items */
-            justify-items: center; /* Centers the items horizontally */
-            padding: 10px;
+        .meaning span {
+            color: #ffcc00;
+            font-weight: bold;
         }
 
-        /* Title item styling */
-        .title {
+        .examples-title {
+            margin: 20px 0 10px 0;
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .examples {
+            margin: 10px 0;
+            padding-left: 0;
+        }
+
+        .examples p {
+            margin: 12px 0;
+            background-color: #141414;
+            padding: 14px;
+            border-radius: 12px;
+            border-left: 4px solid #ffcc00;
+        }
+
+        body.light .examples p {
+            background-color: #f8f8f8;
+        }
+
+        .examples .de {
+            color: #ffaa66;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        body.light .examples .de {
+            color: #d48900;
+        }
+
+        .examples .so {
+            color: #aaa;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        body.light .examples .so {
+            color: #666;
+        }
+
+        .similar-title {
+            margin: 25px 0 15px 0;
+            font-size: 1.1rem;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .similar-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .similar-btn {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        body.light .similar-btn {
+            background-color: #e8e8e8;
+            border-color: #ccc;
+            color: #333;
+        }
+
+        .similar-btn:hover {
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            border-color: #ffcc00;
+            transform: translateY(-2px);
+        }
+
+        .no-result {
             text-align: center;
-            padding: 10px;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
+            padding: 50px 20px;
+            color: #888;
+            font-size: 1.1rem;
+            background: #0d0d0d;
+            border-radius: 20px;
+            margin-top: 25px;
+            border: 1px solid #333;
         }
 
-        .title:hover {
-            background-color: #007bf0;
+        body.light .no-result {
+            background: white;
+            border-color: #e0e0e0;
+            color: #999;
         }
 
-        .title img, .title video {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-
-        /* Additional Styling */
-        h1, h2 {
-            color: white;
+        .loading {
             text-align: center;
+            padding: 50px;
+            color: #ffcc00;
+            font-size: 1.2rem;
         }
 
-        /* Responsive Design */
+        .info-text {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
         @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-            h1 {
+            .verb-title {
                 font-size: 1.5rem;
             }
-            .title {
-                width: 90%; /* Make title container width smaller */
+            .result-card {
+                padding: 20px;
+            }
+            .similar-btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <div class="menudiv" id="menudiv">
-            <div class="menu1"></div>
-            <div class="menu2"></div>
-            <div class="menu3"></div>
-        </div>
-        <menu id="menu">
-            <a class="ali" href="#">Home</a>
-            <a class="ali" href="#">Content</a>
-            <a class="ali" href="#">Search</a>
-        </menu>
-        <div class="searchdiv">
-            <input type="text" id="searchInput" placeholder="Raadi magac ama title..." onkeyup="searchFunction()">
-        </div>
-    </div>
-    <br>
-<!--ku soo dhawoow bodgeena html-->
+<body class="dark">
+
 <div class="container">
-    <div class="word">K</div>
-    <div class="word">U</div>
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">S</div>
-    <div class="word">O</div>
-    <div class="word">O</div>
+    <div class="header">
+        <div class="title-section">
+            <h1>🔍 Qaamuuska Falka Jarmalka</h1>
+            <div class="subtitle">Raadi falka (Af-Soomaali ama Af-Jarmal) — Präfixverben</div>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+            🌙 Dark / Light
+        </button>
+    </div>
 
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">D</div>
-    <div class="word">H</div>
-    <div class="word">A</div>
-    <div class="word">W</div>
-    <div class="word">O</div>
-    <div class="word">W</div>
-    <div class="word"> </div> <!-- Space between words -->
-    <div class="word">B</div>
-    <div class="word">O</div>
-    <div class="word">G</div>
-    <div class="word">E</div>
-    <div class="word">E</div>
-    <div class="word">N</div>
-    <div class="word">A</div>
-
-</div>
-<!--halkaas ayuu ku istaagay ku soo dhawoow bogeena-->
-
-    <div id="titleList" class="box">
-        <div class="cinwaanka">
-            <a class="title" href="details.html?title=erste">
-                Ciyaartoyda hibada leh ee Afrika oo ku sii badanaya horyaalka Sacuudiga
-                <img src="img1.webp" alt="">
-            </a>
-            <a class="title" href="details.html?title=zweite">
-                cinwaanka 2aad
-                <img src="img2.webp" alt="">
-            </a>
-            <a class="title" href="details.html?title=dritte">
-                Dritter Titel
-                <img src="img3.webp" alt="">
-            </a>
-            <a class="title" href="details.html?title=afar">
-                Heesta Ismail Aarka
-                <video controls src="ISMAACIIL AARKA __ XILO JANNO __ OFFICIAL VIDEO 2023.mp4"></video>
-            </a>
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Geli falka... (e.g., finden, abfinden, aufbringen, ausgehen, ansehen, anstellen, anhalten, ablegen, antreffen, anrufen)">
+            <button class="search-btn" id="searchBtn">🔎 Raadi</button>
+        </div>
+        <div class="hint-section">
+            <div class="hint-badge" data-verb="finden">📖 finden</div>
+            <div class="hint-badge" data-verb="gehen">🚶 gehen</div>
+            <div class="hint-badge" data-verb="sehen">👁️ sehen</div>
+            <div class="hint-badge" data-verb="bringen">📦 bringen</div>
+            <div class="hint-badge" data-verb="geben">🎁 geben</div>
+            <div class="hint-badge" data-verb="nehmen">✋ nehmen</div>
+            <div class="hint-badge" data-verb="kommen">🚪 kommen</div>
+            <div class="hint-badge" data-verb="machen">⚡ machen</div>
         </div>
     </div>
 
-    <script>
-        let menudiv = document.getElementById("menudiv");
-        let menu = document.getElementById("menu");
+    <div id="resultContainer">
+        <div class="loading">⏳ La soo gelinayaa data...</div>
+    </div>
+    <div class="info-text">💡 Tilmaam: Guji fal kasta oo hoos ku qoran si aad sharaxaad buuxda u hesho. Falalka la midka ah marka la gujiyo way sharaxaadaan!</div>
+</div>
 
-        menudiv.addEventListener("click", function() {
-            menu.classList.toggle("open");
-        });
+<script>
+    // ============================================================
+    // 🟢 DHAMMAAN DATAHA FALALKA
+    // ============================================================
 
-        function searchFunction() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const list = document.getElementById('titleList');
-            const items = list.getElementsByTagName('a');
+        // ============================================================
+    // 🟢 HALKAN KA BOO KA BILAABMAYAA HOGTA DATAHA
+    // ============================================================
+    
+ // ======================= DATA =======================
+        const verbsData = {};
+    // + alle Präfixe (DHAMMAYSTIRAN) =======================
+const findenVerbs = {
+    // Falka asalka ah
+    "finden": { 
+        meaning: "helid, raadin (taabasho / aragti)", 
+        examples: [{ de: "Ich finde meinen Schlüssel nicht.", so: "Furahayga ma helayo." }, { de: "Hast du den Weg gefunden?", so: "Ma heshay jidka?" }], 
+        similar: ["ausfinden", "abfinden", "anfinden", "aufinden", "vorfinden", "wiederfinden", "herausfinden", "hineinfinden", "befinden", "empfinden", "erfinden", "stattfinden", "überfinden", "verfinden", "zerfinden"] 
+    },
+    
+    // Falalka la midka ah (kuwaas oo dhammaantood la sharxay)
+    "ausfinden": { 
+        meaning: "soo helid (meel ama wax qarsoon)", 
+        examples: [{ de: "Er hat den Fehler ausgefunden.", so: "Wuxuu soo helay qaladka." }, { de: "Sie haben die Lösung ausgefunden.", so: "Waxay soo heleen xalka." }], 
+        similar: ["finden", "herausfinden", "entdecken"] 
+    },
+    
+    "abfinden": { 
+        meaning: "qancin / ku qanacsanaanta (cashar ama xaalad)", 
+        examples: [{ de: "Er muss sich mit dem Verlust abfinden.", so: "Waa inuu ku qanco luminta." }, { de: "Ich finde mich damit ab.", so: "Waan ku qanacsanahay taas." }], 
+        similar: ["finden", "zufriedengeben", "sich abfinden"] 
+    },
+    
+    "anfinden": { 
+        meaning: "helid (qadiimi ah) / la kulmo", 
+        examples: [{ de: "Er fand sich an einem fremden Ort.", so: "Wuxuu isku helay meel qalaad." }], 
+        similar: ["vorfinden", "antreffen", "begegnen"] 
+    },
+    
+    "aufinden": { 
+        meaning: "soo helid (meel qarsoon)", 
+        examples: [{ de: "Sie haben den Weg aufgefunden.", so: "Waxay soo heleen jidka." }], 
+        similar: ["ausfinden", "entdecken", "lokalisieren"] 
+    },
+    
+    "vorfinden": { 
+        meaning: "heli sidii hore loo dhigay", 
+        examples: [{ de: "Er fand das Zimmer sauber vor.", so: "Wuxuu helay qolka oo nadiif ah." }, { de: "Wir fanden leere Flaschen vor.", so: "Waxaan horkeenay dhalooyin madhan." }], 
+        similar: ["antreffen", "vor sich sehen", "entdecken"] 
+    },
+    
+    "wiederfinden": { 
+        meaning: "dib u helid", 
+        examples: [{ de: "Sie hat ihre Freunde wiedergefunden.", so: "Waxay dib ula heshay saaxiibbadeedii." }, { de: "Er fand seinen Hund wieder.", so: "Wuxuu dib u helay eygiisii." }], 
+        similar: ["zurückbekommen", "wiederentdecken", "zurückfinden"] 
+    },
+    
+    "herausfinden": { 
+        meaning: "soo ogaansho (baaritaan)", 
+        examples: [{ de: "Ich muss herausfinden, wer der Täter ist.", so: "Waa inaan soo ogaado dambiilaha." }, { de: "Hast du die Wahrheit herausgefunden?", so: "Ma soo ogatay xaqiiqda?" }], 
+        similar: ["ermitteln", "rausbekommen", "in Erfahrung bringen", "eruieren"] 
+    },
+    
+    "hineinfinden": { 
+        meaning: "ku dhex helid jid / la qabsan", 
+        examples: [{ de: "Er findet sich schnell in die neue Stadt hinein.", so: "Wuxuu si dhakhso ah ula qabsadaa magaalada cusub." }, { de: "Sie hat sich in die Arbeit hineingefunden.", so: "Waxay ku dhex heshay shaqada (la qabsatay)." }], 
+        similar: ["sich zurechtfinden", "sich eingewöhnen", "sich anpassen"] 
+    },
+    
+    "befinden": { 
+        meaning: "ku sugan / dareenka jidhka / ku noqosho", 
+        examples: [{ de: "Wie befinden Sie sich?", so: "Sidee tahay? (caafimaad ahaan)" }, { de: "Er befindet sich in Berlin.", so: "Wuxuu ku sugan yahay Berlin." }], 
+        similar: ["sich fühlen", "sich aufhalten", "sich befinden"] 
+    },
+    
+    "empfinden": { 
+        meaning: "dareen (shucuur/jidheed)", 
+        examples: [{ de: "Sie empfindet große Liebe für ihn.", so: "Waxay u dareentaa jacayl weyn isaga." }, { de: "Ich empfinde Kälte.", so: "Waxaan dareemayaa qabow." }], 
+        similar: ["spüren", "fühlen", "wahrnehmen", "verspüren"] 
+    },
+    
+    "erfinden": { 
+        meaning: "ikhtiraacid / been sheegid", 
+        examples: [{ de: "Edison hat die Glühbirne erfunden.", so: "Edison wuu ikhtiraacay naaska korontada." }, { de: "Er hat eine Ausrede erfunden.", so: "Wuxuu been abuuray cudurdaar." }], 
+        similar: ["ausdenken", "kreieren", "dichten", "erdenken"] 
+    },
+    
+    "stattfinden": { 
+        meaning: "dhacay / qabsoomay", 
+        examples: [{ de: "Das Konzert findet morgen statt.", so: "Konserku wuxuu dhacayaa berri." }, { de: "Die Hochzeit findet am Samstag statt.", so: "Aroosku wuxuu qabsoomayaa Sabtida." }], 
+        similar: ["geschehen", "passieren", "sich ereignen", "vorkommen"] 
+    },
+    
+    "überfinden": { 
+        meaning: "ka gudbay / dhaafay (qadiimi)", 
+        examples: [{ de: "Er überfand den Fluss.", so: "Wuu ka gudbay webiga." }, { de: "Er überfand alle Hindernisse.", so: "Dhammaan caqabadaha wuu ka gudbay." }], 
+        similar: ["überqueren", "durchqueren", "überwinden"] 
+    },
+    
+    "verfinden": { 
+        meaning: "lumin / qaldi (dhif)", 
+        examples: [{ de: "Er hat sich verfunden.", so: "Wuu lumay (ku qaldamay jidka)." }], 
+        similar: ["verirren", "sich verlaufen", "sich verrennen"] 
+    },
+    
+    "zerfinden": { 
+        meaning: "ku baahsan / kala firidhsan (qadiimi)", 
+        examples: [{ de: "Die Gedanken zerfinden sich.", so: "Fikradaha way kala firidhsan yihiin." }], 
+        similar: ["zerstreuen", "sich verteilen", "auflösen"] 
+    },
+    
+    // Falal dheeri ah oo la xidhiidha finden (kuwa kale ee muhiimka ah)
+    "beifinden": { 
+        meaning: "ku soo biirid / ku jirid", 
+        examples: [{ de: "Er befindet sich bei der Gruppe.", so: "Wuxuu ku jiraa kooxda." }], 
+        similar: ["dazugehören", "sich anschließen"] 
+    },
+    
+    "durchfinden": { 
+        meaning: "dhex marid / jid dhex helid", 
+        examples: [{ de: "Er findet sich durch den Wald durch.", so: "Wuxuu dhex marayaa kaynta." }], 
+        similar: ["durchqueren", "sich durchschlagen"] 
+    },
+    
+    "einfinden": { 
+        meaning: "soo gaarid / imaan", 
+        examples: [{ de: "Bitte finden Sie sich pünktlich ein.", so: "Fadlan si waqtiga ku ah u soo gaara." }], 
+        similar: ["erscheinen", "ankommen", "sich einstellen"] 
+    },
+    
+    "mitfinden": { 
+        meaning: "la helid / wada helid", 
+        examples: [{ de: "Er findet den Fehler mit.", so: "Qaladka wuu la helay." }], 
+        similar: ["mitentdecken", "gemeinsam finden"] 
+    },
+    
+    "nachfinden": { 
+        meaning: "daba helid / raad helid", 
+        examples: [{ de: "Er findet die Lösung nach.", so: "Xalka wuu daba helay." }], 
+        similar: ["nachvollziehen", "verstehen"] 
+    },
+    
+    "umfinden": { 
+        meaning: "wareeg helid / beddel helid", 
+        examples: [{ de: "Er findet einen anderen Weg um.", so: "Jid kale buu u helay wareeg." }], 
+        similar: ["umgehen", "vermeiden"] 
+    },
+    
+    "unterfinden": { 
+        meaning: "hoos ka helid (dhif)", 
+        examples: [{ de: "Er findet die Wahrheit unter.", so: "Xaqiiqda hoos buu ka helay." }], 
+        similar: ["entdecken", "aufdecken"] 
+    },
+    
+    "vollfinden": { 
+        meaning: "buuxinta / dhameystirka", 
+        examples: [{ de: "Er findet die Aufgabe voll.", so: "Hawsha buuxinta wuu helay." }], 
+        similar: ["erfüllen", "vollenden"] 
+    },
+    
+    "weiterfinden": { 
+        meaning: "sii wadid helitaanka", 
+        examples: [{ de: "Er findet weiter.", so: "Wu sii wadayaa helitaanka." }], 
+        similar: ["fortsetzen", "weitermachen"] 
+    },
+    
+    "wiederherfinden": { 
+        meaning: "dib u soo celin (helitaan)", 
+        examples: [{ de: "Er findet die Ordnung wieder her.", so: "Nidaamka dib buu u soo celinayaa." }], 
+        similar: ["wiederherstellen", "restaurieren"] 
+    },
+    
+    "zufinden": { 
+        meaning: "ku qanacsan / ogol", 
+        examples: [{ de: "Er fand sich damit zufrieden.", so: "Wu ku qanacsanaa." }], 
+        similar: ["einverstanden sein", "zustimmen"] 
+    },
+    
+    "zurechtfinden": { 
+        meaning: "jid helid / la qabsan", 
+        examples: [{ de: "Er findet sich in der Stadt zurecht.", so: "Magaalada wuu jid helayaa." }], 
+        similar: ["sich orientieren", "hineinfinden", "klarkommen"] 
+    },
+    
+    "zurückfinden": { 
+        meaning: "dib u jid helid / soo laaban", 
+        examples: [{ de: "Er findet nach Hause zurück.", so: "Wuxuu dib u jid helayaa guriga." }], 
+        similar: ["zurückkehren", "den Rückweg finden"] 
+    },
+    
+    "zusammenfinden": { 
+        meaning: "isku imaan / wada helid", 
+        examples: [{ de: "Sie finden sich zusammen.", so: "Way isku yimaadaan." }], 
+        similar: ["sich treffen", "sich versammeln", "sich vereinen"] 
+    }
+};
 
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-                const text = item.textContent || item.innerText;
+    // BRINGEN + Präfixe
+    const bringenVerbs = {
+        "bringen": { meaning: "keenid / u keenid", examples: [{ de: "Ich bringe das Buch.", so: "Waxaan keenayaa buugga." }], similar: ["herbringen", "wegbringen", "abbringen", "aufbringen", "einbringen", "umbringen", "verbringen"] },
+        "abbringen": { meaning: "ka leexin / ka joojin", examples: [{ de: "Nichts bringt ihn von seinem Plan ab.", so: "Waxba kama leexinayaan qorshihiisa." }], similar: ["abhalten", "daran hindern"] },
+        "anbringen": { meaning: "ku dhejin / meel dhigid", examples: [{ de: "Er brachte ein Bild an der Wand an.", so: "Wuxuu ku dhejiyay sawir derbiga." }], similar: ["befestigen", "anheften"] },
+        "aufbringen": { meaning: "soo keenid (lacag) / kicin", examples: [{ de: "Sie brachte das Geld auf.", so: "Waxay soo keentay lacagta." }], similar: ["auftreiben", "beschaffen"] },
+        "ausbringen": { meaning: "faafin / soo bandhigid", examples: [{ de: "Er brachte einen Toast aus.", so: "Wuxuu soo bandhigay duco (toast)." }], similar: ["aussprechen", "veröffentlichen"] },
+        "beibringen": { meaning: "barid / keenid", examples: [{ de: "Er brachte ihm Deutsch bei.", so: "Wuxuu baray Jarmal." }], similar: ["lehren", "vermitteln"] },
+        "darbringen": { meaning: "u keenid (allabari)", examples: [{ de: "Sie brachten ein Opfer dar.", so: "Waxay u keeneen allabari." }], similar: ["opfern", "hingeben"] },
+        "einbringen": { meaning: "soo gelin / faa'iido", examples: [{ de: "Das Projekt bringt viel Geld ein.", so: "Mashruucu wuxuu soo gelinayaa lacag badan." }], similar: ["erwirtschaften", "einspielen"] },
+        "herbringen": { meaning: "u keenid (halkan)", examples: [{ de: "Bring das Buch her!", so: "U keen buugga halkan!" }], similar: ["heranschaffen"] },
+        "hinterbringen": { meaning: "u sheegid (war)", examples: [{ de: "Er brachte ihm die Nachricht hinter.", so: "Wuxuu u sheegay warka." }], similar: ["mitteilen", "überbringen"] },
+        "mitbringen": { meaning: "la keenid", examples: [{ de: "Ich bringe meinen Freund mit.", so: "Waxaan la keenayaa saaxiibkay." }], similar: ["mitnehmen"] },
+        "umbringen": { meaning: "dilid", examples: [{ de: "Der Mörder brachte ihn um.", so: "Gacankudhiigluhu wuu dilay isaga." }], similar: ["töten", "ermorden"] },
+        "verbringen": { meaning: "ku qaadasho waqti", examples: [{ de: "Wir verbringen den Urlaub in Spanien.", so: "Waxaynu ku qaadanaynaa fasaxa Isbayn." }], similar: ["zubringen", "nutzen"] },
+        "vorbringen": { meaning: "soo bandhigid (fikrad)", examples: [{ de: "Er brachte einen Vorschlag vor.", so: "Wuxuu soo bandhigay soo jeedin." }], similar: ["äußern", "anführen"] },
+        "wegbringen": { meaning: "ka qaadid / meel kale dhigi", examples: [{ de: "Bring den Müll weg!", so: "Qaad qashinka!" }], similar: ["entfernen", "beseitigen"] },
+        "zurückbringen": { meaning: "dib u keenid", examples: [{ de: "Bring das Buch zurück!", so: "Dib u keen buugga!" }], similar: ["retournieren"] }
+    };
 
-                if (text.toLowerCase().includes(filter)) {
-                    item.style.display = "";
-                } else {
-                    item.style.display = "none";
-                }
-            }
+    // LAUFEN + Präfixe
+    const laufenVerbs = {
+        "laufen": { meaning: "orday / socod", examples: [{ de: "Ich laufe jeden Tag.", so: "Waan ordaa maalin kasta." }], similar: ["rennen", "gehen"] },
+        "ablaufen": { meaning: "dhacay (waqti) / ka dambeeyay", examples: [{ de: "Die Zeit läuft ab.", so: "Waqtigu wuu dhacayaa." }], similar: ["vergehen", "enden"] },
+        "anlaufen": { meaning: "bilaabid (orday) / soo dhawaansho", examples: [{ de: "Der Motor läuft an.", so: "Matooru wuu bilaabmayaa." }], similar: ["starten", "beginnen"] },
+        "auflaufen": { meaning: "ku dhacasho (qaar) / soo ururin", examples: [{ de: "Das Schiff läuft auf Grund.", so: "Markabku wuxuu ku dhacay carro." }], similar: ["stranden", "zusammenstoßen"] },
+        "auslaufen": { meaning: "faafid / dhammaad", examples: [{ de: "Der Vertrag läuft aus.", so: "Qandaraasku wuu dhammaanayaa." }], similar: ["enden", "ablaufen"] },
+        "belaufen": { meaning: "gaarsi (lacag)", examples: [{ de: "Die Kosten belaufen sich auf 100 Euro.", so: "Kharashku wuxuu gaarayaa 100 Euro." }], similar: ["betragen", "sich summieren"] },
+        "durchlaufen": { meaning: "dhex mar / dhamaystir", examples: [{ de: "Er durchläuft das Programm.", so: "Wuxuu dhamaystiraa barnaamijka." }], similar: ["durchgehen", "absolvieren"] },
+        "entlaufen": { meaning: "baxsasho / cararid", examples: [{ de: "Der Hund ist entlaufen.", so: "Eygii waa baxsaday." }], similar: ["ausbrechen", "fliehen"] },
+        "erlaufen": { meaning: "orday ku helid", examples: [{ de: "Er erlief den Preis.", so: "Wuxuu orday ku helay abaalmarinta." }], similar: ["erkaufen", "erarbeiten"] },
+        "herlaufen": { meaning: "u soo orday", examples: [{ de: "Er kam hergelaufen.", so: "Wuu u soo orday." }], similar: ["nähern", "sich annähern"] },
+        "hinlaufen": { meaning: "u orday (xaggaas)", examples: [{ de: "Lauf hin!", so: "U orday xaggaas!" }], similar: ["hingehen"] },
+        "mitlaufen": { meaning: "la soco / la ordag", examples: [{ de: "Er läuft mit.", so: "Wu la socodaa." }], similar: ["teilnehmen", "begleiten"] },
+        "umlaufen": { meaning: "wareeg / ku wareeg", examples: [{ de: "Das Gerücht läuft um.", so: "Warku waa wareegayaa." }], similar: ["zirkulieren", "kursieren"] },
+        "verlaufen": { meaning: "lumid / qaldamid", examples: [{ de: "Ich habe mich verlaufen.", so: "Waan lumay." }], similar: ["sich verirren"] },
+        "vorlaufen": { meaning: "horumar / hore u socod", examples: [{ de: "Er läuft vor.", so: "Wuu hor socodaa." }], similar: ["vorangehen"] },
+        "weglaufen": { meaning: "cararid / ka baxsasho", examples: [{ de: "Er ist weggelaufen.", so: "Wuu cararay." }], similar: ["fliehen", "entkommen"] },
+        "zulaufen": { meaning: "u soo dhawaansho", examples: [{ de: "Viele Kunden laufen zu.", so: "Macmiil badan baa u soo dhawaada." }], similar: ["zuströmen"] }
+    };
+
+    // GEHEN + Präfixe
+    const gehenVerbs = {
+        "gehen": { meaning: "socod / tagid", examples: [{ de: "Ich gehe nach Hause.", so: "Waxaan tagayaa guriga." }], similar: ["laufen", "spazieren"] },
+        "abgehen": { meaning: "ka tag / ka bixid", examples: [{ de: "Er geht vom Bahnhof ab.", so: "Wuu ka baxayaa salidka." }], similar: ["abfahren", "weggehen"] },
+        "angehen": { meaning: "taabanayo / bilow", examples: [{ de: "Das geht mich an.", so: "Taasi i taabanaysaa." }], similar: ["betreffen", "starten"] },
+        "aufgehen": { meaning: "soo bixid (qorrax) / furmay", examples: [{ de: "Die Sonne geht auf.", so: "Qorraxi way soo baxaysaa." }], similar: ["steigen", "sich öffnen"] },
+        "ausgehen": { meaning: "baxid / dhammaad", examples: [{ de: "Das Licht geht aus.", so: "Nalku wuu damayaa." }], similar: ["erlöschen", "enden"] },
+        "begehen": { meaning: "dabbaaldeg / sameyn", examples: [{ de: "Sie begehen ihren Geburtstag.", so: "Waxay u dabbaaldegaan dhalashadooda." }], similar: ["feiern", "begehen"] },
+        "eingehen":{ meaning: "gelin / dhintid (dhir)", examples: [{ de: "Der Vertrag geht ein.", so: "Qandaraasku wuu galayaa." }], similar: ["schließen", "sterben"] },
+        "entgehen": { meaning: "ka baxsasho / dhaafid", examples: [{ de: "Er entgeht der Gefahr.", so: "Wuu ka baxsaday khatarta." }], similar: ["vermeiden", "entkommen"] },
+        "ergehen": { meaning: "ku dhacay (xaalad)", examples: [{ de: "Es erging ihm gut.", so: "Si fiican buu u dhacay." }], similar: ["passieren", "widerfahren"] },
+        "hergehen": { meaning: "u soo socod", examples: [{ de: "Geh her!", so: "U soo soco!" }], similar: ["nähern"] },
+        "hingehen": { meaning: "u tag (xaggaas)", examples: [{ de: "Ich gehe hin.", so: "Waan u tagayaa xaggaas." }], similar: ["dorthin gehen"] },
+        "mitgehen": { meaning: "la socod", examples: [{ de: "Kann ich mitgehen?", so: "Ma la socon karaa?" }], similar: ["begleiten"] },
+        "nachgehen": { meaning: "daba gal / baarid", examples: [{ de: "Er geht der Sache nach.", so: "Wuu daba gelayaa arrinta." }], similar: ["untersuchen", "verfolgen"] },
+        "umgehen": { meaning: "wareeg / dhaafid", examples: [{ de: "Er geht das Problem um.", so: "Wuu dhaafayaa dhibaatada." }], similar: ["vermeiden", "umkreisen"] },
+        "untergehen": { meaning: "quusid / baabbi'id", examples: [{ de: "Die Sonne geht unter.", so: "Qorraxi waa dhacaysaa." }, { de: "Das Schiff geht unter.", so: "Markabku wuu quusayaa." }], similar: ["sinken", "verschwinden"] },
+        "vergehen": { meaning: "dhacay waqti / baabbi'id", examples: [{ de: "Die Zeit vergeht schnell.", so: "Waqtigu si dhakhso ah ayuu u dhacayaa." }], similar: ["verlaufen", "schwinden"] },
+        "vorgehen": { meaning: "horumar / wax ka qabasho", examples: [{ de: "Wie gehst du vor?", so: "Sidee wax uga qabanaysaa?" }], similar: ["handeln", "vorgehen"] },
+        "weggehen": { meaning: "ka tagid", examples: [{ de: "Ich gehe weg.", so: "Waan ka tagayaa." }], similar: ["verlassen", "sich entfernen"] },
+        "zugehen": { meaning: "ku soo dhawaansho / xiran", examples: [{ de: "Die Tür geht zu.", so: "Albaabku wuu xirmayaa." }], similar: ["schließen", "sich nähern"] }
+    };
+
+
+    // waa kuwa lagu soo kordhiyay lagu soo daray macnaha
+
+    // ======================= ZIEHEN + Präfixe =======================
+const ziehenVerbs = {
+    "ziehen": { meaning: "jeedid / bixid / dhaqaaqid", examples: [{ de: "Ich ziehe den Wagen.", so: "Waan jeediyaa gaariga." }], similar: ["zerren", "bewegen"] },
+    "abziehen": { meaning: "ka jarid / ka bixid", examples: [{ de: "Ziehe den Aufkleber ab.", so: "Ka jar summadda." }], similar: ["entfernen", "abnehmen"] },
+    "anziehen": { meaning: "xidhasho / soo jiidasho", examples: [{ de: "Ich ziehe mich an.", so: "Waan xidhanayaa." }, { de: "Die Erde zieht den Mond an.", so: "Dhulku wuxuu soo jiidanayaa dayaxa." }], similar: ["bekleiden", "anlegen", "attrahieren"] },
+    "aufziehen": { meaning: "kor u jeedid / barbaarin", examples: [{ de: "Er zieht die Uhr auf.", so: "Wuxuu kor u jeediyaa saacadda." }, { de: "Sie zieht Kinder auf.", so: "Waxay barbaarinaysaa carruur." }], similar: ["hochziehen", "großziehen"] },
+    "ausziehen": { meaning: "is qaawin / ka guurid", examples: [{ de: "Ich ziehe die Jacke aus.", so: "Waan iska siibayaa jaketka." }, { de: "Er zieht aus Berlin aus.", so: "Wuu ka guurayaa Berlin." }], similar: ["auskleiden", "wegziehen"] },
+    "beißen": { meaning: "qaniinid", examples: [{ de: "Der Hund beißt.", so: "Eygu wuu qaniinayaa." }], similar: ["zubeißen", "stechen"] },
+    "beziehen": { meaning: "helid / ku saabsan / degid", examples: [{ de: "Ich beziehe das Bett.", so: "Waan hagaajinayaa sariirta." }, { de: "Er bezieht eine Wohnung.", so: "Wuxuu degan yahay guri." }], similar: ["beziehen", "einziehen"] },
+    "durchziehen": { meaning: "dhamaystirid / socodsiin", examples: [{ de: "Wir ziehen das Projekt durch.", so: "Waanu dhamaystirnaa mashruuca." }], similar: ["durchführen", "vollenden"] },
+    "einziehen": { meaning: "soo galid / degid", examples: [{ de: "Wir ziehen in eine neue Wohnung ein.", so: "Waxaan u guuraynaa guri cusub." }], similar: ["eintreten", "einquartieren"] },
+    "entziehen": { meaning: "ka qaadid / diidid", examples: [{ de: "Der Führerschein wurde ihm entzogen.", so: "Ruqsaddii baabuurka waa laga qaaday." }], similar: ["wegnehmen", "aberkennen"] },
+    "herziehen": { meaning: "u soo jeedid", examples: [{ de: "Zieh den Stuhl her!", so: "U soo jeedi kursiga!" }], similar: ["heranziehen"] },
+    "hinziehen": { meaning: "u jeedid xaggaas / dheereyn", examples: [{ de: "Das Meeting zieht sich hin.", so: "Shirku wuu dheeraaday." }], similar: ["verlängern", "sich dehnen"] },
+    "mitziehen": { meaning: "la jeedid / la socod", examples: [{ de: "Zieh mit!", so: "La jeed!" }], similar: ["mitmachen", "teilnehmen"] },
+    "nachziehen": { meaning: "daba jeedid / raac", examples: [{ de: "Die Kinder ziehen nach.", so: "Carruurtu way daba jeedaan." }], similar: ["folgen", "hinterherziehen"] },
+    "umziehen": { meaning: "beddel dharka / guurid", examples: [{ de: "Ich ziehe mich um.", so: "Waan beddelayaa dharkayga." }, { de: "Er zieht nach München um.", so: "Wuxuu u guurayaa Munich." }], similar: ["ankleiden", "verlegen"] },
+    "verziehen": { meaning: "qallooc / dhaqaaqid", examples: [{ de: "Das Holz hat sich verzogen.", so: "Alwaagtii waa qalloocday." }, { de: "Er verzieht keine Miene.", so: "Weyna ma dhaqaajinayo." }], similar: ["verformen", "verzerren"] },
+    "vorziehen": { meaning: "horudhac / doorbid", examples: [{ de: "Ich ziehe Tee dem Kaffee vor.", so: "Waxaan ka door bidaa shaaha qaxwaha." }], similar: ["präferieren", "bevorzugen"] },
+    "wegziehen": { meaning: "ka jeedid / ka guurid", examples: [{ de: "Er zieht weg.", so: "Wuu ka guurayaa." }], similar: ["fortziehen", "umziehen"] },
+    "zurückziehen": { meaning: "dib u jeedid / ka noqosh", examples: [{ de: "Er zieht seine Hand zurück.", so: "Wuxuu dib u jeediyaa gacantiisa." }, { de: "Die Armee zieht sich zurück.", so: "Ciidanku way dib u laabtaan." }], similar: ["retirieren", "zurücknehmen"] }
+};
+
+// ======================= ZEIGEN + Präfixe =======================
+const zeigenVerbs = {
+    "zeigen": { meaning: "muujin / tilmaamid", examples: [{ de: "Zeig mir den Weg!", so: "I tusa jidka!" }], similar: ["vorweisen", "demonstrieren"] },
+    "abzeigen": { meaning: "muujin (dhif)", examples: [{ de: "Er zeigt den Fehler ab.", so: "Wuxuu muujinayaa qaladka." }], similar: ["anzeigen", "aufzeigen"] },
+    "anzeigen": { meaning: "wargelin / muujin", examples: [{ de: "Der Tacho zeigt 100 km/h an.", so: "Qalabku wuxuu muujinayaa 100 km/h." }, { de: "Ich zeige den Dieb an.", so: "Waan wargelinayaa tuugga." }], similar: ["melden", "denunzieren"] },
+    "aufzeigen": { meaning: "tilmaamid / muujin", examples: [{ de: "Die Studie zeigt die Probleme auf.", so: "Daraasaddu waxay muujinaysaa dhibaatooyinka." }], similar: ["darlegen", "erklären"] },
+    "auszeigen": { meaning: "iska muujin (dhif)", examples: [{ de: "Er zeigt sich aus.", so: "Wuu iska muujinayaa." }], similar: ["präsentieren"] },
+    "bezeigen": { meaning: "muujin (dareen)", examples: [{ de: "Sie bezeugt ihr Mitgefühl.", so: "Waxay muujinaysaa naxariisteeda." }], similar: ["bekunden", "äußern"] },
+    "herzeigen": { meaning: "u soo muujin", examples: [{ de: "Zeig mir dein Bild her!", so: "I soo muuji sawirkaaga!" }], similar: ["präsentieren"] },
+    "hinzeigen": { meaning: "u tilmaamid xaggaas", examples: [{ de: "Zeig dorthin!", so: "U tilmaam xaggaas!" }], similar: ["deuten", "weisen"] },
+    "mitzeigen": { meaning: "la muujin", examples: [{ de: "Er zeigt mit.", so: "Wu la muujinayaa." }], similar: ["teilnehmen"] },
+    "nachzeigen": { meaning: "daba muujin / caddeyn", examples: [{ de: "Kannst du den Beleg nachzeigen?", so: "Ma caddeyn kartaa rasiidka?" }], similar: ["nachweisen", "belegen"] },
+    "vorzeigen": { meaning: "soo bandhigid", examples: [{ de: "Zeig deinen Ausweis vor!", so: "Soo bandhig aqoonsigaaga!" }], similar: ["präsentieren", "vorlegen"] },
+    "wegzeigen": { meaning: "ka jeedin / ka tilmaamid", examples: [{ de: "Er zeigt weg.", so: "Wuu ka tilmaamayaa." }], similar: ["abwenden"] },
+    "zurückzeigen": { meaning: "dib u muujin", examples: [{ de: "Der Zeiger zeigt zurück.", so: "Gacanta dib ayuu u muujinaysaa." }], similar: ["retournieren"] }
+};
+
+// ======================= SCHLAGEN + Präfixe =======================
+const schlagenVerbs = {
+    "schlagen": { meaning: "garaacid / dilaac", examples: [{ de: "Er schlägt den Ball.", so: "Wuxuu garaacayaa kubbadda." }], similar: ["hauen", "treffen"] },
+    "abschlagen": { meaning: "diidid / ka jarid", examples: [{ de: "Er schlägt das Angebot ab.", so: "Wuu diiday dalabka." }, { de: "Den Ast abschlagen.", so: "Laan ka jar." }], similar: ["ablehnen", "verweigern", "abhacken"] },
+    "anschlagen": { meaning: "ku garaacid / billaabid", examples: [{ de: "Er schlägt an die Tür.", so: "Wuxuu garaacay albaabka." }, { de: "Die Pflanze schlägt an.", so: "Geedku wuu billaabay." }], similar: ["anklopfen", "gelingen"] },
+    "aufschlagen": { meaning: "furan / dhac ku ridid", examples: [{ de: "Er schlägt das Buch auf.", so: "Wuu furayaa buugga." }, { de: "Der Ball schlägt auf.", so: "Kubbaddu way dhacday." }], similar: ["öffnen", "landen"] },
+    "ausschlagen": { meaning: "diidid / rogman", examples: [{ de: "Der Schimmel schlägt aus.", so: "Farasku wuu rogmadayaa." }, { de: "Er schlägt das Angebot aus.", so: "Wuu diiday dalabka." }], similar: ["ablehnen", "ausweichen"] },
+    "beschlagen": { meaning: "qariyey / xidhay (faras)", examples: [{ de: "Der Huf ist beschlagen.", so: "Cagta faraska waa la xidhay." }], similar: ["bedecken", "beschlagen"] },
+    "durchschlagen": { meaning: "dhex mar / saameyn", examples: [{ de: "Die Kugel schlägt durch.", so: "Rasaastu way dhex martaa." }, { de: "Die Entscheidung schlägt durch.", so: "Go'aanku waa saameeyaa." }], similar: ["durchdringen", "wirken"] },
+    "einschlagen": { meaning: "jeexid / jid qaad", examples: [{ de: "Der Blitz schlägt in den Baum ein.", so: "Hillaacu wuxuu ku dhufanayaa geedka." }, { de: "Schlag diesen Weg ein.", so: "Jidkan qaado." }], similar: ["treffen", "wählen"] },
+    "entgegenschlagen": { meaning: "ka soo horjeed / garaacid", examples: [{ de: "Der Wind schlägt ihm entgegen.", so: "Dabayshu way kaga soo horjeedaa." }], similar: ["widerstehen"] },
+    "erschlagen": { meaning: "dilid / garaacid", examples: [{ de: "Er wurde erschlagen.", so: "Waa la dilay." }], similar: ["töten", "ermorden"] },
+    "herunterschlagen": { meaning: "hoos u garaacid", examples: [{ de: "Er schlägt den Nagel herunter.", so: "Wuxuu hoos u garaacayaa musmaar." }], similar: ["runterhauen"] },
+    "hinunterschlagen": { meaning: "hoos u garaacid xaggaas", examples: [{ de: "Schlag es hinunter!", so: "Hoos u garaac!" }], similar: ["herunterschlagen"] },
+    "nachschlagen": { meaning: "dabagal / eegid (buug)", examples: [{ de: "Schlag das Wort im Wörterbuch nach.", so: "Eregyada ka eeg qaamuuska." }], similar: ["überprüfen", "konsultieren"] },
+    "toitschlagen": { meaning: "dilid / garaacid", examples: [{ de: "Er schlägt ihn tot.", so: "Wuu dilayaa isaga." }], similar: ["umbringen"] },
+    "überschlagen": { meaning: "qiyaas / laablaab", examples: [{ de: "Er überschlägt die Kosten.", so: "Wuxuu qiyaasayaa kharashka." }, { de: "Das Auto überschlägt sich.", so: "Baabuurkii waa laablaabmay." }], similar: ["berechnen", "umkippen"] },
+    "umschlagen": { meaning: "beddel / rogid", examples: [{ de: "Das Wetter schlägt um.", so: "Cimiladu way is beddeshaa." }], similar: ["wechseln", "umdrehen"] },
+    "verschlagen": { meaning: "xirid / qarin", examples: [{ de: "Er verschlägt die Tür.", so: "Wuxuu xiraa albaabka." }, { de: "Es verschlägt ihm die Sprache.", so: "Hadalkuu wuu qarsoon yahay." }], similar: ["verriegeln", "verstummen"] },
+    "vorschlagen": { meaning: "soo jeedin", examples: [{ de: "Ich schlage einen Plan vor.", so: "Waxaan soo jeedinayaa qorshe." }], similar: ["empfehlen", "anregen"] },
+    "wegschlagen": { meaning: "ka qaadid / garaacid ka foga", examples: [{ de: "Er schlägt den Ball weg.", so: "Wuu ka garaacayaa kubbadda." }], similar: ["abschlagen"] },
+    "zerschlagen": { meaning: "jajabid / burburid", examples: [{ de: "Er zerschlägt die Vase.", so: "Wuu jajabayaa weelka." }], similar: ["zerbrechen", "kaputtmachen"] },
+    "zuschlagen": { meaning: "xirid / garaacid", examples: [{ de: "Er schlägt die Tür zu.", so: "Wuu xiraa albaabka." }, { de: "Er schlägt zu.", so: "Wuu garaacayaa." }], similar: ["schließen", "zuhauen"] },
+    "zurückschlagen": { meaning: "dib u garaacid / jawaab", examples: [{ de: "Er schlägt zurück.", so: "Wu dib u garaacayaa." }], similar: ["vergellen", "kontern"] }
+};
+
+// ======================= KENNEN + Präfixe =======================
+const kennenVerbs = {
+    "kennen": { meaning: "aqoon (qof / meel)", examples: [{ de: "Ich kenne Berlin gut.", so: "Waan aqaanaa Berlin si fiican." }], similar: ["wissen", "vertraut sein"] },
+    "ankennen": { meaning: "aqoonsan / qiran (dhif)", examples: [{ de: "Er kennt die Regeln an.", so: "Wuu aqoonsan yahay xeerarka." }], similar: ["akzeptieren", "anerkennen"] },
+    "auskennen": { meaning: "awood / yaqaan", examples: [{ de: "Er kennt sich gut aus.", so: "Si fiican buu u yaqaan." }], similar: ["sich auskennen", "wissen Bescheid"] },
+    "bekennen": { meaning: "qiran / sheegid", examples: [{ de: "Er bekennt seine Schuld.", so: "Wuu qiranayaa dambigiisa." }], similar: ["gestehen", "eingestehen"] },
+    "durchkennen": { meaning: "si buuxda u aqoon", examples: [{ de: "Er kennt die Materie durch.", so: "Si buuxda buu u yaqaan maadada." }], similar: ["vollständig verstehen"] },
+    "erkennen": { meaning: "aqoonsan / garan", examples: [{ de: "Ich erkenne ihn sofort.", so: "Isla markiibaan aqoonsanayaa isaga." }], similar: ["identifizieren", "bemerken"] },
+    "herkennen": { meaning: "aqoon (dhif)", examples: [{ de: "Man kennt ihn her.", so: "Waa la aqoonsan yahay." }], similar: ["wissen"] },
+    "hinterkennen": { meaning: "garasho (qaar)", examples: [{ de: "Er kennt die Wahrheit hinter.", so: "Wuu garanayaa xaqiiqda dambe." }], similar: ["durchschauen"] },
+    "mitkennen": { meaning: "la aqoon", examples: [{ de: "Er kennt die Geschichte mit.", so: "Wu la aqoon yahay taariikhda." }], similar: ["teilhaben"] },
+    "nachkennen": { meaning: "gadaal ka aqoon", examples: [{ de: "Er kennt die Regeln nach.", so: "Xeerarka gadaal buu ka aqaan." }], similar: ["nachvollziehen"] },
+    "verkennen": { meaning: "qaldan u aqoonsan", examples: [{ de: "Sie hat seine Absichten verkannt.", so: "Ujeeddadiisa way qaldantay." }], similar: ["missverstehen", "falsch einschätzen"] },
+    "vorherkennen": { meaning: "hore u aqoonsan", examples: [{ de: "Er kannte das Ergebnis vorher.", so: "Natiijada hore buu u aqoonsanaa." }], similar: ["voraussehen"] },
+    "wiedererkennen": { meaning: "dib u aqoonsan", examples: [{ de: "Ich habe ihn sofort wiedererkannt.", so: "Isla markiibaan dib u aqoonsaday." }], similar: ["identifizieren", "erkennen"] },
+    "zurückkennen": { meaning: "dib u garasho", examples: [{ de: "Er kennt den Weg zurück.", so: "Jidka dib buu u aqaan." }], similar: ["sich erinnern"] }
+};
+
+// ======================= WISSEN + Präfixe =======================
+const wissenVerbs = {
+    "wissen": { meaning: "ogow (xaqiiqo)", examples: [{ de: "Ich weiß, wo der Bahnhof ist.", so: "Waan ogahay meesha uu salidka ku yaal." }], similar: ["kennen", "Bescheid wissen"] },
+    "abwissen": { meaning: "wax ka ogaw (qaar)", examples: [{ de: "Er weiß davon ab.", so: "Wuu ka og yahay arrintaas." }], similar: ["Bescheid wissen"] },
+    "auswissen": { meaning: "dhamaystiran ogaansho", examples: [{ de: "Er weiß die Antwort aus.", so: "Jawaabta si buuxda buu u og yahay." }], similar: ["auswendig wissen"] },
+    "bewissen": { meaning: "caddeyn / ogaansho", examples: [{ de: "Er hat es bewiesen.", so: "Wuu caddeeyay." }], similar: ["beweisen", "belegen"] },
+    "durchwissen": { meaning: "si qoto dheer u og", examples: [{ de: "Er weiß sich durch.", so: "Si qoto dheer buu u og yahay." }], similar: ["durchschauen"] },
+    "einwissen": { meaning: "ku wargelin / siin war", examples: [{ de: "Er weiß ihn ein.", so: "Wuu ku wargeliyay." }], similar: ["informieren", "einweihen"] },
+    "herwissen": { meaning: "ogaansho u soo", examples: [{ de: "Er weiß sich zu helfen.", so: "Wuu og yahay sida isaga u caawiyo." }], similar: ["sich behelfen"] },
+    "hinwissen": { meaning: "u tilmaamid (aqoon)", examples: [{ de: "Er weiß hin.", so: "Wuu tilmaamayaa." }], similar: ["deuten"] },
+    "mitwissen": { meaning: "la ogaansho", examples: [{ de: "Er weiß mit.", so: "Wu la ogyahay." }], similar: ["teilhaben"] },
+    "nachwissen": { meaning: "daba ogaansho / hubin", examples: [{ de: "Er weiß die Fakten nach.", so: "Xaqiiqooyinka wuu hubinayaa." }], similar: ["nachprüfen", "verifizieren"] },
+    "vorwissen": { meaning: "hore u ogaansho", examples: [{ de: "Er wusste es vorher.", so: "Hore buu u og yahay." }], similar: ["vorauswissen", "ahnen"] },
+    "vorauswissen": { meaning: "mustaqbal ka ogaansho", examples: [{ de: "Niemand kann die Zukunft vorauswissen.", so: "Qofna mustaqbalka hore uguma ogaan karo." }], similar: ["prophezeien", "vorhersehen"] },
+    "wiederwissen": { meaning: "dib u xusasho", examples: [{ de: "Er weiß es wieder.", so: "Dib buu u xasuustay." }], similar: ["sich erinnern"] },
+    "zurückwissen": { meaning: "dib u ogaansho", examples: [{ de: "Er weiß den Weg zurück.", so: "Jidka dib buu u og yahay." }], similar: ["zurückfinden"] }
+};
+
+// ======================= MACHEN + Präfixe =======================
+const machenVerbs = {
+    "machen": { meaning: "sameyn / ku talo", examples: [{ de: "Was machst du?", so: "Maxaad samaynaysaa?" }], similar: ["tun", "herstellen"] },
+    "abmachen": { meaning: "heshiis / go'aamin", examples: [{ de: "Wir haben es abgemacht.", so: "Waanu heshiinay." }], similar: ["vereinbaren", "festlegen"] },
+    "anmachen": { meaning: "shidid / xirid", examples: [{ de: "Mach das Licht an!", so: "Shid nalka!" }], similar: ["einschalten", "anzünden"] },
+    "aufmachen": { meaning: "furan", examples: [{ de: "Mach die Tür auf!", so: "Fur albaabka!" }], similar: ["öffnen", "eröffnen"] },
+    "ausmachen": { meaning: "damid / macno lahan", examples: [{ de: "Mach das Licht aus!", so: "Dam nalka!" }, { de: "Das macht nichts aus.", so: "Taasi wax macno ah ma lahan." }], similar: ["ausschalten", "löschen"] },
+    "bemachen": { meaning: "wax ku sameyn (dhif)", examples: [{ de: "Er hat das Papier bemacht.", so: "Wuxuu sameeyay warqadda." }], similar: ["beschriften"] },
+    "durchmachen": { meaning: "socodsiin / la kulmo", examples: [{ de: "Sie hat viel durchgemacht.", so: "Wax badane way soo martay." }], similar: ["erleben", "durchleben"] },
+    "einmachen": { meaning: "kaydin (cunto)", examples: [{ de: "Sie macht Obst ein.", so: "Waxay kaydisaa miraha." }], similar: ["konservieren", "einlegen"] },
+    "hermachen": { meaning: "diyaarin", examples: [{ de: "Mach das Essen her!", so: "Diyaari cuntada!" }], similar: ["zubereiten"] },
+    "hinmachen": { meaning: "u sameeyn / eegid", examples: [{ de: "Mach es hin!", so: "U samee!" }], similar: ["erledigen"] },
+    "mitmachen": { meaning: "ka qayb qaadasho", examples: [{ de: "Kann ich mitmachen?", so: "Ma ka qaybqaadan karaa?" }], similar: ["teilnehmen", "partizipieren"] },
+    "nachmachen": { meaning: "ku dayan / been abuur", examples: [{ de: "Das Kind macht alles nach.", so: "Cunugu wax walba wuu ku dayanayaa." }], similar: ["imitieren", "kopieren"] },
+    "ummachen": { meaning: "beddel / qaabeyn", examples: [{ de: "Er macht die Hose um.", so: "Wuxuu beddelayaa surwaalka." }], similar: ["umändern", "umarbeiten"] },
+    "vermachen": { meaning: "dhaxal siin / u tagid", examples: [{ de: "Er vermacht sein Haus seinen Kindern.", so: "Gurigiisa wuxuu dhaxal uga tagayaa carruurtiisa." }], similar: ["vererben", "hinterlassen"] },
+    "vormachen": { meaning: "tusaale u noqon / been sheegid", examples: [{ de: "Er macht es vor.", so: "Wuu tusaale u noqonayaa." }, { de: "Mach mir nichts vor!", so: "Ha i been sheegin!" }], similar: ["demonstrieren", "vortäuschen"] },
+    "wegmachen": { meaning: "ka qaadid / nadiifin", examples: [{ de: "Mach den Tisch weg!", so: "Ka qaad miiska!" }], similar: ["entfernen", "beseitigen"] },
+    "wiedermachen": { meaning: "dib u sameyn", examples: [{ de: "Er macht es wieder.", so: "Dib buu u sameynayaa." }], similar: ["wiederholen", "erneuern"] },
+    "zumachen": { meaning: "xirid", examples: [{ de: "Mach die Tür zu!", so: "Xir albaabka!" }], similar: ["schließen", "verriegeln"] },
+    "zurückmachen": { meaning: "dib u celin", examples: [{ de: "Er macht es rückgängig.", so: "Wuu dib u celinayaa." }], similar: ["rückgängig machen"] }
+};
+
+// ======================= NEHMEN + Präfixe =======================
+const nehmenVerbs = {
+    "nehmen": { meaning: "qaadasho / qaadid", examples: [{ de: "Ich nehme den Bus.", so: "Waan qaadanayaa baska." }], similar: ["ergreifen", "holen"] },
+    "abnehmen": { meaning: "ka qaadid / miisaan lumin", examples: [{ de: "Er nimmt den Hut ab.", so: "Koofiyadda wuu ka qaadayaa." }, { de: "Sie nimmt ab.", so: "Miisaan bay luminaysaa." }], similar: ["entfernen", "schlank werden"] },
+    "annehmen": { meaning: "aqbasho / qaadasho", examples: [{ de: "Ich nehme das Angebot an.", so: "Waan aqbalayaa dalabka." }], similar: ["akzeptieren", "entgegennehmen"] },
+    "aufnehmen": { meaning: "soo qaadid / diiwaangelin", examples: [{ de: "Sie nimmt den Kampf auf.", so: "Waxay soo qaadanaysaa dagaalka." }, { de: "Er wird aufgenommen.", so: "Waa la diiwaangelinayaa." }], similar: ["beginnen", "aufzeichnen"] },
+    "ausnehmen": { meaning: "ka saarid / madow qaadid", examples: [{ de: "Nimm die Knochen aus!", so: "Ka saar lafaha!" }], similar: ["entfernen", "herausnehmen"] },
+    "benehmen": { meaning: "dhaqan / habdhaqan", examples: [{ de: "Benimm dich!", so: "Dhaqankaaga fiiri!" }], similar: ["sich verhalten", "sich benehmen"] },
+    "durchnehmen": { meaning: "dhammaystir / barasho", examples: [{ de: "Wir nehmen das Kapitel durch.", so: "Waanu soo qaadanaynaa cutubka." }], similar: ["durchgehen", "lernen"] },
+    "einnehmen": { meaning: "qaatid / qabsan", examples: [{ de: "Sie nimmt die Pille ein.", so: "Kaniini way qaadanaysaa." }, { de: "Die Armee nimmt die Stadt ein.", so: "Ciidanku waa qabsanayaa magaalada." }], similar: ["schlucken", "erobern"] },
+    "entnehmen": { meaning: "ka soo qaadid / helid", examples: [{ de: "Der Tabelle entnehme ich die Daten.", so: "Xogta waxaan ka soo qaadanayaa shaxda." }], similar: ["entnehmen", "herauslesen"] },
+    "hernehmen": { meaning: "u soo qaadid", examples: [{ de: "Nimm den Stuhl her!", so: "U soo qaado kursiga!" }], similar: ["herbeiholen"] },
+    "hinnehmen": { meaning: "u qaadasho / dulqaadasho", examples: [{ de: "Er nimmt es hin.", so: "Wuu u qaadanayaa (dulqaadanayaa)." }], similar: ["akzeptieren", "erdulden"] },
+    "mitnehmen": { meaning: "la qaadid / saameyn", examples: [{ de: "Nimm deinen Bruder mit!", so: "La qaado walaalkaa!" }, { de: "Die Reise nimmt mich mit.", so: "Safarku waa i saameeyay." }], similar: ["begleiten", "beeinflussen"] },
+    "nachnehmen": { meaning: "daba qaadid / la soco", examples: [{ de: "Er nimmt nach.", so: "Wu daba qaadanayaa." }], similar: ["folgen", "nachholen"] },
+    "teilnehmen": { meaning: "ka qayb qaadasho", examples: [{ de: "Er nimmt am Kurs teil.", so: "Wuu ka qayb qaadanayaa koorsada." }], similar: ["mitmachen", "partizipieren"] },
+    "übernehmen": { meaning: "masuuliyad qaadid", examples: [{ de: "Ich übernehme die Verantwortung.", so: "Masuuliyadda waan qaadanayaa." }], similar: ["verantworten", "auf sich nehmen"] },
+    "unternehmen": { meaning: "wax qabasho / safar", examples: [{ de: "Was unternimmst du?", so: "Maxaad qabanaysaa?" }, { de: "Er unternimmt eine Reise.", so: "Wuxuu qaadanayaa safar." }], similar: ["tun", "durchführen"] },
+    "vernehmen": { meaning: "maqal / weydiin", examples: [{ de: "Ich vernehme ein Geräusch.", so: "Waxaan maqlayaa sanqadh." }], similar: ["hören", "wahrnehmen"] },
+    "vornehmen": { meaning: "qorsheyn / sameyn", examples: [{ de: "Ich nehme mir vor zu lernen.", so: "Waxaan qorsheynayaa inaan barto." }], similar: ["planen", "sich vornehmen"] },
+    "wegnehmen": { meaning: "ka qaadid", examples: [{ de: "Nimm das Messer weg!", so: "Ka qaad mindida!" }], similar: ["entfernen", "beseitigen"] },
+    "zunehmen": { meaning: "miisaan kordhin", examples: [{ de: "Er nimmt zu.", so: "Miisaankiisu wuu kordhayaa." }], similar: ["dicker werden", "wachsen"] },
+    "zurücknehmen": { meaning: "dib u qaadid / noqosh", examples: [{ de: "Er nimmt seine Worte zurück.", so: "Erayadiisa dib buu u qaadanayaa." }], similar: ["widerrufen", "retournieren"] }
+};
+
+// ======================= GEBEN + Präfixe =======================
+const gebenVerbs = {
+    "geben": { meaning: "siin / bixin", examples: [{ de: "Ich gebe dir das Buch.", so: "Waxaan siinayaa buugga." }], similar: ["reichen", "überreichen"] },
+    "abgeben": { meaning: "gaarsiin / sii tag", examples: [{ de: "Gib das Paket ab!", so: "Gaarsiin baakadda!" }], similar: ["übergeben", "abliefern"] },
+    "angeben": { meaning: "sheegid / faan", examples: [{ de: "Er gibt den Preis an.", so: "Wuu sheegayaa qiimaha." }, { de: "Er gibt immer an.", so: "Had iyo jeer wuu faanayaa." }], similar: ["nennen", "prahlen"] },
+    "aufgeben": { meaning: "iska dhiib / bilaabid", examples: [{ de: "Gib nicht auf!", so: "Ha iska dhiibin!" }, { de: "Gib den Brief auf!", so: "Bixin warqadda!" }], similar: ["verzichten", "aufhören"] },
+    "ausgeben": { meaning: "bixid / kharash", examples: [{ de: "Er gibt viel Geld aus.", so: "Lacag badan buu bixiyaa." }], similar: ["bezahlen", "auszahlen"] },
+    "begeben": { meaning: "tagid / dhicid", examples: [{ de: "Er begibt sich auf die Reise.", so: "Wuxuu tagayaa safarka." }], similar: ["sich begeben", "gehen"] },
+    "eingeben": { meaning: "gelin / qorid", examples: [{ de: "Gib das Passwort ein!", so: "Geli sirta (password)!" }], similar: ["eintippen", "eingeben"] },
+    "ergeben": { meaning: "soo saarid / natiijo", examples: [{ de: "Das ergibt Sinn.", so: "Taasi macno bay soo saartaa." }, { de: "Er ist ihr ergeben.", so: "Wuu u daacadsan yahay." }], similar: ["resultieren", "ergeben"] },
+    "hergeben": { meaning: "u soo siin", examples: [{ de: "Gib das Buch her!", so: "U soo sii buugga!" }], similar: ["herreichen"] },
+    "hingeben": { meaning: "u huray / siin", examples: [{ de: "Er gibt sich ganz hin.", so: "Gabi ahaan buu u hurayaa." }], similar: ["widmen", "opfern"] },
+    "mitgeben": { meaning: "la siin / ku sii", examples: [{ de: "Gib mir etwas mit!", so: "I sii wax la socda!" }], similar: ["überlassen"] },
+    "nachgeben": { meaning: "u fidin / ka noqosh", examples: [{ de: "Er gibt nach.", so: "Wu u fiirsanayaa (ka noqonayaa)." }], similar: ["kapitulieren", "weichen"] },
+    "übergeben": { meaning: "gaarsiin / tag", examples: [{ de: "Ich übergebe dir den Stift.", so: "Waxaan kuu gaarsiiyay qalinka." }, { de: "Er übergibt sich.", so: "Wuu matagayaa." }], similar: ["überreichen", "sich übergeben"] },
+    "umgeben": { meaning: "ku wareegsan / hareereyn", examples: [{ de: "Wald umgibt das Haus.", so: "Kayntu waxay hareeraysaa guriga." }], similar: ["einkreisen", "umringen"] },
+    "untergeben": { meaning: "hoos tag / ka hooseyn", examples: [{ de: "Er ist ihm untergeben.", so: "Wu ka hooseeyaa isaga." }], similar: ["unterstellt sein"] },
+    "vergeben": { meaning: "saamax / lumiyay", examples: [{ de: "Ich vergebe dir.", so: "Waan kaa saamaxay." }, { de: "Er hat die Chance vergeben.", so: "Fursaddii wuu lumiyay." }], similar: ["verzeihen", "vertun"] },
+    "vorgeben": { meaning: "yeesh / sheegid", examples: [{ de: "Er gibt vor zu lernen.", so: "Wuxuu yeeshay inuu bartay." }], similar: ["behaupten", "vortäuschen"] },
+    "weggeben": { meaning: "ka siin / qaadid", examples: [{ de: "Gib das weg!", so: "Ka sii taas!" }], similar: ["wegwerfen", "abgeben"] },
+    "zurückgeben": { meaning: "dib u celin", examples: [{ de: "Gib das Buch zurück!", so: "Dib u celi buugga!" }], similar: ["retournieren", "wiedergeben"] }
+};
+
+    // SEHEN + Präfixe
+    const sehenVerbs = {
+        "sehen": { meaning: "arkid / eegid", examples: [{ de: "Ich sehe den Film.", so: "Waxaan arkayaa filimka." }], similar: ["blicken", "schauen"] },
+        "absehen": { meaning: "ka fiirsasho / ka tagid (qas)", examples: [{ de: "Ich sehe davon ab.", so: "Waan ka tagayaa taas." }], similar: ["verzichten", "unterlassen"] },
+        "ansehen": { meaning: "dhawris / eegid", examples: [{ de: "Sieh dir das an!", so: "Eeg tan!" }], similar: ["betrachten", "angucken"] },
+        "aufsehen": { meaning: "fiirin (kor) / la yaab", examples: [{ de: "Er sieht zu ihr auf.", so: "Wuu ixtiraamaa iyada." }], similar: ["respektieren", "hochschauen"] },
+        "aussehen": { meaning: "u ekaansho", examples: [{ de: "Du siehst gut aus.", so: "Waxaad u eegtahay si fiican." }], similar: ["erscheinen", "wirken"] },
+        "besehen": { meaning: "si fiican u eegid", examples: [{ de: "Er besah das Gemälde.", so: "Wuxuu si fiican u eegay sawirka." }], similar: ["betrachten", "inspizieren"] },
+        "durchsehen": { meaning: "dhex mar eegid / baarid", examples: [{ de: "Ich sehe die Unterlagen durch.", so: "Waan dhex marayaa qoraalada." }], similar: ["prüfen", "kontrollieren"] },
+        "einsehen": { meaning: "qiran / fahmid", examples: [{ de: "Er sieht seinen Fehler ein.", so: "Wuu qiranayaa qaladkiisa." }], similar: ["akzeptieren", "verstehen"] },
+        "hersehen": { meaning: "u soo fiirin", examples: [{ de: "Sieh her!", so: "U soo fiiri!" }], similar: ["hinschauen"] },
+        "hinsehen": { meaning: "u fiirin (xaggaas)", examples: [{ de: "Sieh hin!", so: "U fiiri xaggaas!" }], similar: ["beachten"] },
+        "nachsehen": { meaning: "dabagal / weydi", examples: [{ de: "Kannst du nachsehen?", so: "Ma dabagali kartaa?" }], similar: ["überprüfen", "kontrollieren"] },
+        "umsehen": { meaning: "fiirin hareeraha / raadin", examples: [{ de: "Ich sehe mich um.", so: "Waan fiiriyaa hareeraha." }], similar: ["sich orientieren", "suchen"] },
+        "versehen": { meaning: "qalad ku arkid / siin", examples: [{ de: "Ich habe mich versehen.", so: "Waan qaldamay (arkid ahaan)." }, { de: "Er versieht ihn mit Geld.", so: "Wuxuu siinayaa lacag." }], similar: ["irren", "ausstatten"] },
+        "vorsehen": { meaning: "qorsheyn / diyaarin", examples: [{ de: "Das ist vorgesehen.", so: "Taasi waa la qorsheeyay." }], similar: ["planen", "vorbereiten"] },
+        "zusehen": { meaning: "dhawris / daawasho", examples: [{ de: "Ich sehe dem Spiel zu.", so: "Waan daawanayaa ciyaarta." }], similar: ["beobachten", "zuschauen"] },
+        "zurücksehen": { meaning: "dib u fiirin (waqti hore)", examples: [{ de: "Er sieht auf die Vergangenheit zurück.", so: "Wuxuu dib u fiiriyaa waqtigii hore." }], similar: ["erinnern", "zurückblicken"] }
+    };
+
+  // falalka kuwa shabaha ama u eg ee hada lagu soo daray
+
+
+    // ======================= WEITERE VERBEN MIT PRÄFIXEN (ähnlich wie finden) =======================
+
+// 1. STELLEN + Präfixe (is dhigid / meel dhigid)
+const stellenVerbs = {
+    "stellen": { meaning: "dhigid / taagin", examples: [{ de: "Ich stelle die Vase auf den Tisch.", so: "Waxaan dhigayaa weelka miiska." }], similar: ["platzieren", "hinstellen"] },
+    "abstellen": { meaning: "damid / meel dhigid", examples: [{ de: "Stell den Motor ab!", so: "Dam matoorka!" }, { de: "Stell das Fahrrad ab.", so: "Dhigo baaskiilka." }], similar: ["ausschalten", "parken"] },
+    "anstellen": { meaning: "shidaal / shaqo siin", examples: [{ de: "Stell das Radio an!", so: "Shid raadiyaha!" }, { de: "Die Firma stellt ihn an.", so: "Shirkaddu waxay shaqo siisay isaga." }], similar: ["einschalten", "einstellen"] },
+    "aufstellen": { meaning: "taagin / sameyn", examples: [{ de: "Er stellt eine Tabelle auf.", so: "Wuxuu sameeyay shax." }], similar: ["errichten", "aufbauen"] },
+    "ausstellen": { meaning: "damid / soo bandhigid", examples: [{ de: "Stell das Licht aus!", so: "Dam nalka!" }, { de: "Er stellt seine Kunst aus.", so: "Farshaxankiisa wuu soo bandhigayaa." }], similar: ["ausschalten", "exponieren"] },
+    "bestehen": { meaning: "ka kooban / ka adkaan", examples: [{ de: "Die Prüfung besteht aus 3 Teilen.", so: "Imtixaanku wuxuu ka kooban yahay 3 qaybood." }, { de: "Er besteht die Prüfung.", so: "Wuu ka adkaaday imtixaanka." }], similar: ["bestehen aus", "erfolgreich sein"] },
+    "beistellen": { meaning: "u dhigid (caawin)", examples: [{ de: "Stell mir den Stuhl bei!", so: "Iigu dhig kursiga!" }], similar: ["zur Verfügung stellen"] },
+    "darstellen": { meaning: "matalaan / muujin", examples: [{ de: "Das Bild stellt einen Mann dar.", so: "Sawirku wuxuu matalayaa nin." }], similar: ["repräsentieren", "darstellen"] },
+    "durchstellen": { meaning: "isku xirid (telefoon)", examples: [{ de: "Ich stelle dich durch.", so: "Waan ku xirirayaa." }], similar: ["verbinden", "weiterleiten"] },
+    "einstellen": { meaning: "joojin / shaqo siin", examples: [{ de: "Stell die Maschine ein!", so: "Jooji mashiinka!" }, { de: "Die Firma stellt ein.", so: "Shirkaddu way shaqo siisaa." }], similar: ["abschalten", "anwerben"] },
+    "entstellen": { meaning: "qalloocin / xumayn", examples: [{ de: "Die Lüge entstellt die Wahrheit.", so: "Beenntu xumayso xaqiiqda." }], similar: ["verzerren", "verunstalten"] },
+    "erstellen": { meaning: "sameyn / diyaarin", examples: [{ de: "Erstellt einen Bericht!", so: "Samee warbixin!" }], similar: ["anfertigen", "erzeugen"] },
+    "feststellen": { meaning: "ogaansho / caddeyn", examples: [{ de: "Ich stelle fest, dass es kalt ist.", so: "Waan ogaanayaa inay qabow tahay." }], similar: ["bemerken", "konstatieren"] },
+    "freistellen": { meaning: "fasax siin / xorid", examples: [{ de: "Er wird freigestellt.", so: "Fasax baa la siinayaa." }], similar: ["beurlauben", "befreien"] },
+    "gegenüberstellen": { meaning: "iska hor dhigid", examples: [{ de: "Stell die zwei Ideen gegenüber.", so: "Labada fikradood iska hor dhig." }], similar: ["vergleichen", "kontrastieren"] },
+    "herstellen": { meaning: "soo saarid / sameyn", examples: [{ de: "Die Firma stellt Autos her.", so: "Shirkaddu waxay soo saartaa baabuur." }], similar: ["produzieren", "erzeugen"] },
+    "hinstellen": { meaning: "u dhigid xaggaas", examples: [{ de: "Stell es hin!", so: "U dhig xaggaas!" }], similar: ["platzieren", "positionieren"] },
+    "instandstellen": { meaning: "dayactir / hagaajin", examples: [{ de: "Er stellt die Maschine instand.", so: "Mashiinka wuu hagaajinayaa." }], similar: ["reparieren", "renovieren"] },
+    "mitstellen": { meaning: "la dhigid", examples: [{ de: "Stell mit!", so: "La dhig!" }], similar: ["teilnehmen"] },
+    "nachstellen": { meaning: "daba gal / raac", examples: [{ de: "Er stellt ihr nach.", so: "Wu daba galayaa." }], similar: ["verfolgen", "belästigen"] },
+    "überstellen": { meaning: "wareejin / la wareeg", examples: [{ de: "Er stellt das Paket über.", so: "Baakadda wuu wareejiyay." }], similar: ["übergeben", "überreichen"] },
+    "umstellen": { meaning: "beddel / wareeg", examples: [{ de: "Stell die Möbel um!", so: "Beddel alaabta!" }, { de: "Die Polizei stellt das Haus um.", so: "Booliisku way wareegtay guriga." }], similar: ["umräumen", "einkreisen"] },
+    "unterstellen": { meaning: "hoos dhigid / eedayn", examples: [{ de: "Stell den Stuhl unter!", so: "Hoos dhig kursiga!" }, { de: "Er unterstellt ihm Lüge.", so: "Wuxuu ku eedaynayaa been." }], similar: ["vermuten", "unterordnen"] },
+    "verstellen": { meaning: "beddel / qarin", examples: [{ de: "Er verstellt die Möbel.", so: "Alaabta wuu beddelayaa." }, { de: "Er verstellt seine Stimme.", so: "Codkiisa wuu qariyayaa." }], similar: ["umräumen", "verkleiden"] },
+    "vorstellen": { meaning: "soo bandhigid / male-awaal", examples: [{ de: "Stell dich vor!", so: "Soo bandhig naftaada!" }, { de: "Stell dir vor!", so: "Male-awaal!" }], similar: ["präsentieren", "sich vorstellen"] },
+    "wiederherstellen": { meaning: "dib u soo celin", examples: [{ de: "Er stellt die Ordnung wieder her.", so: "Nidaamka dib buu u soo celinayaa." }], similar: ["restaurieren", "wiederherstellen"] },
+    "zurückstellen": { meaning: "dib u dhigid", examples: [{ de: "Stell das Buch zurück!", so: "Dib u dhig buugga!" }], similar: ["retournieren", "zurücklegen"] },
+    "zusammenstellen": { meaning: "isku dhigid / ururin", examples: [{ de: "Er stellt eine Liste zusammen.", so: "Liis buu isku dhigayaa." }], similar: ["kombinieren", "sammeln"] },
+    "zustellen": { meaning: "gaarsiin / xirid", examples: [{ de: "Der Briefträger stellt das Paket zu.", so: "Fariidahan baa gaarsiiyay baakadda." }, { de: "Stell die Tür zu!", so: "Xir albaabka!" }], similar: ["liefern", "schließen"] }
+};
+
+// 2. SETZEN + Präfixe (fadhiisid / meel dhigid)
+const setzenVerbs = {
+    "setzen": { meaning: "fadhiisin / dhigid", examples: [{ de: "Ich setze mich auf den Stuhl.", so: "Waxaan fadhiistaa kursiga." }], similar: ["sich setzen", "platzieren"] },
+    "absetzen": { meaning: "ka qaadid / tuurid", examples: [{ de: "Setz die Brille ab!", so: "Ka qaado muraayadaha!" }, { de: "Sie setzt das Baby ab.", so: "Cunugga way dejinaysaa." }], similar: ["ablegen", "abstellen"] },
+    "ansetzen": { meaning: "bilaabid / ku dhejin", examples: [{ de: "Setz den Helm an!", so: "Koofiyadda adag ku dheji!" }], similar: ["aufsetzen", "beginnen"] },
+    "aussetzen": { meaning: "joojin / taagin", examples: [{ de: "Das Wetter setzt aus.", so: "Cimiladu way joogsanaysaa." }, { de: "Er setzt das Kind aus.", so: "Cunugga wuu tuuray." }], similar: ["unterbrechen", "aussetzen"] },
+    "besetzen": { meaning: "qabsan / buuxin", examples: [{ de: "Die Armee besetzt die Stadt.", so: "Ciidanku wuxuu qabsaday magaalada." }, { de: "Der Platz ist besetzt.", so: "Boooshka waa la buuxiyay." }], similar: ["okkupieren", "belegen"] },
+    "durchsetzen": { meaning: "ku qasbid / adkaysi", examples: [{ de: "Er setzt seinen Willen durch.", so: "Rabitaankiisa wuu ku qasbayaa." }], similar: ["durchdrücken", "erreichen"] },
+    "einsetzen": { meaning: "bilaabid / shaqo siin", examples: [{ de: "Setz den Schlüssel ein!", so: "Geli furaha!" }, { de: "Er wird eingesetzt.", so: "Shaqo baa loo siinayaa." }], similar: ["beginnen", "anstellen"] },
+    "entsetzen": { meaning: "naxdin / ka qaadid", examples: [{ de: "Die Nachricht entsetzt mich.", so: "Warku waa i naxay." }], similar: ["schockieren", "entfernen"] },
+    "ersetzen": { meaning: "beddel / badal", examples: [{ de: "Kannst du mich ersetzen?", so: "Ma i beddeli kartaa?" }], similar: ["austauschen", "substituieren"] },
+    "fortsetzen": { meaning: "sii wadid", examples: [{ de: "Setz die Arbeit fort!", so: "Shaqada sii wad!" }], similar: ["weitermachen", "fortfahren"] },
+    "hinsetzen": { meaning: "u fadhiisid xaggaas", examples: [{ de: "Setz dich hin!", so: "U fadhiiso xaggaas!" }], similar: ["sich setzen", "Platz nehmen"] },
+    "nachsetzen": { meaning: "raac / daba gal", examples: [{ de: "Er setzt ihr nach.", so: "Wu daba galayaa." }], similar: ["verfolgen", "nacheilen"] },
+    "übersetzen": { meaning: "turjumid / gaarsiin", examples: [{ de: "Übersetze den Text!", so: "Turjum qoraalka!" }, { de: "Die Fähre setzt über.", so: "Doonnidu way gaarsiisaa." }], similar: ["dolmetschen", "überqueren"] },
+    "umsetzen": { meaning: "beddel / fulin", examples: [{ de: "Setz den Plan um!", so: "Qorshaha fuli!" }], similar: ["realisieren", "verwandeln"] },
+    "versetzen": { meaning: "dhaqaajin / qaldamid", examples: [{ de: "Er versetzt den Tisch.", so: "Miiska wuu dhaqaajiyaa." }, { de: "Er versetzt mich.", so: "Wu i qaldamay." }], similar: ["bewegen", "verlegen"] },
+    "vorsetzen": { meaning: "hor dhigid / u siin", examples: [{ de: "Setz ihm das Essen vor!", so: "Cuntada hor dhig!" }], similar: ["servieren", "präsentieren"] },
+    "wegsetzen": { meaning: "ka qaadid", examples: [{ de: "Setz den Stuhl weg!", so: "Ka qaado kursiga!" }], similar: ["entfernen", "wegräumen"] },
+    "wiedersetzen": { meaning: "diidid / hor is taagid", examples: [{ de: "Er widersetzt sich dem Befehl.", so: "Amarka wuu diidayaa." }], similar: ["sich widersetzen", "widerstehen"] },
+    "zersetzen": { meaning: "burburid / halligid", examples: [{ de: "Die Chemikalie zersetzt das Material.", so: "Kiimikadu way burburisaa walaxda." }], similar: ["auflösen", "zerstören"] },
+    "zusetzen": { meaning: "xirid / cadaadis", examples: [{ de: "Setz den Deckel zu!", so: "Xir daboolka!" }, { de: "Er setzt mir zu.", so: "Cadaadis buu i saarayaa." }], similar: ["schließen", "bedrängen"] }
+};
+
+// 3. LASSEN + Präfixe (dayn / u ogolaansho)
+const lassenVerbs = {
+    "lassen": { meaning: "dayn / u ogolaan", examples: [{ de: "Lass mich in Ruhe!", so: "I daa nabad!" }], similar: ["erlauben", "unterlassen"] },
+    "ablassen": { meaning: "ka joojin / daadin", examples: [{ de: "Lass vom Gas ab!", so: "Ka jooji gaaska!" }, { de: "Das Wasser ablassen.", so: "Biyaha daadi." }], similar: ["aufhören", "ablassen"] },
+    "anlassen": { meaning: "shidid / xirid", examples: [{ de: "Lass den Motor an!", so: "Shid matoorka!" }], similar: ["starten", "einschalten"] },
+    "auflassen": { meaning: "furan ka tag / xiran ka tag", examples: [{ de: "Lass die Tür auf!", so: "Albaabka furan ka tag!" }], similar: ["offen lassen", "geschlossen lassen"] },
+    "auslassen": { meaning: "ka tag / daadin", examples: [{ de: "Lass mich aus!", so: "I daa!" }, { de: "Lass die Wut aus!", so: "Cadaawadda daadi!" }], similar: ["weglassen", "ausdrücken"] },
+    "belassen": { meaning: "sidaas u dayn", examples: [{ de: "Lass es dabei!", so: "Sidaas u daa!" }], similar: ["so lassen", "belassen"] },
+    "durchlassen": { meaning: "u ogolaan dhaafitaan", examples: [{ de: "Lass mich durch!", so: "I ogolow inaan dhaafo!" }], similar: ["durchgehen lassen", "passieren lassen"] },
+    "einlassen": { meaning: "soo gelin / ku lug lahan", examples: [{ de: "Lass ihn ein!", so: "Soo geli isaga!" }, { de: "Er lässt sich auf das Spiel ein.", so: "Wuxuu ku lug yeeshay ciyaarta." }], similar: ["hineinlassen", "sich einlassen"] },
+    "entlassen": { meaning: "shaqada ka dayn / sii dayn", examples: [{ de: "Die Firma entlässt ihn.", so: "Shirkaddu way ka dayshay isaga." }], similar: ["feuern", "freilassen"] },
+    "herlassen": { meaning: "u soo dhowaan", examples: [{ de: "Lass mich her!", so: "I soo dhowaan!" }], similar: ["nähern lassen"] },
+    "hinlassen": { meaning: "u oggolaan xaggaas", examples: [{ de: "Lass ihn hin!", so: "U oggolow xaggaas!" }], similar: ["gehen lassen"] },
+    "nachlassen": { meaning: "yaraado / dayn", examples: [{ de: "Der Regen lässt nach.", so: "Robbadii way yaraatay." }], similar: ["abnehmen", "schwächer werden"] },
+    "überlassen": { meaning: "u dayn / ku tashi", examples: [{ de: "Ich überlasse dir die Entscheidung.", so: "Go'aanka waxaan ku tashi kuu daynayaa." }], similar: ["übergeben", "vertrauen"] },
+    "unterlassen": { meaning: "ka dayn / joojin", examples: [{ de: "Unterlass das!", so: "Ka daa taas!" }], similar: ["vermeiden", "verzichten"] },
+    "verlassen": { meaning: "ka tag / isku halleyn", examples: [{ de: "Er verlässt das Haus.", so: "Guriga wuu ka tagayaa." }, { de: "Verlass dich auf mich!", so: "Is ku hallee aniga!" }], similar: ["weggehen", "vertrauen"] },
+    "vorlassen": { meaning: "hor u dayn", examples: [{ de: "Lass mich vor!", so: "Hor i daa!" }], similar: ["vorgehen lassen"] },
+    "weglassen": { meaning: "ka tag / saarin", examples: [{ de: "Lass das Wort weg!", so: "Erayga ka tag!" }], similar: ["auslassen", "entfernen"] },
+    "zerlassen": { meaning: "dhalaali / milmi", examples: [{ de: "Lass die Butter zerlassen!", so: "Subagga dhalaali!" }], similar: ["schmelzen", "auflösen"] },
+    "zulassen": { meaning: "u ogolaan / qiran", examples: [{ de: "Das Gesetz lässt das zu.", so: "Sharcigu wuu u ogolyahay taas." }], similar: ["erlauben", "genehmigen"] },
+    "zurücklassen": { meaning: "ka tag / daysan", examples: [{ de: "Er lässt seinen Hund zurück.", so: "Eygiisa wuu ka tagayaa." }], similar: ["hinterlassen", "zurücklassen"] }
+};
+
+// 4. HALTEN + Präfixe (qabasho / joojin)
+const haltenVerbs = {
+    "halten": { meaning: "qabasho / joojin", examples: [{ de: "Halt das Buch!", so: "Qabo buugga!" }], similar: ["festhalten", "anhalten"] },
+    "anhalten": { meaning: "joojin / sii wadid", examples: [{ de: "Halt an!", so: "Jooji!" }, { de: "Das Wetter hält an.", so: "Cimiladu way sii socotaa." }], similar: ["stoppen", "andauern"] },
+    "aufhalten": { meaning: "hakin / ka hor tag", examples: [{ de: "Halt den Dieb auf!", so: "Haki tuugga!" }], similar: ["stoppen", "verhindern"] },
+    "aushalten": { meaning: "u adkaysan / dulqaadasho", examples: [{ de: "Ich kann es nicht aushalten.", so: "Uma adkaysan karo." }], similar: ["ertragen", "durchstehen"] },
+    "behalten": { meaning: "hayn / xafidan", examples: [{ de: "Behalte das Geld!", so: "Hay lacagta!" }], similar: ["aufbewahren", "nicht weggeben"] },
+    "durchhalten": { meaning: "sii wadid / dulqaadasho", examples: [{ de: "Halt durch!", so: "Sii wad!" }], similar: ["durchstehen", "weiter machen"] },
+    "einhalten": { meaning: "raac / dhawrid", examples: [{ de: "Halt die Regeln ein!", so: "Dhawr xeerarka!" }], similar: ["befolgen", "respektieren"] },
+    "enthalten": { meaning: "ka kooban / diidid", examples: [{ de: "Das Buch enthält 100 Seiten.", so: "Buuggu wuxuu ka kooban yahay 100 bog." }], similar: ["beinhalten", "umfassen"] },
+    "erhalten": { meaning: "helid / badbaadin", examples: [{ de: "Ich erhalte einen Brief.", so: "Waxaan helayaa warqad." }, { de: "Er erhält die alte Maschine.", so: "Mashiinkii hore wuu badbaadiyay." }], similar: ["bekommen", "kriegen", "bewahren"] },
+    "fernhalten": { meaning: "ka fogayn / ka ilaalin", examples: [{ de: "Halt dich fern!", so: "Ka fogow!" }], similar: ["vermeiden", "distanzieren"] },
+    "festhalten": { meaning: "si adag u qabasho", examples: [{ de: "Halt fest!", so: "Si adag u qabo!" }], similar: ["ergreifen", "festhalten"] },
+    "herhalten": { meaning: "u soo qabasho", examples: [{ de: "Halt her!", so: "U soo qabo!" }], similar: ["hergeben", "reichen"] },
+    "hinhalten": { meaning: "u qabasho xaggaas", examples: [{ de: "Halt hin!", so: "U qabo xaggaas!" }], similar: ["vorhalten"] },
+    "instandhalten": { meaning: "dayactirid", examples: [{ de: "Er hält die Maschine instand.", so: "Mashiinka wuu dayactiraa." }], similar: ["warten", "reparieren"] },
+    "mithalten": { meaning: "la socon / la qaadan", examples: [{ de: "Kannst du mithalten?", so: "Ma la socon kartaa?" }], similar: ["schritthalten", "folgen"] },
+    "nachhalten": { meaning: "sii wadid / hubin", examples: [{ de: "Er hält nach.", so: "Wuu hubinayaa." }], similar: ["überprüfen", "kontrollieren"] },
+    "unterhalten": { meaning: "maadasho / hadal", examples: [{ de: "Er unterhält das Publikum.", so: "Dadka wuu maadshayaa." }, { de: "Wir unterhalten uns.", so: "Waanu hadlaynaa." }], similar: ["amüsieren", "sich unterhalten"] },
+    "verhalten": { meaning: "u dhaqan / xakamayn", examples: [{ de: "Verhalte dich ruhig!", so: "Si nabad ah u dhaqan!" }], similar: ["sich benehmen", "handeln"] },
+    "vorhalten": { meaning: "hor dhigid / eedayn", examples: [{ de: "Halt ihm den Spiegel vor!", so: "Hor dhig muraayadda!" }, { de: "Er hält ihm seinen Fehler vor.", so: "Qaladkiisa wuu hor dhigayaa." }], similar: ["präsentieren", "vorwerfen"] },
+    "wiederhalten": { meaning: "dib u qabasho", examples: [{ de: "Er hält den Ball wieder.", so: "Kubbadda dib buu u qabayaa." }], similar: ["zurückhalten", "aufhalten"] },
+    "zurückhalten": { meaning: "dib u qabasho / xakamayn", examples: [{ de: "Halt dich zurück!", so: "Is xakamee!" }], similar: ["zurückhalten", "zögern"] },
+    "zusammenhalten": { meaning: "wada qabasho / midnimo", examples: [{ de: "Wir halten zusammen.", so: "Waanu wada joognaa." }], similar: ["verbinden", "kooperieren"] }
+};
+
+// 5. LEGEN + Präfixe (dhidig / meel saarid)
+const legenVerbs = {
+    "legen": { meaning: "dhidig / meel saarid", examples: [{ de: "Ich lege das Buch auf den Tisch.", so: "Waxaan dhigayaa buugga miiska." }], similar: ["ablegen", "legen"] },
+    "ablegen": { meaning: "ka qaadid / kaydin", examples: [{ de: "Leg den Mantel ab!", so: "Ka qaado jaakadda!" }, { de: "Er legt die Prüfung ab.", so: "Wuu kaydinayaa imtixaanka." }], similar: ["ausziehen", "ablegen"] },
+    "anlegen": { meaning: "xirid / maalgeli", examples: [{ de: "Leg die Kette an!", so: "Xir silsiladda!" }, { de: "Er legt Geld an.", so: "Lacag buu maalgaliyaa." }], similar: ["anziehen", "investieren"] },
+    "auflegen": { meaning: "soo saarid / telefoon ku dayn", examples: [{ de: "Leg das Buch auf!", so: "Buugga soo saar!" }, { de: "Er legt den Hörer auf.", so: "Telefoonka wuu dayay." }], similar: ["auslegen", "auflegen"] },
+    "auslegen": { meaning: "soo bandhigid / sharxi", examples: [{ de: "Leg die Ware aus!", so: "Alaabta soo bandhig!" }, { de: "Er legt den Text aus.", so: "Qoraalka wuu sharxayaa." }], similar: ["präsentieren", "interpretieren"] },
+    "belegen": { meaning: "xaqiijin / buuxin", examples: [{ de: "Belege deine Aussage!", so: "Hadalkaaga xaqiiji!" }], similar: ["beweisen", "belegen"] },
+    "darlegen": { meaning: "sharxi / caddeyn", examples: [{ de: "Er legt seinen Plan dar.", so: "Qorshihiisa wuu sharxayaa." }], similar: ["erklären", "darlegen"] },
+    "durchlegen": { meaning: "dhex mari / qaadasho", examples: [{ de: "Er legt das Kabel durch.", so: "Fiilada wuu dhex mariyay." }], similar: ["verlegen", "durchziehen"] },
+    "einlegen": { meaning: "soo galin / kaydin", examples: [{ de: "Leg die CD ein!", so: "CD-da soo geli!" }], similar: ["hineinlegen", "einlegen"] },
+    "erlegen": { meaning: "dilid (ugaarsi)", examples: [{ de: "Der Jäger erlegt den Hirsch.", so: "Ugaarsaduhu wuxuu dilay deerada." }], similar: ["töten", "erlegen"] },
+    "herlegen": { meaning: "u soo dhidig", examples: [{ de: "Leg das Buch her!", so: "U soo dhig buugga!" }], similar: ["herreichen", "geben"] },
+    "hinlegen": { meaning: "u dhidig xaggaas", examples: [{ de: "Leg es hin!", so: "U dhig xaggaas!" }], similar: ["ablegen", "legen"] },
+    "mitlegen": { meaning: "la dhigid", examples: [{ de: "Leg mit!", so: "La dhig!" }], similar: ["teilnehmen"] },
+    "nachlegen": { meaning: "kordhin / raaci", examples: [{ de: "Leg noch etwas nach!", so: "Wax yar kordhi!" }], similar: ["hinzufügen", "nachlegen"] },
+    "offenlegen": { meaning: "furan / daahfurn", examples: [{ de: "Er legt die Wahrheit offen.", so: "Xaqiiqda wuu daahfuray." }], similar: ["enthüllen", "offenbaren"] },
+    "überlegen": { meaning: "ka fiirsasho / sareyn", examples: [{ de: "Ich überlege es mir.", so: "Waan ka fiirsanayaa." }, { de: "Er ist mir überlegen.", so: "Wu iga sareeyaa." }], similar: ["nachdenken", "dominieren"] },
+    "umlegen": { meaning: "rogid / dilid", examples: [{ de: "Leg den Schalter um!", so: "Rog furaha!" }, { de: "Sie legen ihn um.", so: "Way dilayaan isaga." }], similar: ["umschalten", "umbringen"] },
+    "unterlegen": { meaning: "hoos dhigid / ka hooseyn", examples: [{ de: "Leg das Papier unter!", so: "Hoos dhig warqadda!" }, { de: "Er ist ihm unterlegen.", so: "Wu ka hooseeyaa isaga." }], similar: ["subtrahieren", "verlieren"] },
+    "verlegen": { meaning: "lumin / wareejin", examples: [{ de: "Ich habe den Schlüssel verlegt.", so: "Furaha waan lumiyay." }, { de: "Er verlegt den Termin.", so: "Waqtiga wuu wareejiyay." }], similar: ["verlieren", "verschieben"] },
+    "vorlegen": { meaning: "hor dhigid / soo jeedin", examples: [{ de: "Leg den Vorschlag vor!", so: "Soo jeedinta hor dhig!" }], similar: ["präsentieren", "vorlegen"] },
+    "weglegen": { meaning: "ka saarid / kaydin", examples: [{ de: "Leg das Buch weg!", so: "Ka saar buugga!" }], similar: ["entfernen", "wegstellen"] },
+    "zulegen": { meaning: "kordhin / iibsan", examples: [{ de: "Er legt sich ein Auto zu.", so: "Baabuur buu iibsaday." }], similar: ["anschaffen", "kaufen"] },
+    "zurücklegen": { meaning: "dib u dhigid / kaydin", examples: [{ de: "Leg das Buch zurück!", so: "Dib u dhig buugga!" }, { de: "Er legt 10 km zurück.", so: "10 km buu socdaa." }], similar: ["retournieren", "zurücklegen"] },
+    "zusammenlegen": { meaning: "isku dhigid / wada dhigi", examples: [{ de: "Leg die Papiere zusammen!", so: "Waraaqaha isku dhig!" }], similar: ["sammeln", "kombinieren"] }
+};
+
+// ======================= TREFFEN + Präfixe =======================
+const treffenVerbs = {
+    "treffen": { meaning: "kulmid / arag / taabanayo", examples: [{ de: "Ich treffe meine Freunde.", so: "Waxaan kulmayaa saaxiibaday." }], similar: ["begegnen", "antreffen"] },
+    "abtreffen": { meaning: "heshiis ku kulmid (go'an)", examples: [{ de: "Wir treffen uns um 8 ab.", so: "Waxaan ku kulmi doonnaa saacadda 8." }], similar: ["verabreden", "vereinbaren"] },
+    "antreffen": { meaning: "helid / la kulmo", examples: [{ de: "Ich habe ihn zu Hause angetroffen.", so: "Waxaan kula kulmay gurigiisa." }], similar: ["vorfinden", "begegnen"] },
+    "auftreffen": { meaning: "ku dhufasho / garaacid", examples: [{ de: "Der Ball trifft auf die Wand auf.", so: "Kubbaddu waxay ku dhufatay gidaarka." }], similar: ["prallen", "stoßen"] },
+    "betreffen": { meaning: "ku saabsan / taaban", examples: [{ de: "Das betrifft mich nicht.", so: "Taasi i taabanayso ma aha." }], similar: ["angehen", "betreffen"] },
+    "durchtreffen": { meaning: "dhex marta u garaacid", examples: [{ de: "Der Schuss trifft durch.", so: "Rasaastu way dhex martaa." }], similar: ["durchdringen", "durchschlagen"] },
+    "eintreffen": { meaning: "soo gaarid / dhacay", examples: [{ de: "Der Zug trifft pünktlich ein.", so: "Tareenku wuxuu soo gaarayaa waqtiga." }, { de: "Die Vorhersage ist eingetroffen.", so: "Saadaashii waa dhacday." }], similar: ["ankommen", "sich bewahrheiten"] },
+    "entreffen": { meaning: "ku dhufasho (dhif)", examples: [{ de: "Der Ball entreift die Wand.", so: "Kubbaddu waxay ku dhufatay gidaarka." }], similar: ["treffen", "berühren"] },
+    "erftreffen": { meaning: "ku dhufasho / garaacid", examples: [{ de: "Der Pfeil erftrifft das Ziel.", so: "Fallaaruhu wuxuu garaacay bartilmaameedka." }], similar: ["erwischen", "treffen"] },
+    "übertreffen": { meaning: "ka sii fiican / dhaafin", examples: [{ de: "Er übertrifft alle Erwartungen.", so: "Wuxuu ka sii fiican yahay filashooyinka oo dhan." }], similar: ["überragen", "übertreffen"] },
+    "verfehlen": { meaning: "qaldan / seegi", examples: [{ de: "Er verfehlt das Ziel.", so: "Wuu seegay bartilmaameedka." }], similar: ["danebenschießen", "verpassen"] },
+    "vortreffen": { meaning: "hore ugu kulmo", examples: [{ de: "Ich treffe ihn vorher.", so: "Waxaan hore ugu kulmayaa." }], similar: ["vorhersehen", "früher treffen"] },
+    "wiedertreffen": { meaning: "dib u kulmid", examples: [{ de: "Wir treffen uns wieder.", so: "Waanu dib u kulmi doonnaa." }], similar: ["wiedersehen", "sich wiederbegegnen"] },
+    "zusammen treffen": { meaning: "isku kulmid / wada kulmo", examples: [{ de: "Wir treffen uns zusammen.", so: "Waanu isku kulmi doonnaa." }], similar: ["sich versammeln", "sich treffen"] },
+    "zutreffen": { meaning: "run ahaansho / saxsanaan", examples: [{ de: "Das trifft zu.", so: "Taasi waa run." }], similar: ["stimmen", "zutreffen"] },
+    "zurücktreffen": { meaning: "dib u kulmid", examples: [{ de: "Er trifft ihn zurück.", so: "Dib buu u kulmayaa isaga." }], similar: ["erwidern", "zurückschlagen"] }
+};
+
+// ======================= DENKEN + Präfixe =======================
+const denkenVerbs = {
+    "denken": { meaning: "ka fiirsasho / malayn", examples: [{ de: "Ich denke an dich.", so: "Waan ka fikirayaa adiga." }], similar: ["überlegen", "nachdenken"] },
+    "abdenken": { meaning: "ka fiirsasho (xaalad)", examples: [{ de: "Ich denke es ab.", so: "Waan ka fikirayaa." }], similar: ["erwägen", "bedenken"] },
+    "andenken": { meaning: "ka fiirsasho / xasuus", examples: [{ de: "Denk an die Vergangenheit!", so: "Ka fikir waqtigii hore!" }], similar: ["erinnern", "gedenken"] },
+    "ausdenken": { meaning: "ikhtiraacid / qorsheyn", examples: [{ de: "Er denkt sich eine Geschichte aus.", so: "Sheeko buu ikhtiraacay." }], similar: ["erfinden", "sich einfallen lassen"] },
+    "bedenken": { meaning: "tixgeline / ka fiirsasho", examples: [{ de: "Bedenke die Folgen!", so: "Ka fikir cawaaqibka!" }], similar: ["berücksichtigen", "überlegen"] },
+    "durchdenken": { meaning: "si qoto dheer u fiirsasho", examples: [{ de: "Er denkt das Problem durch.", so: "Dhibaatada si qoto dheer buu uga fikirayaa." }], similar: ["analysieren", "durchdenken"] },
+    "eindenken": { meaning: "isu celin / xasuus", examples: [{ de: "Denk dich in die Lage hinein!", so: "Isu geli xaaladda!" }], similar: ["sich hineinversetzen", "einfühlen"] },
+    "entdenken": { meaning: "ka saarid maskaxda", examples: [{ de: "Ich kann es nicht entdenken.", so: "Maskaxday ka saari maayo." }], similar: ["vergessen", "verdrängen"] },
+    "erdenken": { meaning: "ikhtiraacid / fikir ku hel", examples: [{ de: "Er hat eine Lösung erdacht.", so: "Xalka wuu ka fikiray." }], similar: ["ausdenken", "erfinden"] },
+    "fortdenken": { meaning: "sii wadida fikirka", examples: [{ de: "Denk fort!", so: "Sii wad fikirka!" }], similar: ["weitermachen", "fortfahren"] },
+    "gegendanken": { meaning: "kahor tagid fikir ahaan", examples: [{ de: "Er denkt dagegen.", so: "Wu ka soo horjeedaa fikir ahaan." }], similar: ["widersprechen", "entgegnen"] },
+    "herdenken": { meaning: "u soo jiidasho fikir", examples: [{ de: "Denk es her!", so: "U soo jiid!" }], similar: ["sich vorstellen", "rekonstruieren"] },
+    "hindenken": { meaning: "u fiirsasho xaggaas", examples: [{ de: "Denk hin!", so: "U fikir xaggaas!" }], similar: ["hinschauen", "konzentrieren"] },
+    "mitdenken": { meaning: "la fikir / wada fikir", examples: [{ de: "Denk mit!", so: "La fikir!" }], similar: ["kooperieren", "teilnehmen"] },
+    "nachdenken": { meaning: "ka fiirsasho / fikir ku bixin", examples: [{ de: "Ich denke darüber nach.", so: "Waan ka fiirsanayaa arrintaas." }], similar: ["überlegen", "reflektieren"] },
+    "umdenken": { meaning: "fikir beddel / isbadal", examples: [{ de: "Wir müssen umdenken.", so: "Waa inaan fikirka beddelnaa." }], similar: ["neudenken", "sich umstellen"] },
+    "verdenken": { meaning: "eedayn / qalad u arag", examples: [{ de: "Ich kann es dir nicht verdenken.", so: "Kuguma eedayn karo." }], similar: ["übelnehmen", "vorwerfen"] },
+    "vordenken": { meaning: "hore u fikir / qorsheyn", examples: [{ de: "Er denkt voraus.", so: "Wuu hore u fikirayaa." }], similar: ["vorausplanen", "antizipieren"] },
+    "wegdenken": { meaning: "ka saarid maskaxda", examples: [{ de: "Denk ihn weg!", so: "Ka saar maskaxda!" }], similar: ["ausblenden", "ignorieren"] },
+    "zurückdenken": { meaning: "dib u fiirsasho", examples: [{ de: "Ich denke an die gute alte Zeit zurück.", so: "Waxaan dib uga fikirayaa wakhtigii hore ee fiicanaa." }], similar: ["sich erinnern", "zurückblicken"] },
+    "zusammen denken": { meaning: "isku dar fikir ahaan", examples: [{ de: "Denk die Ideen zusammen!", so: "Fikradaha isku dar!" }], similar: ["kombinieren", "verbinden"] }
+};
+
+// ======================= FÜHLEN + Präfixe =======================
+const fühlenVerbs = {
+    "fühlen": { meaning: "dareemid (taabasho / shucuur)", examples: [{ de: "Ich fühle den Schmerz.", so: "Waxaan dareemayaa xanuunka." }], similar: ["spüren", "empfinden"] },
+    "abfühlen": { meaning: "taabasho oo dareemid", examples: [{ de: "Der Arzt fühlt den Puls ab.", so: "Dhakhtarku wuxuu dareemayaa garaaca wadnaha." }], similar: ["tasten", "palpieren"] },
+    "anfühlen": { meaning: "taabasho / dareemid", examples: [{ de: "Fühl mal, wie weich das ist!", so: "Taabo oo dareem sida ay u jilicsan tahay!" }], similar: ["berühren", "tasten"] },
+    "auffühlen": { meaning: "dareemid (kor u qaad)", examples: [{ de: "Er fühlt sich auf.", so: "Wuu dareemayaa." }], similar: ["wahrnehmen", "spüren"] },
+    "ausfühlen": { meaning: "si buuxda u dareemid", examples: [{ de: "Fühl die Struktur aus!", so: "Qaab dhismeedka si buuxda u dareem!" }], similar: ["erkunden", "erfühlen"] },
+    "befühlen": { meaning: "taabasho baaritaan", examples: [{ de: "Der Arzt befühlt den Bauch.", so: "Dhakhtarku wuxuu taabtay caloosha." }], similar: ["abtasten", "untersuchen"] },
+    "durchfühlen": { meaning: "si qoto dheer u dareemid", examples: [{ de: "Er fühlt die Stimmung durch.", so: "Jawiga si qoto dheer buu u dareemayaa." }], similar: ["einfühlen", "hineinversetzen"] },
+    "einfühlen": { meaning: "isku dhex gelin dareen ahaan", examples: [{ de: "Er kann sich in andere einfühlen.", so: "Wuxuu isku dhigi karaa kuwa kale dareen ahaan." }], similar: ["mitfühlen", "sich hineinversetzen"] },
+    "entfühlen": { meaning: "ka bixid dareenka", examples: [{ de: "Er entfühlt die Situation.", so: "Xaaladda kama dareemayo." }], similar: ["abstumpfen", "ignorieren"] },
+    "erfühlen": { meaning: "taabasho ku dareemid", examples: [{ de: "Er fühlt die Form.", so: "Qaabka wuu taabtay." }], similar: ["ertasten", "wahrnehmen"] },
+    "herfühlen": { meaning: "u soo dareemid", examples: [{ de: "Fühl her!", so: "U soo dareem!" }], similar: ["herantasten", "herspüren"] },
+    "hinfühlen": { meaning: "u dareemid xaggaas", examples: [{ de: "Fühl hin!", so: "U dareem xaggaas!" }], similar: ["hintasten", "hinschauen"] },
+    "mitfühlen": { meaning: "la dareemid", examples: [{ de: "Ich fühle mit dir.", so: "Waan kula dareemayaa." }], similar: ["sympathisieren", "Mitleid haben"] },
+    "nachfühlen": { meaning: "dabagal dareen ahaan", examples: [{ de: "Kannst du das nachfühlen?", so: "Ma dareemi kartaa taasa?" }], similar: ["verstehen", "nachempfinden"] },
+    "vorfühlen": { meaning: "hore u dareemid", examples: [{ de: "Er fühlt vor.", so: "Wuu hor dareemayaa." }], similar: ["vorausahnen", "antizipieren"] },
+    "wegfühlen": { meaning: "ka baxid dareenka", examples: [{ de: "Fühl den Schmerz weg!", so: "Xanuunka ka bax dareenka!" }], similar: ["betäuben", "ignorieren"] },
+    "wohlfühlen": { meaning: "raaxo dareemid", examples: [{ de: "Ich fühle mich wohl.", so: "Raaxo waan dareemayaa." }], similar: ["sich wohlfühlen", "sich gut fühlen"] },
+    "zurückfühlen": { meaning: "dib u dareemid", examples: [{ de: "Er fühlt in die Vergangenheit zurück.", so: "Wuxuu dib u dareemayaa waqtigii hore." }], similar: ["sich erinnern", "zurückdenken"] }
+};
+
+// ======================= KOMMEN + Präfixe =======================
+const kommenVerbs = {
+    "kommen": { meaning: "imaan / soo gaarid", examples: [{ de: "Ich komme nach Hause.", so: "Waxaan imanayaa guriga." }], similar: ["ankommen", "eintreffen"] },
+    "abkommen": { meaning: "ka leexan / ka tagid", examples: [{ de: "Er kommt vom Weg ab.", so: "Jidka wuu ka leexanayaa." }], similar: ["abweichen", "sich entfernen"] },
+    "ankommen": { meaning: "soo gaarid / ku xiran", examples: [{ de: "Der Zug kommt an.", so: "Tareenku wuu soo gaarayaa." }, { de: "Es kommt darauf an.", so: "Taas ayay ku xiran tahay." }], similar: ["eintreffen", "abhängen"] },
+    "aufkommen": { meaning: "soo baxid / bixin", examples: [{ de: "Ein Gerücht kommt auf.", so: "War baa soo baxay." }, { de: "Er kommt für die Kosten auf.", so: "Wuxuu bixinayaa kharashka." }], similar: ["entstehen", "bezahlen"] },
+    "auskommen": { meaning: "ku qanacsan / la dhaqan", examples: [{ de: "Ich komme mit dem Geld aus.", so: "Lacagta waan ku qanacsanahay." }, { de: "Sie kommen gut miteinander aus.", so: "Si fiican ayay ula dhaqmaan." }], similar: ["zurechtkommen", "sich verstehen"] },
+    "bekommen": { meaning: "helid / qaadasho", examples: [{ de: "Ich bekomme ein Geschenk.", so: "Waxaan helayaa hadiyad." }], similar: ["erhalten", "kriegen"] },
+    "beikommen": { meaning: "qabsan / la tacaali", examples: [{ de: "Er kann dem Problem nicht beikommen.", so: "Dhibaatada lama qabsan karo." }], similar: ["bewältigen", "meistern"] },
+    "durchkommen": { meaning: "dhex mar / guulaysan", examples: [{ de: "Er kommt durch die Prüfung.", so: "Imtixaanka wuu dhex marayaa (guulaysanayaa)." }], similar: ["bestehen", "erfolgreich sein"] },
+    "einkommen": { meaning: "soo galid / dakhli", examples: [{ de: "Das Geld kommt ein.", so: "Lacagtu way soo gashaa." }], similar: ["hereinkommen", "verdienen"] },
+    "entgegenkommen": { meaning: "u soo hor dhawaansho / caawin", examples: [{ de: "Er kommt mir entgegen.", so: "Wu i soo hor dhawaanshayaa." }, { de: "Die Firma kommt uns entgegen.", so: "Shirkaddu way nagu caawinaysaa." }], similar: ["helfen", "entgegenkommen"] },
+    "fortkommen": { meaning: "horumar / tagid", examples: [{ de: "Er kommt gut voran.", so: "Si fiican buu u horumaryaa." }], similar: ["vorankommen", "fortschreiten"] },
+    "herkommen": { meaning: "u soo imaan (halkan)", examples: [{ de: "Komm her!", so: "U soo imaano!" }], similar: ["sich nähern", "herbeikommen"] },
+    "hinkommen": { meaning: "u tagid xaggaas / gaarid", examples: [{ de: "Wie komme ich hin?", so: "Sidee u tagayaa xaggaas?" }], similar: ["gelangen", "hinfahren"] },
+    "mitkommen": { meaning: "la imaan / raac", examples: [{ de: "Kommst du mit?", so: "Ma la imanaysaa?" }], similar: ["begleiten", "mitgehen"] },
+    "nachkommen": { meaning: "raac / fulin", examples: [{ de: "Er kommt seiner Pflicht nach.", so: "Waajibkiisa buu fulinayaa." }], similar: ["befolgen", "erfüllen"] },
+    "überkommen": { meaning: "qabsan / dareen", examples: [{ de: "Ein Gefühl überkommt mich.", so: "Dareen baa i qabsaday." }], similar: ["ergreifen", "überwältigen"] },
+    "umkommen": { meaning: "dhiman / lumay", examples: [{ de: "Viele Menschen sind umgekommen.", so: "Dad badan ayaa dhimatay." }], similar: ["sterben", "umkommen"] },
+    "unterkommen": { meaning: "meel helid / degid", examples: [{ de: "Er kommt bei Freunden unter.", so: "Wuxuu degayaa saaxiibbo." }], similar: ["Unterschlupf finden", "wohnen"] },
+    "verkommen": { meaning: "xumaasho / baabbi'id", examples: [{ de: "Das Essen ist verkommen.", so: "Cuntadii way xumaatay." }], similar: ["verderben", "verrotten"] },
+    "vorkommen": { meaning: "dhacay / ka muuqan", examples: [{ de: "Das kommt oft vor.", so: "Taasi waxay dhacdaa marar badan." }, { de: "Er kommt mir bekannt vor.", so: "Wu iila muuqdaa qof aan aqaan." }], similar: ["erscheinen", "passieren"] },
+    "vorankommen": { meaning: "horumar / hore u soco", examples: [{ de: "Wir kommen gut voran.", so: "Si fiican ayaanu horumareynaa." }], similar: ["fortschreiten", "vorwärtskommen"] },
+    "vorbeikommen": { meaning: "soo booqan / dhaafid", examples: [{ de: "Kommst du vorbei?", so: "Ma soo booqanaysaa?" }], similar: ["besuchen", "vorbeigehen"] },
+    "wiederkommen": { meaning: "dib u imaan / soo laaban", examples: [{ de: "Komm wieder!", so: "Dib u imaano!" }], similar: ["zurückkehren", "wiederkehren"] },
+    "zusammenkommen": { meaning: "isku imaan / wada kulmo", examples: [{ de: "Wir kommen zusammen.", so: "Waanu wada iman doonnaa." }], similar: ["sich treffen", "sich versammeln"] },
+    "zukommen": { meaning: "u soo dhawaansho / helid", examples: [{ de: "Auf ihn kommt eine Aufgabe zu.", so: "Hawl baa u soo dhawaatay." }], similar: ["bevorstehen", "erwarten"] },
+    "zurückkommen": { meaning: "dib u laaban / soo noqon", examples: [{ de: "Ich komme später zurück.", so: "Dib baan u soo noqon doonaa." }], similar: ["zurückkehren", "wiederkommen"] }
+};
+
+// ======================= RUFEN + Präfixe =======================
+const rufenVerbs = {
+    "rufen": { meaning: "qaylin / yeedhid", examples: [{ de: "Er ruft seinen Namen.", so: "Magiciisa buu qaylinayaa." }], similar: ["schreien", "ausrufen"] },
+    "abrufen": { meaning: "soo dalbasho / wac", examples: [{ de: "Er ruft die Daten ab.", so: "Xogta wuu soo dalbanayaa." }], similar: ["abfragen", "downloaden"] },
+    "anrufen": { meaning: "telefoon ku wac", examples: [{ de: "Ruf mich an!", so: "I wac!" }], similar: ["anrufen", "telefonieren"] },
+    "aufrufen": { meaning: "ku baaqid / soo yeedhid", examples: [{ de: "Der Lehrer ruft den Schüler auf.", so: "Macallinku wuxuu soo yeedhay ardayga." }], similar: ["aufrufen", "auffordern"] },
+    "ausrufen": { meaning: "qaylin / ku dhawaaq", examples: [{ de: "Er ruft den Sieger aus.", so: "Wuxuu ku dhawaaqay guulaystaha." }], similar: ["verkünden", "proklamieren"] },
+    "berufen": { meaning: "magacaabid / ku tilmaam", examples: [{ de: "Er wird zum Chef berufen.", so: "Waxaa loo magacaabay maamulaha." }], similar: ["ernennen", "einsetzen"] },
+    "durcheinanderrufen": { meaning: "jahawareer ku qaylin", examples: [{ de: "Alle rufen durcheinander.", so: "Dhammaan way jahawareer ku qaylinayaan." }], similar: ["chaotisch rufen"] },
+    "entrufen": { meaning: "ka yeedhid (dhif)", examples: [{ de: "Er entruft das Böse.", so: "Shar ku leh wuu ka yeedhay." }], similar: ["vertreiben", "austreiben"] },
+    "errufen": { meaning: "ku dhawaaq / yeedhid", examples: [{ de: "Sie rufen den Frieden aus.", so: "Waxay ku dhawaaqayaan nabadda." }], similar: ["ausrufen", "verkünden"] },
+    "herrufen": { meaning: "u soo yeedhid", examples: [{ de: "Ruf ihn her!", so: "U soo yeedh isaga!" }], similar: ["herbeirufen", "holen"] },
+    "hinrufen": { meaning: "u yeedhid xaggaas", examples: [{ de: "Ruf hin!", so: "U yeedh xaggaas!" }], similar: ["dorthin rufen"] },
+    "mitrufen": { meaning: "la qaylin / wadajir", examples: [{ de: "Ruf mit!", so: "La qayli!" }], similar: ["mitmachen", "teilnehmen"] },
+    "nachrufen": { meaning: "daba qaylin / raac", examples: [{ de: "Er ruft ihm nach.", so: "Dabadiisa buu u qaylinayaa." }], similar: ["hinterherrufen", "nachschreien"] },
+    "umrufen": { meaning: "wareeg qaylin", examples: [{ de: "Er ruft um Hilfe.", so: "Caawimaad buu u qaylinayaa." }], similar: ["um Hilfe schreien"] },
+    "verrufen": { meaning: "sumcad xumo leh", examples: [{ de: "Der Ort ist verrufen.", so: "Meesha waa sumcad xumo." }], similar: ["berüchtigt", "verschrien"] },
+    "vorrufen": { meaning: "hore u yeedhid", examples: [{ de: "Der Lehrer ruft ihn vor.", so: "Macallinku hortiisa buu u yeedhay." }], similar: ["aufrufen", "vortreten lassen"] },
+    "wegrufen": { meaning: "ka yeedhid / fogeyn", examples: [{ de: "Er ruft ihn weg.", so: "Wu ka yeedhay." }], similar: ["abrufen", "entfernen"] },
+    "zurückrufen": { meaning: "dib u yeedhid / wac", examples: [{ de: "Ruf mich zurück!", so: "Dib i wac!" }], similar: ["zurückrufen", "retournieren"] },
+    "zusammenrufen": { meaning: "isku yeedhid / wada yeedhid", examples: [{ de: "Er ruft alle zusammen.", so: "Dhammaan wuu isku yeedhay." }], similar: ["versammeln", "einberufen"] }
+};
+
+// ======================= DICHTEN + Präfixe (sameyn / abuur) =======================
+const dichtenVerbs = {
+    "dichten": { meaning: "maanso sameyn / xiraya", examples: [{ de: "Er dichtet ein Gedicht.", so: "Maanso buu sameynayaa." }], similar: ["reimen", "verfassen"] },
+    "abdichten": { meaning: "xirid / xiraya", examples: [{ de: "Er dichtet das Fenster ab.", so: "Daaqadda wuu xirayaa." }], similar: ["versiegeln", "isolieren"] },
+    "andichten": { meaning: "ku eedayn / been ku sheeg", examples: [{ de: "Sie dichten ihm Fehler an.", so: "Qalado bay u sheegayaan isaga." }], similar: ["unterstellen", "anschuldigen"] },
+    "aufdichten": { meaning: "ku darid maanso", examples: [{ de: "Er dichtet eine Strophe auf.", so: "Maanso buu ku darayaa." }], similar: ["hinzufügen", "ergänzen"] },
+    "ausdichten": { meaning: "dhammaystirid maanso", examples: [{ de: "Er dichtet das Gedicht aus.", so: "Maansada wuu dhammaystirayaa." }], similar: ["vollenden", "fertigstellen"] },
+    "beidichten": { meaning: "la sameyn maanso", examples: [{ de: "Er dichtet bei.", so: "Wu la sameeyaa maanso." }], similar: ["mitdichten", "gemeinsam dichten"] },
+    "erdichten": { meaning: "been abuurid / ikhtiraacid", examples: [{ de: "Er erdichtet eine Geschichte.", so: "Sheeko buu been abuuray." }], similar: ["erfinden", "ausdenken"] },
+    "mitdichten": { meaning: "wada maanso sameyn", examples: [{ de: "Lass uns mitdichten!", so: "Aan wada maanso sameyno!" }], similar: ["kooperieren", "teilnehmen"] },
+    "nachdichten": { meaning: "ku dayan maanso", examples: [{ de: "Er dichtet das Gedicht nach.", so: "Maansada wuu ku dayanayaa." }], similar: ["imitieren", "kopieren"] },
+    "umdichten": { meaning: "beddel maanso", examples: [{ de: "Er dichtet das Gedicht um.", so: "Maansada wuu beddelayaa." }], similar: ["umarbeiten", "überarbeiten"] },
+    "verdichten": { meaning: "cufid / cadaadis", examples: [{ de: "Der Nebel verdichtet sich.", so: "Ciiryaamo waa cufanaysaa." }], similar: ["komprimieren", "dichter machen"] },
+    "vordichten": { meaning: "hore u dhigid maanso", examples: [{ de: "Er dichtet vor.", so: "Wuu hor dhigayaa maansada." }], similar: ["präsentieren", "vortragen"] },
+    "zurdichten": { meaning: "xirid / qarin", examples: [{ de: "Er dichtet die Tür zu.", so: "Albaabka wuu xiraa." }], similar: ["verschließen", "abdichten"] }
+};
+
+// ======================= EREIGNEN + Präfixe (dhacay) =======================
+const ereignenVerbs = {
+    "ereignen": { meaning: "dhacay / qabsoomay", examples: [{ de: "Der Unfall ereignet sich.", so: "Shilku wuu dhacayaa." }], similar: ["passieren", "stattfinden"] },
+    "vorereignen": { meaning: "hore u dhacay", examples: [{ de: "Es hat sich vorereignet.", so: "Hore ayuu u dhacay." }], similar: ["vorfallen", "vorher passieren"] },
+    "wiederereignen": { meaning: "dib u dhacay", examples: [{ de: "Das gleiche ereignet sich wieder.", so: "Isla midkaas ayaa dib u dhacayaa." }], similar: ["wiederholen", "sich wiederholen"] }
+};
+
+// ======================= KREIEREN + Präfixe (abuur) =======================
+const kreierenVerbs = {
+    "kreieren": { meaning: "abuuraan / sameyn", examples: [{ de: "Der Künstler kreiert ein Bild.", so: "Farshaxanku wuxuu abuurayaa sawir." }], similar: ["schaffen", "erstellen"] },
+    "auskreieren": { meaning: "soo saarid / dhammaystirin", examples: [{ de: "Er kreiert ein neues Produkt aus.", so: "Alaab cusub buu soo saarayaa." }], similar: ["entwickeln", "produzieren"] },
+    "durchkreieren": { meaning: "dhex abuurid", examples: [{ de: "Er kreiert durch den Prozess.", so: "Habka dhexdiisa buu abuurayaa." }], similar: ["durcharbeiten", "durchführen"] },
+    "erkreieren": { meaning: "ikhtiraacid", examples: [{ de: "Er erkreiert eine neue Methode.", so: "Hab cusub buu ikhtiraacay." }], similar: ["erfinden", "schaffen"] },
+    "mitkreieren": { meaning: "wada abuurid", examples: [{ de: "Sie kreieren zusammen.", so: "Way wada abuuraan." }], similar: ["kooperieren", "gemeinsam schaffen"] },
+    "neukreieren": { meaning: "cusub u abuurid", examples: [{ de: "Er kreiert das Design neu.", so: "Naqshadda cusub buu u abuurayaa." }], similar: ["erneuern", "überarbeiten"] },
+    "umkreieren": { meaning: "beddel / wax ka beddel", examples: [{ de: "Er kreiert das Konzept um.", so: "Fikradda wuu beddelayaa." }], similar: ["umarbeiten", "umgestalten"] },
+    "vorkreieren": { meaning: "hore u abuurid", examples: [{ de: "Er kreiert vor.", so: "Wuu hor abuurayaa." }], similar: ["vorbereiten", "antizipieren"] },
+    "wiederkreieren": { meaning: "dib u abuurid", examples: [{ de: "Er kreiert das Kunstwerk wieder.", so: "Farshaxanka dib buu u abuurayaa." }], similar: ["wiederherstellen", "rekonstruieren"] },
+    "zusammenkreieren": { meaning: "isku dar abuurid", examples: [{ de: "Sie kreieren zusammen.", so: "Wada ayay abuuraan." }], similar: ["kombinieren", "verbinden"] }
+};
+
+
+
+// ======================= HANDELN + Präfixe =======================
+const handelnVerbs = {
+    "handeln": { meaning: "ganacsi / dhaqan / wax ka qabasho", examples: [{ de: "Er handelt mit Autos.", so: "Wuxuu ganacsadaa baabuurta." }, { de: "Es handelt sich um ein Problem.", so: "Waxa uu ka hadlayaa dhibaato." }], similar: ["agieren", "verkaufen", "verhandeln"] },
+    
+    "abhandeln": { meaning: "dhameystirin / qayb ka hadal", examples: [{ de: "Er handelt das Thema ab.", so: "Mawduuca wuu ka hadlay." }], similar: ["behandeln", "erledigen", "abarbeiten"] },
+    
+    "anhandeln": { meaning: "soo jiidasho / ku qancin", examples: [{ de: "Er handelt sich Ärger an.", so: "Cadhó buu soo jiidanayaa." }], similar: ["einhandeln", "sich zuziehen"] },
+    
+    "aufhandeln": { meaning: "kor u qaadid qiimo", examples: [{ de: "Er handelt den Preis auf.", so: "Qiimaha kor buu u qaaday." }], similar: ["erhöhen", "teurer machen"] },
+    
+    "aushandeln": { meaning: "heshiis gaarid / wada xaajood", examples: [{ de: "Sie handeln einen Vertrag aus.", so: "Heshiis bay wada xaajoodaan." }], similar: ["vereinbaren", "verhandeln", "ausmachen"] },
+    
+    "behandeln": { meaning: "daaweyn / ku hadal / la dhaqan", examples: [{ de: "Der Arzt behandelt den Patienten.", so: "Dhakhtarku wuxuu daaweynayaa bukaanka." }, { de: "Er behandelt das Thema.", so: "Mawduuca wuu ka hadlayaa." }], similar: ["therapieren", "umgehen mit", "diskutieren"] },
+    
+    "durchhandeln": { meaning: "dhamaystirid heshiis", examples: [{ de: "Er handelt den Vertrag durch.", so: "Heshiiska wuu dhamaystiray." }], similar: ["durchführen", "vollenden"] },
+    
+    "einhandeln": { meaning: "soo jiidasho (dhibaato)", examples: [{ de: "Er handelt sich Probleme ein.", so: "Dhibaatooyin buu soo jiidanayaa." }], similar: ["anhandeln", "sich zuziehen"] },
+    
+    "erhandeln": { meaning: "heshiis ku helid / soo iibsan", examples: [{ de: "Er handelt einen guten Preis er.", so: "Qiimo fiican buu ku helay." }], similar: ["erbitten", "erlangen", "bekommen"] },
+    
+    "feilhandeln": { meaning: "xaraashid / gorgortan", examples: [{ de: "Er handelt feil.", so: "Wuu xaraashayaa." }], similar: ["feilschen", "verhandeln"] },
+    
+    "fort handeln": { meaning: "sii wadid ganacsiga", examples: [{ de: "Er handelt fort.", so: "Wu sii wadayaa ganacsiga." }], similar: ["weiter machen", "fortsetzen"] },
+    
+    "gegenhandeln": { meaning: "ka soo horjeed / diidmo", examples: [{ de: "Er handelt dagegen.", so: "Wu ka soo horjeedaa." }], similar: ["widersprechen", "kontrieren"] },
+    
+    "herhandeln": { meaning: "u soo jiidasho ganacsi", examples: [{ de: "Er handelt Kunden her.", so: "Macmiilasha wuu soo jiidanayaa." }], similar: ["anlocken", "gewinnen"] },
+    
+    "herunterhandeln": { meaning: "hoos u dhigid qiimo", examples: [{ de: "Er handelt den Preis herunter.", so: "Qiimaha hoos buu u dhigay." }], similar: ["reduzieren", "senken", "runterhandeln"] },
+    
+    "hinhandeln": { meaning: "u xaajoodid xaggaas", examples: [{ de: "Er handelt hin.", so: "Wu u xaajoodayaa xaggaas." }], similar: ["zielen", "anstreben"] },
+    
+    "mithandeln": { meaning: "la xaajood / wada ganacsi", examples: [{ de: "Er handelt mit.", so: "Wu la xaajoodayaa." }], similar: ["mitmachen", "teilnehmen", "kooperieren"] },
+    
+    "nachhandeln": { meaning: "daba xaajood / dib u gorgortan", examples: [{ de: "Er handelt nach.", so: "Wu daba xaajoodayaa." }], similar: ["nachverhandeln", "überarbeiten"] },
+    
+    "schlecht handeln": { meaning: "xun u dhaqan / qalad", examples: [{ de: "Er handelt schlecht.", so: "Si xun buu u dhaqmayaa." }], similar: ["fehlhandeln", "sich falsch verhalten"] },
+    
+    "überhandeln": { meaning: "dhaafid xaajoodka", examples: [{ de: "Er handelt über das Ziel.", so: "Bartilmaameedka wuu dhaafay." }], similar: ["übertreiben", "zu weit gehen"] },
+    
+    "umhandeln": { meaning: "beddel xaajood / wax ka beddel", examples: [{ de: "Er handelt den Vertrag um.", so: "Heshiiska wuu beddelayaa." }], similar: ["umarbeiten", "neu verhandeln"] },
+    
+    "unterhandeln": { meaning: "gorgortan / wada xaajood", examples: [{ de: "Sie unterhandeln über den Preis.", so: "Qiimaha way ka wada xaajoodaan." }], similar: ["verhandeln", "diskutieren", "feilschen"] },
+    
+    "verhandeln": { meaning: "wada xaajood / heshiis doon", examples: [{ de: "Sie verhandeln mit dem Gegner.", so: "Waxay la wada xaajoodaan cadowga." }], similar: ["diskutieren", "aushandeln", "unterhandeln"] },
+    
+    "voll handeln": { meaning: "dhameystirin ficil", examples: [{ de: "Er handelt voll.", so: "Si buuxda buu u dhaqmayaa." }], similar: ["vollenden", "ausführen"] },
+    
+    "voraus handeln": { meaning: "hore uga hadal / qorsheyn", examples: [{ de: "Er handelt voraus.", so: "Wuu hor uga hadlayaa." }], similar: ["vorausplanen", "antizipieren"] },
+    
+    "vorhandeln": { meaning: "hore u soo jeedin", examples: [{ de: "Er handelt einen Vorschlag vor.", so: "Soo jeedin buu hor dhigayaa." }], similar: ["präsentieren", "vorbringen"] },
+    
+    "weghandeln": { meaning: "ka fogaan / iibin", examples: [{ de: "Er handelt die Ware weg.", so: "Alaabta wuu iibiyaa." }], similar: ["verkaufen", "loswerden"] },
+    
+    "weiterhandeln": { meaning: "sii wadid ganacsiga", examples: [{ de: "Er handelt weiter.", so: "Wu sii wadayaa ganacsiga." }], similar: ["fortsetzen", "weitermachen"] },
+    
+    "wiederhandeln": { meaning: "dib u xaajood", examples: [{ de: "Er handelt wieder.", so: "Dib buu u xaajoodayaa." }], similar: ["wiederholen", "erneut verhandeln"] },
+    
+    "zurückhandeln": { meaning: "dib u soo celin", examples: [{ de: "Er handelt das Geld zurück.", so: "Lacagta dib buu u soo celinayaa." }], similar: ["zurückfordern", "retournieren"] },
+    
+    "zusammenhandeln": { meaning: "wada xaajood / isku raaci", examples: [{ de: "Sie handeln zusammen.", so: "Wada ayay xaajoodaan." }], similar: ["kooperieren", "sich einigen"] }
+};
+
+// ======================= ESSEN + Präfixe =======================
+const essenVerbs = {
+    "essen": { meaning: "cunid", examples: [{ de: "Ich esse einen Apfel.", so: "Waxaan cunayaa tufaax." }], similar: ["verzehren", "speisen", "kauen"] },
+    
+    "abessen": { meaning: "dhamaystirid cunto", examples: [{ de: "Er isst den Teller ab.", so: "Saxanka wuu dhameeyay." }], similar: ["aufessen", "leer essen"] },
+    
+    "anessen": { meaning: "qaniinid / cunid yar", examples: [{ de: "Er isst vom Brot an.", so: "Rootiga wuu ka qaniinayaa." }], similar: ["anknabbern", "probieren"] },
+    
+    "aufessen": { meaning: "dhameeyid cunista", examples: [{ de: "Iss dein Essen auf!", so: "Cuntadaada dhamee!" }], similar: ["abessen", "verspeisen", "verzehren"] },
+    
+    "ausessen": { meaning: "cunid dhamaystiran", examples: [{ de: "Er isst die Schüssel aus.", so: "Weelka wuu ka cunay (dhameeyay)." }], similar: ["leer essen", "aufessen"] },
+    
+    "beessen": { meaning: "cunid (dhif)", examples: [{ de: "Er isst das Brot be.", so: "Rootiga wuu cunay." }], similar: ["essen", "verzehren"] },
+    
+    "durch essen": { meaning: "dhex cunid / dhamaystirin", examples: [{ de: "Er isst sich durch das Menu.", so: "Menu-ga dhexdiisa buu cunayaa." }], similar: ["durchprobieren", "durchkosten"] },
+    
+    "einessen": { meaning: "caado u noqon / la qabsan", examples: [{ de: "Er isst sich in die neue Küche ein.", so: "Cunnada cusub wuu la qabsanayaa." }], similar: ["gewöhnen", "akklimatisieren"] },
+    
+    "empor essen": { meaning: "kor u cunid (dhif)", examples: [{ de: "Er isst empor.", so: "Kor buu u cunayaa." }], similar: ["zunehmen", "wachsen"] },
+    
+    "entessen": { meaning: "ka cunid / bixid", examples: [{ de: "Er isst den Hunger ent.", so: "Gaajada wuu ka cunayaa." }], similar: ["stillen", "vertreiben"] },
+    
+    "eressen": { meaning: "cunid ku helid", examples: [{ de: "Er isst seinen Lohn er.", so: "Mushaharkiisa wuu ku cunay." }], similar: ["verbrauchen", "aufessen"] },
+    
+    "fort essen": { meaning: "sii wadid cunista", examples: [{ de: "Er isst fort.", so: "Wu sii wadayaa cunista." }], similar: ["weitermachen", "fortsetzen"] },
+    
+    "her essen": { meaning: "u soo cunid", examples: [{ de: "Iss her!", so: "U soo cun!" }], similar: ["herankommen", "essen"] },
+    
+    "hin essen": { meaning: "u cunid xaggaas", examples: [{ de: "Iss hin!", so: "U cun xaggaas!" }], similar: ["hinschlingen"] },
+    
+    "mitessen": { meaning: "la cunid / wada cunid", examples: [{ de: "Kann ich mitessen?", so: "Ma la cuni karaa?" }], similar: ["teilnehmen", "gemeinsam essen"] },
+    
+    "nach essen": { meaning: "daba cunid / ka dib cun", examples: [{ de: "Er isst nach.", so: "Dabadiisuu cunayaa." }], similar: ["später essen", "nachholen"] },
+    
+    "überessen": { meaning: "badan cunid / dhaafid", examples: [{ de: "Er isst sich über.", so: "Badan buu cunayaa." }], similar: ["überfressen", "sich vollstopfen"] },
+    
+    "veressen": { meaning: "badan cunid / qancin", examples: [{ de: "Er hat sich veressen.", so: "Badan buu cunay." }, { de: "Er ist in sie veressen.", so: "Wuu ku qanacsan yahay iyada." }], similar: ["satt essen", "sich verlieben (fig.)"] },
+    
+    "voll essen": { meaning: "dhergi / qancin", examples: [{ de: "Iss dich voll!", so: "Dhergi!" }], similar: ["satt essen", "sich vollstopfen"] },
+    
+    "vor essen": { meaning: "hore u cunid", examples: [{ de: "Er isst vor.", so: "Wu hor cunayaa." }], similar: ["vorkosten", "probieren"] },
+    
+    "weg essen": { meaning: "ka cunid / baabi'id", examples: [{ de: "Er isst die Reste weg.", so: "Hadhaaga wuu ka cunayaa." }], similar: ["aufessen", "beseitigen"] },
+    
+    "weiter essen": { meaning: "sii wadid cunista", examples: [{ de: "Iss weiter!", so: "Sii wad cunista!" }], similar: ["fortfahren", "weitermachen"] },
+    
+    "wieder essen": { meaning: "dib u cunid", examples: [{ de: "Er isst wieder.", so: "Dib buu u cunayaa." }], similar: ["erneut essen", "wiederholen"] },
+    
+    "zusammen essen": { meaning: "wada cunid", examples: [{ de: "Wir essen zusammen.", so: "Waanu wada cunaynaa." }], similar: ["gemeinsam essen", "sich treffen"] },
+    
+    "zurück essen": { meaning: "dib u soo celin", examples: [{ de: "Er isst zurück.", so: "Dib buu u soo celinayaa." }], similar: ["wiederherstellen", "ausgleichen"] }
+};
+
+// ======================= PLANEN + Präfixe =======================
+const planenVerbs = {
+    "planen": { meaning: "qorsheyn / diyaarin", examples: [{ de: "Ich plane eine Reise.", so: "Safar baan qorsheynayaa." }], similar: ["vorhaben", "entwerfen", "konzipieren"] },
+    
+    "abplanen": { meaning: "dhameystirin qorshe", examples: [{ de: "Er plant den Tag ab.", so: "Maalinta wuu qorsheeyay." }], similar: ["durchplanen", "erledigen"] },
+    
+    "anplanen": { meaning: "bilaabid qorshe", examples: [{ de: "Er plant ein Projekt an.", so: "Mashruuc buu bilaabayaa qorsheynta." }], similar: ["beginnen", "initiieren"] },
+    
+    "aufplanen": { meaning: "kor u qaadid qorshe", examples: [{ de: "Er plant die Kosten auf.", so: "Kharashka kor buu u qaadayaa qorsheynta." }], similar: ["erhöhen", "aufstocken"] },
+    
+    "ausplanen": { meaning: "dhameystirin qorshe", examples: [{ de: "Er plant den Entwurf aus.", so: "Naqshadda wuu dhamaystiray." }], similar: ["fertigstellen", "vollenden"] },
+    
+    "beplanen": { meaning: "qorsheyn (dhul)", examples: [{ de: "Sie planen das Gebiet be.", so: "Dhulka way qorsheynayaan." }], similar: ["bebauen", "erschließen"] },
+    
+    "durchplanen": { meaning: "si buuxda u qorsheyn", examples: [{ de: "Er plant den Tag durch.", so: "Maalinta si buuxda buu u qorsheeyay." }], similar: ["durchorganisieren", "detaillieren"] },
+    
+    "einplanen": { meaning: "ku darid qorshe", examples: [{ de: "Er plant Pausen ein.", so: "Nasasho buu ku darayaa qorshaha." }], similar: ["berücksichtigen", "vorsehen"] },
+    
+    "entplanen": { meaning: "ka saarid qorshe", examples: [{ de: "Er plant den Termin ent.", so: "Waqtiga wuu ka saaray qorshaha." }], similar: ["streichen", "annullieren"] },
+    
+    "erplanen": { meaning: "qorsheyn ku helid", examples: [{ de: "Er plant eine Lösung er.", so: "Xalka qorsheynta buu ku helay." }], similar: ["erreichen", "erzielen"] },
+    
+    "fortplanen": { meaning: "sii wadid qorsheynta", examples: [{ de: "Er plant fort.", so: "Wu sii wadayaa qorsheynta." }], similar: ["weiterplanen", "fortsetzen"] },
+    
+    "herplanen": { meaning: "u soo qorsheyn", examples: [{ de: "Er plant das Projekt her.", so: "Mashruuca wuu u soo qorsheynayaa." }], similar: ["vorbereiten", "entwerfen"] },
+    
+    "hinplanen": { meaning: "u qorsheyn xaggaas", examples: [{ de: "Er plant hin.", so: "Wu u qorsheynayaa xaggaas." }], similar: ["zielen", "anstreben"] },
+    
+    "mitplanen": { meaning: "la qorsheyn / wada qorsheyn", examples: [{ de: "Er plant mit.", so: "Wu la qorsheynayaa." }], similar: ["teilnehmen", "kooperieren"] },
+    
+    "nachplanen": { meaning: "daba qorsheyn / beddel qorshe", examples: [{ de: "Er plant nach.", so: "Qorshaha dib buu u qorsheynayaa." }], similar: ["überarbeiten", "korrigieren"] },
+    
+    "umplanen": { meaning: "beddel qorshe / dib u qorsheyn", examples: [{ de: "Er plant den Termin um.", so: "Waqtiga wuu beddelayaa qorshaha." }], similar: ["umstellen", "neu planen"] },
+    
+    "überplanen": { meaning: "badan qorsheyn / dhaafid", examples: [{ de: "Er plant über.", so: "Badan buu qorsheynayaa." }], similar: ["übertreiben", "überladen"] },
+    
+    "verplanen": { meaning: "qorsheyn qalad / lumiyay", examples: [{ de: "Er hat die Zeit verplant.", so: "Waqtiga wuu lumiyay qorsheynta." }], similar: ["verschwenden", "falsch planen"] },
+    
+    "voll planen": { meaning: "buuxinta qorshe", examples: [{ de: "Er plant voll.", so: "Si buuxda buu u qorsheynayaa." }], similar: ["ausfüllen", "komplettieren"] },
+    
+    "vorausplanen": { meaning: "hore u qorsheyn", examples: [{ de: "Er plant voraus.", so: "Wuu hor u qorsheynayaa." }], similar: ["antizipieren", "vorhersehen"] },
+    
+    "vorplanen": { meaning: "hore u dhigid qorshe", examples: [{ de: "Er plant vor.", so: "Wuu hor dhigayaa qorshaha." }], similar: ["präsentieren", "vorlegen"] },
+    
+    "wegplanen": { meaning: "ka saarid qorshe / tirtir", examples: [{ de: "Er plant die Aufgabe weg.", so: "Hawsha wuu ka saarayaa qorshaha." }], similar: ["eliminieren", "streichen"] },
+    
+    "weiterplanen": { meaning: "sii wadid qorsheynta", examples: [{ de: "Er plant weiter.", so: "Wu sii wadayaa qorsheynta." }], similar: ["fortfahren", "weitermachen"] },
+    
+    "wiederplanen": { meaning: "dib u qorsheyn", examples: [{ de: "Er plant wieder.", so: "Dib buu u qorsheynayaa." }], similar: ["wiederholen", "erneuern"] },
+    
+    "zusammenplanen": { meaning: "wada qorsheyn", examples: [{ de: "Sie planen zusammen.", so: "Wada bay qorsheynayaan." }], similar: ["kooperieren", "gemeinsam planen"] },
+    
+    "zurückplanen": { meaning: "dib u qorsheyn / soo celin", examples: [{ de: "Er plant zurück.", so: "Dib buu u qorsheynayaa." }], similar: ["replanen", "korrigieren"] }
+};
+
+// ======================= SICHTIGEN + Präfixe (sichten / berücksichtigen) =======================
+const sichtigenVerbs = {
+    "sichten": { meaning: "baaraandeg / kormeer / arkay", examples: [{ de: "Er sichtet die Dokumente.", so: "Dukumiintiyada wuu baaraandegayaa." }], similar: ["prüfen", "kontrollieren", "durchsehen"] },
+    
+    "absichten": { meaning: "ujeedo leh / doonid", examples: [{ de: "Er hat etwas abgesehen.", so: "Wax ujeedo ah buu leeyahay." }], similar: ["beabsichtigen", "vorhaben"] },
+    
+    "ansichten": { meaning: "aragti / fikir", examples: [{ de: "Er hat eine andere Ansicht.", so: "Aragti kale buu leeyahay." }], similar: ["meinen", "glauben", "betrachten"] },
+    
+    "aufsichten": { meaning: "kormeer / ilaalin", examples: [{ de: "Er führt die Aufsicht.", so: "Kormeerka buu fulinayaa." }], similar: ["überwachen", "beaufsichtigen"] },
+    
+    "beabsichtigen": { meaning: "qorsheyn / doonid / ujeedo", examples: [{ de: "Ich beabsichtige zu reisen.", so: "Waxaan doonayaa inaan safro." }], similar: ["vorhaben", "planen", "intendieren"] },
+    
+    "berücksichtigen": { meaning: "tixgelin / xisaabtan", examples: [{ de: "Berücksichtige die Regeln!", so: "Tixgeli xeerarka!" }, { de: "Er berücksichtigt alle Wünsche.", so: "Dhammaan rabitaannada wuu tixgeliyay." }], similar: ["beachten", "in Betracht ziehen", "respektieren"] },
+    
+    "besichtigen": { meaning: "booqasho / kormeerid / daawasho", examples: [{ de: "Wir besichtigen das Museum.", so: "Matxafka waanu daawanaynaa." }], similar: ["anschauen", "inspizieren", "besuchen"] },
+    
+    "durchsichten": { meaning: "baaris / dhex marid", examples: [{ de: "Er sichtet die Akten durch.", so: "Dukumiintiyada wuu dhex marayaa." }], similar: ["durchsehen", "prüfen", "kontrollieren"] },
+    
+    "einsichten": { meaning: "fahmid / qirasho", examples: [{ de: "Er hat Einsicht gezeigt.", so: "Wuu fahmay (qiranayay)." }], similar: ["verstehen", "akzeptieren", "einsehen"] },
+    
+    "übersichtigen": { meaning: "guud ahaan eegid / dulmar", examples: [{ de: "Er übersichtigt die Lage.", so: "Xaaladda guud ahaan buu u eegay." }], similar: ["überblicken", "zusammenfassen"] },
+    
+    "umsichtigen": { meaning: "taxaddar / digtoonaan", examples: [{ de: "Er handelt umsichtig.", so: "Si taxaddar leh buu u dhaqmayaa." }], similar: ["vorsichtig sein", "aufpassen"] },
+    
+    "vorsichtigen": { meaning: "taxaddar / ka digtoon", examples: [{ de: "Sei vorsichtig!", so: "Taxaddar!" }], similar: ["aufpassen", "sich hüten"] },
+    
+    "widersichtigen": { meaning: "ka hor tagid / diidid", examples: [{ de: "Er widersichtigt den Plan.", so: "Qorshaha wuu diiday." }], similar: ["widersprechen", "opponieren"] },
+    
+    "zurücksichtigen": { meaning: "dib u eegid / tixgelin dambe", examples: [{ de: "Er zeigt Rücksicht.", so: "Tixgelin buu muujinayaa." }], similar: ["rücksichtsvoll sein", "beachten"] }
+};
+
+// ======================= MERKEN + Präfixe =======================
+const merkenVerbs = {
+    "merken": { meaning: "xasuus / dareemid / ogaansho", examples: [{ de: "Ich merke mir die Adresse.", so: "Cinwaanka waan xasuustaa." }, { de: "Er merkt den Schmerz.", so: "Xanuunka wuu dareemayaa." }], similar: ["bemerken", "wahrnehmen", "sich einprägen"] },
+    
+    "abmerken": { meaning: "xasuus ka qaadid / dhammaystirin", examples: [{ de: "Er merkt sich die Vokabeln ab.", so: "Erayada wuu xasuustaa." }], similar: ["lernen", "sich einprägen"] },
+    
+    "anmerken": { meaning: "talo / comment / sheegid", examples: [{ de: "Er merkt etwas an.", so: "Wax buu ku sheegayaa." }], similar: ["kommentieren", "bemerken", "anfügen"] },
+    
+    "aufmerken": { meaning: "fiiro gaar leh / taxaddar", examples: [{ de: "Merke auf!", so: "Fiiro gaar leh u yeelo!" }], similar: ["aufpassen", "achten", "konzentrieren"] },
+    
+    "ausmerken": { meaning: "soo xulid / kala saarid", examples: [{ de: "Er merkt die Fehler aus.", so: "Khaladaadka wuu soo xulayaa." }], similar: ["aussondern", "auswählen", "markieren"] },
+    
+    "bemerken": { meaning: "ogaansho / dareemid / arkay", examples: [{ de: "Ich habe dich bemerkt.", so: "Waan ku arkay." }, { de: "Er bemerkt den Fehler.", so: "Qaladka wuu ogaanayaa." }], similar: ["wahrnehmen", "sehen", "feststellen"] },
+    
+    "einmerken": { meaning: "xasuus qorid / xafidan", examples: [{ de: "Merke dir das ein!", so: "Taas xafidan!" }], similar: ["sich einprägen", "memorieren", "lernen"] },
+    
+    "entmerken": { meaning: "xasuus ka bixid / iloobid", examples: [{ de: "Er hat es entmerkt.", so: "Wuu ilaaway." }], similar: ["vergessen", "verlernen"] },
+    
+    "hermerken": { meaning: "u soo xasuus / soo jeedin", examples: [{ de: "Merke her!", so: "U soo xasuus!" }], similar: ["erinnern", "ins Gedächtnis rufen"] },
+    
+    "hinmerken": { meaning: "u fiirin / u jeedin", examples: [{ de: "Merke hin!", so: "U fiiri xaggaas!" }], similar: ["aufmerksam sein", "achten"] },
+    
+    "mitmerken": { meaning: "la xasuus / wada ogaan", examples: [{ de: "Er merkt mit.", so: "Wu la xasuustaa." }], similar: ["teilnehmen", "mitbekommen"] },
+    
+    "nachmerken": { meaning: "daba xasuus / raad raac", examples: [{ de: "Er merkt sich die Spur nach.", so: "Raadka wuu xasuustaa." }], similar: ["verfolgen", "nachvollziehen"] },
+    
+    "vermerken": { meaning: "qorid / diiwaangelin", examples: [{ de: "Er vermerkt den Termin.", so: "Waqtiga wuu diiwaangeliyay." }], similar: ["notieren", "aufzeichnen", "protokollieren"] },
+    
+    "vormerken": { meaning: "hore u qorid / kaydin", examples: [{ de: "Er merkt den Termin vor.", so: "Waqtiga hore buu u qoray." }], similar: ["reservieren", "eintragen", "vorbestellen"] },
+    
+    "wegmerken": { meaning: "ka saarid xasuusta", examples: [{ de: "Merke es weg!", so: "Ka saar xasuusta!" }], similar: ["vergessen", "löschen"] },
+    
+    "wiedermerken": { meaning: "dib u xasuus / soo celin", examples: [{ de: "Er merkt es wieder.", so: "Dib buu u xasuustay." }], similar: ["sich wieder erinnern", "rekapitulieren"] },
+    
+    "zurückmerken": { meaning: "dib u xasuus (waqti hore)", examples: [{ de: "Er merkt zurück.", so: "Wuxuu dib u xasuustaa waqtigii hore." }], similar: ["sich erinnern", "zurückdenken"] },
+    
+    "zusammenmerken": { meaning: "isku xasuus / wada xafidan", examples: [{ de: "Merke die Fakten zusammen!", so: "Xaqiiqooyinka isku xasuuso!" }], similar: ["kombinieren", "verbinden"] }
+};
+
+// ======================= BEREUEN + Präfixe =======================
+const bereuenVerbs = {
+    "bereuen": { meaning: "qoomamo / ka qoomameyn", examples: [{ de: "Ich bereue meinen Fehler.", so: "Qaladkayga waan ka qoomamay." }], similar: ["reuen", "leid tun", "bedauern"] },
+    
+    "abbereuen": { meaning: "dhamaystirid qoomamada", examples: [{ de: "Er bereut den Verlust ab.", so: "Luminta wuu ka qoomamay." }], similar: ["trauern", "beklagen"] },
+    
+    "anbereuen": { meaning: "bilow qoomamo", examples: [{ de: "Er bereut an.", so: "Bilow buu u qoomamay." }], similar: ["beginnen zu bereuen"] },
+    
+    "aufbereuen": { meaning: "kor u qaadid qoomamo", examples: [{ de: "Er bereut auf.", so: "Qoomamadiisu way kor u qaaday." }], similar: ["intensiv bereuen"] },
+    
+    "ausbereuen": { meaning: "dhameystirin qoomamo", examples: [{ de: "Er bereut die Tat aus.", so: "Falka wuu ka qoomamay." }], similar: ["vollständig bereuen"] },
+    
+    "durchbereuen": { meaning: "si qoto dheer u qoomamay", examples: [{ de: "Er bereut die Entscheidung durch.", so: "Go'aanka si qoto dheer buu uga qoomamay." }], similar: ["tief bereuen", "durchdenken"] },
+    
+    "einbereuen": { meaning: "qoomamada ku biirid", examples: [{ de: "Er bereut die Tat ein.", so: "Falka wuu ku biiray qoomamada." }], similar: ["einsehen", "akzeptieren"] },
+    
+    "entbereuen": { meaning: "ka bixid qoomamada", examples: [{ de: "Er bereut ent.", so: "Qoomamada wuu ka baxay." }], similar: ["vergessen", "loslassen"] },
+    
+    "erbereuen": { meaning: "qoomamo ku helid", examples: [{ de: "Er bereut die Konsequenzen er.", so: "Cawaaqibka wuu ka qoomamay." }], similar: ["erfahren", "leiden"] },
+    
+    "fortbereuen": { meaning: "sii wadid qoomamada", examples: [{ de: "Er bereut fort.", so: "Wu sii wadayaa qoomamada." }], similar: ["weiter bereuen", "fortfahren"] },
+    
+    "mitbereuen": { meaning: "la qoomamay / wada qoomamo", examples: [{ de: "Er bereut mit.", so: "Wu la qoomamayaa." }], similar: ["teilnehmen", "sympathisieren"] },
+    
+    "nachbereuen": { meaning: "daba qoomamay / kadib qoomamo", examples: [{ de: "Er bereut die Tat nach.", so: "Falka kadib buu uga qoomamay." }], similar: ["später bereuen", "nachdenken"] },
+    
+    "überbereuen": { meaning: "badan qoomamay / dhaafid", examples: [{ de: "Er bereut über.", so: "Badan buu uga qoomamay." }], similar: ["übertreiben", "zu viel bereuen"] },
+    
+    "verbereuen": { meaning: "qalad u qoomamay", examples: [{ de: "Er hat sich verbereut.", so: "Qalad buu u qoomamay." }], similar: ["falsch bereuen", "irren"] },
+    
+    "voll bereuen": { meaning: "buuxinta qoomamada", examples: [{ de: "Er bereut voll.", so: "Si buuxda buu uga qoomamay." }], similar: ["vollständig bereuen", "tief bedauern"] },
+    
+    "vorausbereuen": { meaning: "hore u qoomamay", examples: [{ de: "Er bereut voraus.", so: "Hore buu uga qoomamay." }], similar: ["im Voraus bereuen", "antizipieren"] },
+    
+    "vorbereuen": { meaning: "hore u qoomamay / ka hor qoomamo", examples: [{ de: "Er bereut die Entscheidung vor.", so: "Go'aanka ka hor buu uga qoomamay." }], similar: ["präventiv bereuen"] },
+    
+    "wegbereuen": { meaning: "ka fogaan qoomamada", examples: [{ de: "Er bereut weg.", so: "Qoomamada wuu ka fogaanayaa." }], similar: ["überwinden", "loslassen"] },
+    
+    "weiterbereuen": { meaning: "sii wadid qoomamada", examples: [{ de: "Er bereut weiter.", so: "Wu sii wadayaa qoomamada." }], similar: ["fortsetzen", "weitermachen"] },
+    
+    "wiederbereuen": { meaning: "dib u qoomamay", examples: [{ de: "Er bereut wieder.", so: "Dib buu uga qoomamay." }], similar: ["erneut bereuen", "wiederholen"] },
+    
+    "zurückbereuen": { meaning: "dib u soo celin qoomamo", examples: [{ de: "Er bereut zurück.", so: "Qoomamada dib buu u soo celinayaa." }], similar: ["reuen", "wieder aufleben lassen"] },
+    
+    "zusammenbereuen": { meaning: "wada qoomamo", examples: [{ de: "Sie bereuen zusammen.", so: "Wada ayay uga qoomamayaan." }], similar: ["gemeinsam bereuen", "teilen"] }
+};
+
+
+
+
+
+
+
+// Dhammaan falalka ku dar
+function mergeVerbs() {
+    const all = {};
+    const addGroup = (group) => { 
+        if (group && typeof group === 'object') {
+            for (let k in group) all[k] = group[k]; 
         }
-    </script>
+    };
+    
+    // Dhammaan kooxaha falalka (32 kooxood)
+    const groups = [
+        findenVerbs, bringenVerbs, laufenVerbs, gehenVerbs, sehenVerbs,
+        ziehenVerbs, zeigenVerbs, schlagenVerbs, kennenVerbs, wissenVerbs,
+        machenVerbs, nehmenVerbs, gebenVerbs, stellenVerbs, setzenVerbs,
+        lassenVerbs, haltenVerbs, legenVerbs, treffenVerbs, denkenVerbs,
+        fühlenVerbs, kommenVerbs, rufenVerbs, dichtenVerbs, ereignenVerbs,
+        kreierenVerbs, handelnVerbs, essenVerbs, planenVerbs, sichtigenVerbs,
+        merkenVerbs, bereuenVerbs
+    ];
+    
+    groups.forEach(group => addGroup(group));
+    return all;
+}
+
+let fullVerbsData = {};
+
+try {
+    fullVerbsData = mergeVerbs();
+    console.log("✅ Data waa la soo geliyay. Tirada falalka:", Object.keys(fullVerbsData).length);
+} catch(e) {
+    console.error("❌ Data khaldan:", e);
+    fullVerbsData = {};
+}
+
+// Raadinta Af-Soomaali
+const searchableMap = {
+    // FINDEN
+    "raadin": "finden", "helid": "finden", "soo helid": "ausfinden", "soo ogaansho": "herausfinden",
+    "dareen": "empfinden", "ikhtiraacid": "erfinden", "dhacay": "stattfinden", "qabsoomay": "stattfinden",
+    "dib u helid": "wiederfinden", "la qabsan": "hineinfinden", "ka leexin": "abbringen", "ka joojin": "abbringen",
+    "lumin": "verfinden", "qaldi": "verfinden", "ku qanacsan": "abfinden", "qancin": "abfinden",
+    // BRINGEN
+    "keenid": "bringen", "keen": "bringen", "dilid": "umbringen", "barid": "beibringen",
+    "faafin": "ausbringen", "soo bandhigid": "vorbringen", "soo gelin": "einbringen",
+    // LAUFEN
+    "orday": "laufen", "orday ku helid": "erlaufen", "cararid": "weglaufen", "baxsasho": "entlaufen",
+    "wareeg": "umlaufen", "lumid": "verlaufen", "qaldamid": "verlaufen",
+    // GEHEN
+    "socod": "gehen", "tagid": "gehen", "tag": "gehen", "bilow": "angehen", "baxid": "ausgehen",
+    "dabbaaldeg": "begehen", "daba gal": "nachgehen", "baarid": "nachgehen",
+    // SEHEN
+    "arkid": "sehen", "eegid": "ansehen", "dhawris": "ansehen", "u ekaansho": "aussehen",
+    "baarid": "durchsehen", "dabagal": "nachsehen", "qirasho": "einsehen", "fahmid": "einsehen",
+    // ZIEHEN
+    "jeedid": "ziehen", "bixid": "ziehen", "dhaqaaqid": "ziehen", "xidhasho": "anziehen",
+    "soo jiidasho": "anziehen", "ka guurid": "ausziehen", "is qaawin": "ausziehen",
+    // ZEIGEN
+    "muujin": "zeigen", "tilmaamid": "zeigen", "wargelin": "anzeigen",
+    // SCHLAGEN
+    "garaacid": "schlagen", "dilaac": "schlagen", "diidid": "abschlagen", "soo jeedin": "vorschlagen",
+    "jajabid": "zerschlagen", "burburid": "zerschlagen",
+    // KENNEN
+    "aqoon": "kennen", "aqoonsan": "erkennen", "garan": "erkennen", "qiran": "bekennen",
+    // WISSEN
+    "ogow": "wissen", "ogahay": "wissen", "caddeyn": "bewissen", "xaqiijin": "bewissen",
+    // MACHEN
+    "sameyn": "machen", "furan": "aufmachen", "xirid": "zumachen", "damid": "ausmachen",
+    "ka qayb qaadasho": "mitmachen", "ku dayan": "nachmachen",
+    // NEHMEN
+    "qaadasho": "nehmen", "qaadid": "nehmen", "aqbasho": "annehmen", "soo qaadid": "aufnehmen",
+    "la qaadid": "mitnehmen", "masuuliyad qaadid": "übernehmen", "miisaan kordhin": "zunehmen",
+    // GEBEN
+    "siin": "geben", "bixin": "geben", "gaarsiin": "abgeben", "iska dhiib": "aufgeben",
+    "bixid": "ausgeben", "kharash": "ausgeben", "saamax": "vergeben", "dib u celin": "zurückgeben",
+    // STELLEN
+    "dhigid": "stellen", "taagin": "stellen", "damid": "abstellen", "shaqo siin": "anstellen",
+    "soo bandhigid": "ausstellen", "sameyn": "erstellen", "ogaansho": "feststellen",
+    // SETZEN
+    "fadhiisid": "setzen", "fadhiisin": "setzen", "ka qaadid": "absetzen", "bilaabid": "ansetzen",
+    "joojin": "aussetzen", "qabsan": "besetzen", "beddel": "ersetzen", "turjumid": "übersetzen",
+    // LASSEN
+    "dayn": "lassen", "u ogolaan": "lassen", "joojin": "ablassen", "shaqada ka dayn": "entlassen",
+    "ka tag": "verlassen", "isku halleyn": "verlassen",
+    // HALTEN
+    "qabasho": "halten", "joojin": "anhalten", "hakin": "aufhalten", "u adkaysan": "aushalten",
+    "dulqaadasho": "aushalten", "hayn": "behalten", "helid": "erhalten",
+    // LEGEN
+    "dhidig": "legen", "meel saarid": "legen", "ka qaadid": "ablegen", "xirid": "anlegen",
+    "maalgeli": "anlegen", "soo bandhigid": "auslegen", "sharxi": "darlegen", "ka fiirsasho": "überlegen",
+    // TREFFEN
+    "kulmid": "treffen", "arag": "treffen", "helid": "antreffen", "ku saabsan": "betreffen",
+    "soo gaarid": "eintreffen", "ka sii fiican": "übertreffen", "dhaafin": "übertreffen",
+    // DENKEN
+    "fikir": "denken", "ka fiirsasho": "denken", "malayn": "denken", "ikhtiraacid": "ausdenken",
+    "qorsheyn": "ausdenken", "tixgeline": "bedenken", "la fikir": "mitdenken",
+    // FÜHLEN
+    "dareemid": "fühlen", "taabasho": "fühlen", "la dareemid": "mitfühlen", "raaxo dareemid": "wohlfühlen",
+    // KOMMEN
+    "imaan": "kommen", "soo gaarid": "ankommen", "soo baxid": "aufkommen", "helid": "bekommen",
+    "la imaan": "mitkommen", "dhacay": "vorkommen", "dib u laaban": "zurückkommen",
+    // RUFEN
+    "qaylin": "rufen", "yeedhid": "rufen", "wac": "anrufen", "soo dalbasho": "abrufen",
+    "ku baaqid": "aufrufen", "ku dhawaaq": "ausrufen",
+    // DICHTEN
+    "maanso sameyn": "dichten", "xiraya": "abdichten", "ku eedayn": "andichten", "been abuurid": "erdichten",
+    // EREIGNEN
+    "dhacay": "ereignen", "qabsoomay": "ereignen", "dib u dhacay": "wiederereignen",
+    // KREIEREN
+    "abuur": "kreieren", "sameyn": "kreieren", "soo saarid": "auskreieren", "ikhtiraacid": "erkreieren",
+    "wada abuurid": "mitkreieren", "dib u abuurid": "wiederkreieren",
+    // HANDELN
+    "ganacsi": "handeln", "xaajood": "handeln", "wax ka qabasho": "handeln", "daaweyn": "behandeln",
+    "la dhaqan": "behandeln", "gorgortan": "unterhandeln", "verhandeln": "verhandeln",
+    // ESSEN
+    "cunid": "essen", "cun": "essen", "dhameeyid": "aufessen", "la cunid": "mitessen",
+    "badan cunid": "überessen", "dhergi": "voll essen",
+    // PLANEN
+    "qorsheyn": "planen", "diyaarin": "planen", "bilaabid": "anplanen", "ku darid": "einplanen",
+    "beddel": "umplanen", "dib u qorsheyn": "wiederplanen",
+    // SICHTIGEN
+    "baaraandeg": "sichten", "kormeer": "sichten", "tixgelin": "berücksichtigen", "booqasho": "besichtigen",
+    // MERKEN
+    "xasuus": "merken", "dareemid": "merken", "ogaansho": "bemerken", "xafidan": "einmerken",
+    "qorid": "vermerken", "diiwaangelin": "vermerken",
+    // BEREUEN
+    "qoomamo": "bereuen", "ka qoomameyn": "bereuen", "qoomamay": "bereuen"
+};
+
+
+    function getVerbKey(searchTerm) {
+        let term = searchTerm.toLowerCase().trim();
+        if (searchableMap[term]) return searchableMap[term];
+        if (fullVerbsData[term]) return term;
+        for (let key in fullVerbsData) {
+            if (key.toLowerCase() === term) return key;
+            if (fullVerbsData[key].meaning && fullVerbsData[key].meaning.toLowerCase().includes(term)) return key;
+            if (key.includes(term) && term.length > 2) return key;
+        }
+        return null;
+    }
+
+    function displayVerb(verbKey) {
+        const verb = fullVerbsData[verbKey];
+        if (!verb) {
+            document.getElementById("resultContainer").innerHTML = `<div class="no-result">❌ Falka "${verbKey}" lama helin.</div>`;
+            return;
+        }
+
+        let examplesHtml = "";
+        if (verb.examples && verb.examples.length > 0) {
+            verb.examples.forEach(ex => {
+                examplesHtml += `<p><div class="de">🇩🇪 ${ex.de}</div><div class="so">🇸🇴 ${ex.so}</div></p>`;
+            });
+        } else {
+            examplesHtml = `<p><div class="so">Tusaale looma helin falkan.</div></p>`;
+        }
+
+        let similarHtml = "";
+        if (verb.similar && verb.similar.length > 0) {
+            similarHtml = `<div class="similar-title">🔗 Falalka la midka ah (guji si aad u aragto sharaxaad):</div><div class="similar-buttons">`;
+            verb.similar.forEach(sim => {
+                if (fullVerbsData[sim]) {
+                    similarHtml += `<button class="similar-btn" data-verb="${sim}">${sim}</button>`;
+                }
+            });
+            similarHtml += `</div>`;
+        }
+
+        const resultHtml = `
+            <div class="result-card">
+                <div class="verb-title">📖 ${verbKey}</div>
+                <div class="meaning"><span>🏷️ Macnaha:</span> ${verb.meaning}</div>
+                <div class="examples-title">📌 Tusaalooyin:</div>
+                <div class="examples">${examplesHtml}</div>
+                ${similarHtml}
+            </div>
+        `;
+
+        document.getElementById("resultContainer").innerHTML = resultHtml;
+
+        document.querySelectorAll(".similar-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                let simVerb = this.getAttribute("data-verb");
+                if (fullVerbsData[simVerb]) {
+                    displayVerb(simVerb);
+                }
+            });
+        });
+    }
+
+    function searchVerb() {
+        let query = document.getElementById("searchInput").value;
+        if (!query.trim()) {
+            document.getElementById("resultContainer").innerHTML = `<div class="no-result">🔍 Fadlan geli falka aad raadinayso.</div>`;
+            return;
+        }
+        const verbKey = getVerbKey(query);
+        if (verbKey && fullVerbsData[verbKey]) {
+            displayVerb(verbKey);
+        } else {
+            document.getElementById("resultContainer").innerHTML = `<div class="no-result">😞 Lama helin "${query}".<br><br>🔹 Tusaale: finden, abfinden, aufbringen, ausgehen, ansehen</div>`;
+        }
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+
+    function setTheme(theme) {
+        if (theme === 'light') {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            themeToggle.innerHTML = '☀️ Light Mode';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            themeToggle.innerHTML = '🌙 Dark Mode';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    setTheme(savedTheme === 'light' ? 'light' : 'dark');
+
+    themeToggle.addEventListener("click", () => {
+        setTheme(body.classList.contains('dark') ? 'light' : 'dark');
+    });
+
+    // Hint badges
+    document.querySelectorAll(".hint-badge").forEach(badge => {
+        badge.addEventListener("click", () => {
+            const verb = badge.getAttribute("data-verb");
+            document.getElementById("searchInput").value = verb;
+            searchVerb();
+        });
+    });
+
+    // Event listeners
+    document.getElementById("searchBtn").addEventListener("click", searchVerb);
+    document.getElementById("searchInput").addEventListener("keypress", e => { if (e.key === "Enter") searchVerb(); });
+    
+    window.addEventListener("DOMContentLoaded", () => {
+        if (fullVerbsData["finden"]) {
+            displayVerb("finden");
+        } else if (Object.keys(fullVerbsData).length > 0) {
+            const firstVerb = Object.keys(fullVerbsData)[0];
+            displayVerb(firstVerb);
+        } else {
+            document.getElementById("resultContainer").innerHTML = `<div class="no-result">⚠️ Data ma jiro. Fadlan hubi in dataha la soo geliyay.</div>`;
+        }
+    });
+</script>
 </body>
 </html>
