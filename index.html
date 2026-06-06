@@ -4969,6 +4969,737 @@ const klingenVerbs = {
 
 
 
+
+
+    const fangenVerbs = {
+    "fangen": {
+        meaning: "qabasho",
+        examples: [
+            { de: "Der Junge fängt den Ball.", so: "Wiilku kubbadda ayuu qabtaa." }
+        ],
+        similar: ["ergreifen", "packen"]
+    },
+
+    "abfangen": {
+        meaning: "dhexda ku qabasho / joojin",
+        examples: [
+            { de: "Die Polizei fängt den Täter ab.", so: "Booliisku dambiilaha ayuu dhexda ku qabtay." }
+        ],
+        similar: ["stoppen", "aufhalten"]
+    },
+
+    "anfangen": {
+        meaning: "bilaabid",
+        examples: [
+            { de: "Der Unterricht fängt um acht Uhr an.", so: "Casharku wuxuu bilaabmaa siddeedda saac." }
+        ],
+        similar: ["beginnen", "starten"]
+    },
+
+    "auffangen": {
+        meaning: "qabasho wax soo dhacaya",
+        examples: [
+            { de: "Sie fängt das Glas auf.", so: "Waxay qabatay koobkii dhacayay." }
+        ],
+        similar: ["aufhalten", "retten"]
+    },
+
+    "befangen": {
+        meaning: "xishood badan / aan kalsooni lahayn",
+        examples: [
+            { de: "Er wirkt befangen.", so: "Wuxuu u muuqdaa mid xishood badan." }
+        ],
+        similar: ["verlegen", "unsicher"]
+    },
+
+    "einfangen": {
+        meaning: "soo qabasho",
+        examples: [
+            { de: "Der Bauer fängt das Pferd ein.", so: "Beeralaygu faraska ayuu soo qabtaa." }
+        ],
+        similar: ["festnehmen", "ergreifen"]
+    },
+
+    "empfangen": {
+        meaning: "qaabilid / soo dhoweyn",
+        examples: [
+            { de: "Wir empfangen die Gäste.", so: "Martida ayaan qaabilaynaa." }
+        ],
+        similar: ["begrüßen", "aufnehmen"]
+    },
+
+    "entfangen": {
+        meaning: "uur qaadid (duug ah)",
+        examples: [
+            { de: "Sie hat ein Kind empfangen.", so: "Waxay uuraysatay ilmo." }
+        ],
+        similar: ["schwanger werden"]
+    },
+
+    "fangengehen": {
+        meaning: "qabasho ciyaar ahaan",
+        examples: [
+            { de: "Die Kinder gehen fangen.", so: "Carruurtu waxay ciyaarayaan qab-qabasho." }
+        ],
+        similar: ["spielen"]
+    },
+
+    "mitfangen": {
+        meaning: "wada qabasho",
+        examples: [
+            { de: "Er hilft beim Mitfangen der Fische.", so: "Wuxuu ka qayb qaataa qabashada kalluunka." }
+        ],
+        similar: ["helfen", "beteiligen"]
+    },
+
+    "nachfangen": {
+        meaning: "dib u qabasho",
+        examples: [
+            { de: "Der Hund fängt den Ball nach.", so: "Eygu kubbadda ayuu dib u qabtaa." }
+        ],
+        similar: ["erneut fangen"]
+    },
+
+    "umfangen": {
+        meaning: "isku wareejin / habsiin",
+        examples: [
+            { de: "Die Mutter umfängt ihr Kind.", so: "Hooyadu ilmaheeda ayay habsiisaa." }
+        ],
+        similar: ["umarmen", "umschließen"]
+    },
+
+    "verfangen": {
+        meaning: "ku dhegmid / ku qabsamid",
+        examples: [
+            { de: "Der Fisch verfängt sich im Netz.", so: "Kalluunku wuxuu ku dhegay shabagga." }
+        ],
+        similar: ["hängenbleiben", "sich verheddern"]
+    }
+};
+
+
+const hoerenVerbs = {
+    "hören": {
+        meaning: "maqal / dhegeysi",
+        examples: [
+            { de: "Ich höre Musik.", so: "Waxaan dhageystaa muusig." }
+        ],
+        similar: ["zuhören", "lauschen"]
+    },
+
+    "anhören": {
+        meaning: "dhageysi ilaa dhammaad",
+        examples: [
+            { de: "Ich höre mir das Lied an.", so: "Waxaan dhegeysanayaa heesta." }
+        ],
+        similar: ["zuhören", "lauschen"]
+    },
+
+    "aufhören": {
+        meaning: "joojin",
+        examples: [
+            { de: "Der Regen hört auf.", so: "Roobku wuu joogsaday." }
+        ],
+        similar: ["enden", "stoppen"]
+    },
+
+    "aushören": {
+        meaning: "sir ka ogaansho dhegaysi ahaan",
+        examples: [
+            { de: "Er wollte das Geheimnis aushören.", so: "Wuxuu rabay inuu sirta maqlo." }
+        ],
+        similar: ["ausfragen", "erkunden"]
+    },
+
+    "überhören": {
+        meaning: "iska maqal la'aan / indho-tirid",
+        examples: [
+            { de: "Ich habe die Frage überhört.", so: "Su'aasha maan maqal." }
+        ],
+        similar: ["ignorieren", "verpassen"]
+    },
+
+    "verhören": {
+        meaning: "wareysi su'aalo ah / baaritaan",
+        examples: [
+            { de: "Die Polizei verhört den Verdächtigen.", so: "Booliisku tuhmanaha ayuu wareysanayaa." }
+        ],
+        similar: ["befragen", "interviewen"]
+    },
+
+    "zuhören": {
+        meaning: "si taxaddar leh u dhegaysi",
+        examples: [
+            { de: "Bitte hör mir zu.", so: "Fadlan i dhegeyso." }
+        ],
+        similar: ["lauschen", "aufmerken"]
+    },
+
+    "weghören": {
+        meaning: "iska indho-tirid wax la maqlay",
+        examples: [
+            { de: "Er hört einfach weg.", so: "Wuxuu iska indho-tiray wixii uu maqlay." }
+        ],
+        similar: ["ignorieren", "überhören"]
+    },
+
+    "mithören": {
+        meaning: "wada maqal",
+        examples: [
+            { de: "Jemand hört unser Gespräch mit.", so: "Qof ayaa wada maqlaya wada sheekaysigeenna." }
+        ],
+        similar: ["lauschen", "abhören"]
+    },
+
+    "heraushören": {
+        meaning: "ka dhex garasho cod ama hadal",
+        examples: [
+            { de: "Ich höre Unsicherheit heraus.", so: "Waxaan ka dhex dareemayaa kalsooni-darro." }
+        ],
+        similar: ["erkennen", "entnehmen"]
+    },
+
+    "hineinhören": {
+        meaning: "si qoto dheer u dhegaysi",
+        examples: [
+            { de: "Hör mal in das neue Album hinein.", so: "Dhegeyso albamka cusub." }
+        ],
+        similar: ["anhören", "prüfen"]
+    },
+
+    "reinhören": {
+        meaning: "tijaabo ahaan u dhegaysi",
+        examples: [
+            { de: "Ich höre kurz in den Podcast rein.", so: "Wax yar ayaan podcast-ka dhegaysanayaa." }
+        ],
+        similar: ["hineinhören", "testen"]
+    },
+
+    "nachhören": {
+        meaning: "mar kale dhegaysi",
+        examples: [
+            { de: "Ich muss die Aufnahme nachhören.", so: "Waa inaan duubista mar kale dhegaystaa." }
+        ],
+        similar: ["wieder anhören", "kontrollieren"]
+    }
+};
+
+
+const brechenVerbs = {
+    "brechen": {
+        meaning: "jebin",
+        examples: [
+            { de: "Er bricht den Stock.", so: "Wuxuu jebinayaa usha." }
+        ],
+        similar: ["zerbrechen", "kaputtmachen"]
+    },
+
+    "abbrechen": {
+        meaning: "joojin / hakin",
+        examples: [
+            { de: "Sie bricht das Studium ab.", so: "Waxay joojisay waxbarashadii." }
+        ],
+        similar: ["beenden", "aufgeben"]
+    },
+
+    "anbrechen": {
+        meaning: "bilaabasho (waqti cusub)",
+        examples: [
+            { de: "Ein neuer Tag bricht an.", so: "Maalin cusub ayaa billaabanaysa." }
+        ],
+        similar: ["beginnen", "kommen"]
+    },
+
+    "aufbrechen": {
+        meaning: "furid / safar bilaabid",
+        examples: [
+            { de: "Wir brechen früh auf.", so: "Waxaan safarka u baxeynaa goor hore." }
+        ],
+        similar: ["losfahren", "starten"]
+    },
+
+    "ausbrechen": {
+        meaning: "baxsasho / qaraxid",
+        examples: [
+            { de: "Der Gefangene bricht aus.", so: "Maxbuusku wuu baxsaday." }
+        ],
+        similar: ["entkommen", "fliehen"]
+    },
+
+    "durchbrechen": {
+        meaning: "jebin oo gudbid",
+        examples: [
+            { de: "Das Wasser bricht durch die Mauer.", so: "Biyuhu darbiga ayay jebiyeen oo ka gudbeen." }
+        ],
+        similar: ["durchdringen", "durchstoßen"]
+    },
+
+    "einbrechen": {
+        meaning: "jabsi ku galid",
+        examples: [
+            { de: "Die Diebe brechen ins Haus ein.", so: "Tuugadu guriga ayay jabsadeen." }
+        ],
+        similar: ["eindringen", "stehlen"]
+    },
+
+    "herausbrechen": {
+        meaning: "si xoog leh uga soo bixid",
+        examples: [
+            { de: "Die Lava bricht heraus.", so: "Laafadu si xoog leh ayay u soo baxaysaa." }
+        ],
+        similar: ["hervorkommen", "ausströmen"]
+    },
+
+    "hereinbrechen": {
+        meaning: "si lama filaan ah u soo galid",
+        examples: [
+            { de: "Die Nacht bricht herein.", so: "Habeenku si degdeg ah ayuu u soo dhacay." }
+        ],
+        similar: ["kommen", "eintreten"]
+    },
+
+    "niederbrechen": {
+        meaning: "dhulka ku jebin",
+        examples: [
+            { de: "Der Sturm bricht den Baum nieder.", so: "Duufaantu geedka ayay dhulka ku jebisay." }
+        ],
+        similar: ["umwerfen", "zerstören"]
+    },
+
+    "unterbrechen": {
+        meaning: "carqaladayn / kala goyn",
+        examples: [
+            { de: "Bitte unterbrich mich nicht.", so: "Fadlan ha i kala goyn." }
+        ],
+        similar: ["stören", "pausieren"]
+    },
+
+    "verbrechen": {
+        meaning: "dembi gelid (duug ah); maanta badanaa magaca Verbrechen",
+        examples: [
+            { de: "Er hat gegen das Gesetz verbrochen.", so: "Wuxuu jebiyey sharciga." }
+        ],
+        similar: ["sündigen", "schuldig werden"]
+    },
+
+    "zerbrechen": {
+        meaning: "burburin / kala jabin",
+        examples: [
+            { de: "Das Glas zerbricht.", so: "Muraayaddii way jabtay." }
+        ],
+        similar: ["kaputtgehen", "zersplittern"]
+    }
+};
+
+const greifenVerbs = {
+    "greifen": {
+        meaning: "qabasho / gacanta ku qaadid",
+        examples: [
+            { de: "Er greift den Ball.", so: "Wuxuu qabtay kubbadda." }
+        ],
+        similar: ["packen", "nehmen"]
+    },
+
+    "angreifen": {
+        meaning: "weerarid",
+        examples: [
+            { de: "Die Soldaten greifen die Stadt an.", so: "Askartu waxay weerarayaan magaalada." }
+        ],
+        similar: ["attackieren", "überfallen"]
+    },
+
+    "aufgreifen": {
+        meaning: "qaadid mawduuc / soo qaadid",
+        examples: [
+            { de: "Er greift das Thema auf.", so: "Wuxuu soo qaadanayaa mawduuca." }
+        ],
+        similar: ["thematisieren", "ansprechen"]
+    },
+
+    "begreifen": {
+        meaning: "fahmid",
+        examples: [
+            { de: "Ich begreife die Aufgabe.", so: "Waan fahmayaa hawsha." }
+        ],
+        similar: ["verstehen", "kapieren"]
+    },
+
+    "ergreifen": {
+        meaning: "qabasho / la wareegid",
+        examples: [
+            { de: "Die Polizei ergreift den Täter.", so: "Booliisku waxay qabteen dambiilaha." }
+        ],
+        similar: ["fassen", "nehmen"]
+    },
+
+    "eingreifen": {
+        meaning: "faragelin",
+        examples: [
+            { de: "Der Lehrer greift ein.", so: "Macallinku wuu faragelinayaa." }
+        ],
+        similar: ["intervenieren", "stören"]
+    },
+
+    "zugreifen": {
+        meaning: "degdeg u qaadid / isticmaalid",
+        examples: [
+            { de: "Er greift nach dem Essen zu.", so: "Wuxuu si degdeg ah u qaatay cuntada." }
+        ],
+        similar: ["nehmen", "zugreifen"]
+    },
+
+    "begreifenlassen": {
+        meaning: "fahamsiin (naadir)",
+        examples: [
+            { de: "Man muss ihm das begreiflich machen.", so: "Waa in loo fahamsiiyaa." }
+        ],
+        similar: ["erklären", "verdeutlichen"]
+    },
+
+    "übergreifen": {
+        meaning: "ku fida / gudbid",
+        examples: [
+            { de: "Das Feuer greift auf das Haus über.", so: "Dabku wuxuu ku fidayaa guriga." }
+        ],
+        similar: ["ausbreiten", "sich ausdehnen"]
+    },
+
+    "vergreifen": {
+        meaning: "si khalad ah u taabasho / qalad galid",
+        examples: [
+            { de: "Er hat sich im Ton vergriffen.", so: "Wuxuu si khalad ah u hadlay." }
+        ],
+        similar: ["fehler machen", "sich irren"]
+    }
+};
+
+
+const stoerenVerbs = {
+    "stören": {
+        meaning: "carqaladayn / dhibid",
+        examples: [
+            { de: "Bitte stör mich nicht.", so: "Fadlan ha i dhibin." }
+        ],
+        similar: ["unterbrechen", "belästigen"]
+    },
+
+    "stören": {
+        meaning: "carqaladayn / dhibid",
+        examples: [
+            { de: "Der Lärm stört mich.", so: "Qayladu way i dhibaysaa." }
+        ],
+        similar: ["beeinträchtigen", "hindern"]
+    },
+
+    "abstören": {
+        meaning: "dhexda ka joojin (naadir)",
+        examples: [
+            { de: "Man störte die Verbindung ab.", so: "Xiriirka waa la joojiyay." }
+        ],
+        similar: ["unterbrechen", "trennen"]
+    },
+
+    "anstoeren": {
+        meaning: "soo kicinta carqalad (aad u naadir / af ahaan)",
+        examples: [
+            { de: "Die Nachricht stört Probleme an.", so: "Warku wuxuu kiciyaa dhibaatooyin." }
+        ],
+        similar: ["auslösen", "verursachen"]
+    },
+
+    "aufstören": {
+        meaning: "kicid / hurdada ka kicid (naadir)",
+        examples: [
+            { de: "Der Lärm stört die Leute auf.", so: "Qayladu dadka ayay hurdada ka kicisaa." }
+        ],
+        similar: ["aufwecken", "stören"]
+    },
+
+    "beeinträchtigen": {
+        meaning: "saameyn xun / carqaladayn",
+        examples: [
+            { de: "Der Regen beeinträchtigt den Verkehr.", so: "Roobku wuxuu carqaladeeyaa gaadiidka." }
+        ],
+        similar: ["stören", "behindern"]
+    },
+
+    "verstören": {
+        meaning: "maskax ahaan dhibid / wareerid",
+        examples: [
+            { de: "Die Nachricht verstört ihn.", so: "Warku wuu wareeriyay." }
+        ],
+        similar: ["schockieren", "verwirren"]
+    },
+
+    "zerstören": {
+        meaning: "burburin",
+        examples: [
+            { de: "Der Sturm zerstört das Haus.", so: "Duufaantu waxay burburisay guriga." }
+        ],
+        similar: ["kaputtmachen", "vernichten"]
+    },
+
+    "unterstören": {
+        meaning: "hoos ka carqaladayn (aad u naadir / aan caadi ahayn)",
+        examples: [
+            { de: "Die Verbindung wurde unterstört.", so: "Xiriirka waa la carqaladeeyay." }
+        ],
+        similar: ["unterbrechen", "stören"]
+    }
+};
+
+
+const springenVerbs = {
+    "springen": {
+        meaning: "boodid",
+        examples: [
+            { de: "Das Kind springt.", so: "Ilmuhu wuu boodayaa." }
+        ],
+        similar: ["hüpfen", "springen hoch"]
+    },
+
+    "anspringen": {
+        meaning: "soo boodid / si lama filaan ah u dhaqaaqid",
+        examples: [
+            { de: "Der Hund springt den Mann an.", so: "Eygu ninka ayuu ku soo booday." }
+        ],
+        similar: ["attackieren", "anspringen"]
+    },
+
+    "aufspringen": {
+        meaning: "si degdeg ah u istaagid / boodid",
+        examples: [
+            { de: "Er springt auf.", so: "Wuxuu si degdeg ah u istaagay." }
+        ],
+        similar: ["aufstehen", "hochspringen"]
+    },
+
+    "ausspringen": {
+        meaning: "ka boodid / ka soo baxid (meel)",
+        examples: [
+            { de: "Der Ball springt aus der Hand.", so: "Kubbaddu gacanta ayay ka booday." }
+        ],
+        similar: ["herausspringen", "entkommen"]
+    },
+
+    "einspringen": {
+        meaning: "beddel ahaan u shaqayn / buuxin",
+        examples: [
+            { de: "Er springt für den Kollegen ein.", so: "Wuxuu beddel u noqday saaxiibkiis." }
+        ],
+        similar: ["vertreten", "ersetzen"]
+    },
+
+    "entspringen": {
+        meaning: "ka soo burqan / ka soo bixi",
+        examples: [
+            { de: "Der Fluss entspringt im Gebirge.", so: "Webigu buuraha ayuu ka soo burqadaa." }
+        ],
+        similar: ["entspringen aus", "entstehen"]
+    },
+
+    "hinspringen": {
+        meaning: "u boodid dhankaas",
+        examples: [
+            { de: "Er springt schnell hin.", so: "Si degdeg ah ayuu u booday dhankaas." }
+        ],
+        similar: ["hingehen", "springen zu"]
+    },
+
+    "hinüberspringen": {
+        meaning: "ka gudbid adigoo boodaya",
+        examples: [
+            { de: "Er springt über den Zaun hinüber.", so: "Wuxuu ka booday xayndaabka." }
+        ],
+        similar: ["überqueren", "überspringen"]
+    },
+
+    "überspringen": {
+        meaning: "ka boodi / iska dhaafid",
+        examples: [
+            { de: "Ich überspringe die Frage.", so: "Su'aasha waan ka boodayaa." }
+        ],
+        similar: ["auslassen", "ignorieren"]
+    },
+
+    "umherspringen": {
+        meaning: "wareegid boodbood",
+        examples: [
+            { de: "Die Kinder springen umher.", so: "Carruurtu way wareegayaan iyagoo boodaya." }
+        ],
+        similar: ["herumspringen", "spielen"]
+    },
+
+    "verspringen": {
+        meaning: "khalad boodid / si khaldan u boodid",
+        examples: [
+            { de: "Er verspringt den Schritt.", so: "Tallaabada ayuu si khaldan u booday." }
+        ],
+        similar: ["fehlspringen", "verpassen"]
+    },
+
+    "wegspringen": {
+        meaning: "ka boodid / ka baxsasho",
+        examples: [
+            { de: "Der Frosch springt weg.", so: "Raha wuu ka boodayaa oo baxsadaa." }
+        ],
+        similar: ["fliehen", "entkommen"]
+    },
+
+    "zusammenspringen": {
+        meaning: "isku soo boodid (naadir)",
+        examples: [
+            { de: "Die Gruppe springt zusammen.", so: "Kooxdu way isku soo boodaysaa." }
+        ],
+        similar: ["zusammenkommen", "sich versammeln"]
+    }
+};
+
+const kletternVerbs = {
+    "klettern": {
+        meaning: "fuulid / kor u fuulid",
+        examples: [
+            { de: "Das Kind klettert auf den Baum.", so: "Ilmuhu wuxuu fuulayaa geedka." }
+        ],
+        similar: ["steigen", "hochsteigen"]
+    },
+
+    "anklettern": {
+        meaning: "u fuulid (dhanka wax)",
+        examples: [
+            { de: "Die Katze klettert das Fenster an.", so: "Bisaddu waxay u fuushay daaqadda." }
+        ],
+        similar: ["hochsteigen", "hinaufklettern"]
+    },
+
+    "aufklettern": {
+        meaning: "kor u fuulid",
+        examples: [
+            { de: "Er klettert den Berg auf.", so: "Wuxuu fuulayaa buurta." }
+        ],
+        similar: ["hinaufsteigen", "hochsteigen"]
+    },
+
+    "ausklettern": {
+        meaning: "ka soo fuulid / ka baxid meel la fuulay",
+        examples: [
+            { de: "Er klettert aus dem Fenster.", so: "Wuxuu ka soo fuulayaa daaqadda." }
+        ],
+        similar: ["herausklettern", "verlassen"]
+    },
+
+    "beklettern": {
+        meaning: "fuulid shay gaar ah (si toos ah u fuulid)",
+        examples: [
+            { de: "Die Kinder beklettern den Felsen.", so: "Carruurtu waxay fuulayaan dhagaxa." }
+        ],
+        similar: ["besteigen", "erklettern"]
+    },
+
+    "durchklettern": {
+        meaning: "ka dhex fuulid",
+        examples: [
+            { de: "Er klettert durch den Zaun.", so: "Wuxuu ka dhex fuulay xayndaabka." }
+        ],
+        similar: ["hindurchgehen", "durchqueren"]
+    },
+
+    "erklettern": {
+        meaning: "si guul leh u fuulid (gaadhid sare)",
+        examples: [
+            { de: "Sie erklettert den Gipfel.", so: "Waxay gaadhay dusha buurta." }
+        ],
+        similar: ["besteigen", "erreichen"]
+    },
+
+    "herabklettern": {
+        meaning: "hoos u fuulid",
+        examples: [
+            { de: "Er klettert vom Baum herab.", so: "Wuxuu ka soo degayaa geedka." }
+        ],
+        similar: ["hinuntersteigen", "absteigen"]
+    },
+
+    "heraufklettern": {
+        meaning: "kor u fuulid (dhanka qofka/kor)",
+        examples: [
+            { de: "Das Kind klettert den Hügel herauf.", so: "Ilmuhu wuxuu fuulayaa buur yar." }
+        ],
+        similar: ["hochsteigen", "aufsteigen"]
+    },
+
+    "herunterklettern": {
+        meaning: "hoos u degid fuulid ahaan",
+        examples: [
+            { de: "Sie klettert den Baum herunter.", so: "Waxay ka soo degaysaa geedka." }
+        ],
+        similar: ["absteigen", "herabsteigen"]
+    },
+
+    "hinaufklettern": {
+        meaning: "kor u fuulid (dhankaas)",
+        examples: [
+            { de: "Er klettert die Leiter hinauf.", so: "Wuxuu fuulayaa jaranjarada." }
+        ],
+        similar: ["aufsteigen", "hochsteigen"]
+    },
+
+    "hinunterklettern": {
+        meaning: "hoos u fuulid",
+        examples: [
+            { de: "Er klettert den Felsen hinunter.", so: "Wuxuu ka soo degayaa dhagaxa." }
+        ],
+        similar: ["absteigen", "herabklettern"]
+    },
+
+    "umklettern": {
+        meaning: "ku wareegid fuulid",
+        examples: [
+            { de: "Er klettert den Baum um.", so: "Wuxuu ku wareegayaa geedka isagoo fuulaya." }
+        ],
+        similar: ["umgehen", "umsteigen"]
+    },
+
+    "verklettern": {
+        meaning: "si khaldan u fuulid / ku dhex lumid fuulid",
+        examples: [
+            { de: "Er verklettert sich im Felsen.", so: "Wuxuu ku dhex lumay fuulista dhagaxa." }
+        ],
+        similar: ["sich verirren", "verirren"]
+    }
+};
+
+
+// ===============================
+// TODAY'S ADDED VERBS (GERMAN PREFIX VERBS)
+// ===============================
+
+
+// fangen verbs added
+mergeUnique(verbsData, fangenVerbs);
+
+// hören verbs added
+mergeUnique(verbsData, hoerenVerbs);
+
+// brechen verbs added
+mergeUnique(verbsData, brechenVerbs);
+
+// greifen verbs added
+mergeUnique(verbsData, greifenVerbs);
+
+// stören verbs added
+mergeUnique(verbsData, stoerenVerbs);
+
+// springen verbs added
+mergeUnique(verbsData, springenVerbs);
+
+// klettern verbs added
+mergeUnique(verbsData, kletternVerbs);
+
+// ===============================
+// END OF TODAY'S VERBS
+// ===============================
+
 Object.assign(verbsData, findenVerbs);
 Object.assign(verbsData, bringenVerbs);
 Object.assign(verbsData, laufenVerbs);
@@ -5046,8 +5777,14 @@ Object.assign(verbsData, kaufenVerbs);
 Object.assign(verbsData, kauenVerbs);
 Object.assign(verbsData, klingelnVerbs);
 Object.assign(verbsData, klingenVerbs);
-  
-
+    
+Object.assign(verbsData, fangenVerbs);
+Object.assign(verbsData, hoerenVerbs);
+Object.assign(verbsData, brechenVerbs);
+Object.assign(verbsData, greifenVerbs);
+Object.assign(verbsData, stoerenVerbs);
+Object.assign(verbsData, springenVerbs);
+Object.assign(verbsData, kletternVerbs);
 // ============================================================
 // MERGE FUNCTION - KANI WAA MID SAX AH OO XAKAMEYNAYA DUPLICATES
 // ============================================================
@@ -5137,7 +5874,15 @@ mergeUnique(verbsData, kaufenVerbs);
 mergeUnique(verbsData, kauenVerbs);
 mergeUnique(verbsData, klingelnVerbs);
 mergeUnique(verbsData, klingenVerbs);
+mergeUnique(verbsData, fangenVerbs);
+mergeUnique(verbsData, hoerenVerbs);
+mergeUnique(verbsData, brechenVerbs);
 
+mergeUnique(verbsData, greifenVerbs);
+
+mergeUnique(verbsData, stoerenVerbs);
+mergeUnique(verbsData, springenVerbs);
+mergeUnique(verbsData, kletternVerbs);
 // Hadda verbsData waxa ku jira dhammaan falalka adigoon duplicate lahayn!
 console.log(`Wadar ahaan ${Object.keys(verbsData).length} verb ayaa la keydiyay`);
 
